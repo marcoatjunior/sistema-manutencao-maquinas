@@ -10,17 +10,17 @@
                 <div class="form-group">
                     <label for="username">Usuário</label>
                     <input type="text" formControlName="username" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                        <div *ngIf="f.username.errors.required">Campo 'Usuário' é obrigatório.</div>
+                        [ngClass]="{ 'is-invalid': submitted && form.username.errors }" />
+                    <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+                        <div *ngIf="form.username.errors.required">Campo 'Usuário' é obrigatório.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Senha</label>
                     <input type="password" formControlName="password" class="form-control"
-                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
-                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                        <div *ngIf="f.password.errors.required">Campo 'Senha' é obrigatório</div>
+                        [ngClass]="{ 'is-invalid': submitted && form.password.errors }" />
+                    <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+                        <div *ngIf="form.password.errors.required">Campo 'Senha' é obrigatório</div>
                     </div>
                 </div>
                 <button [disabled]="loading" class="btn btn-primary">
