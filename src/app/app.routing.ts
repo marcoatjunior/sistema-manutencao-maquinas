@@ -2,7 +2,7 @@
 
 import { HomeComponent } from './home';
 import { LoginComponent } from './login';
-import { AuthGuard } from './_helpers';
+import { AuthGuard } from './shared/guards';
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },

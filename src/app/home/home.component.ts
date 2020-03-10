@@ -1,10 +1,13 @@
 ﻿import { Component } from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { User } from '@app/_models';
-import { UserService, AuthenticationService } from '@app/_services';
+import { User } from '@app/shared/models';
+import { UserService } from '@app/shared/services';
 
-@Component({ templateUrl: 'home.component.html' })
+@Component({
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.scss']
+})
 export class HomeComponent {
     loading = false;
     users: User[];

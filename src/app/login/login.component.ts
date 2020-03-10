@@ -2,8 +2,7 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
-import { AuthenticationService } from '@app/_services';
+import { AuthenticationService } from '@app/shared/services';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -47,13 +46,16 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.form.username.value, this.form.password.value)
-            .pipe(first())
-            .subscribe(() => {
-                this.router.navigate([this.returnUrl]);
-            }, error => {
-                this.error = error;
-                this.loading = false;
-            });
+
+        this.authenticationService.login(
+            this.form.username.value,
+            this.form.password.value
+        ).pipe(first())
+            .subscribe(() => this.router.navigate([this.returnUrl]),
+                error => {
+                    this.error = error;
+                    this.loading = false;
+                });
+
     }
 }
