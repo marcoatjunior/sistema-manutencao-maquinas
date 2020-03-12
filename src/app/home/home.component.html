@@ -1,10 +1,18 @@
 ﻿<div class="card mt-4">
     <h4 class="card-header">Dashboard</h4>
     <div class="card-body">
-        <h6>Dados do dashboard</h6>
-        <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
+        <div class="row">
+            <div class="col">
+                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"></canvas>
+            </div>
+            <div class="col">
+                <h6>Usuários do sistema</h6>
+                <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+                <ul *ngIf="users">
+                    <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

@@ -12,6 +12,10 @@ export class HomeComponent {
     loading = false;
     users: User[];
 
+    public doughnutChartLabels = ['Peça X', 'Peça Y', 'Peça Z'];
+    public doughnutChartData = [1, 1, 1];
+    public doughnutChartType = 'doughnut';
+
     constructor(private userService: UserService) { }
 
     ngOnInit() {
