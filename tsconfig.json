@@ -20,14 +20,14 @@
       "dom"
     ],
     "paths": {
-      "@app/*": [
-        "src/app/*"
+      "@shared/*": [
+        "./src/app/shared/*"
       ],
       "@images/*": [
-        "src/assets/images/*"
+        "./src/assets/images/*"
       ],
       "@environments/*": [
-        "src/environments/*"
+        "./src/environments/*"
       ]
     }
   }
