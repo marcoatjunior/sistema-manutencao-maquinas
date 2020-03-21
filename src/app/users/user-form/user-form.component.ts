@@ -13,9 +13,10 @@ import { ProfileEnum, enumSelector } from '@shared/enums/profile.enum';
 })
 export class UserFormComponent implements OnInit, OnDestroy {
 
-    loading = false;
     formGroup: FormGroup;
+    userId: number;
 
+    loading = false;
     profiles = enumSelector(ProfileEnum);
 
     constructor(
@@ -23,7 +24,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private userService: UserService
-    ) { }
+    ) {
+        this.userId = this.route.snapshot.params.id;
+    }
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
@@ -39,8 +42,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
     }
 
     private populateForm() {
-        if (this.route.snapshot.params.id) {
-            this.userService.getById(this.route.snapshot.params.id)
+        if (this.userId) {
+            this.userService.getById(this.userId)
                 .pipe(untilDestroyed(this))
                 .subscribe((user: User) => this.formGroup.patchValue({ ...user }));
         }

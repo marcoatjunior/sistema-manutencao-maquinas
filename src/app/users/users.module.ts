@@ -7,6 +7,7 @@ import { UsersRoutingModule } from './users-routing.module';
 import { ChartsModule } from 'ng2-charts';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import { UserFormComponent } from './user-form/user-form.component';
     ],
     declarations: [
         UsersComponent,
+        UserComponent,
         UserListComponent,
         UserFormComponent
     ],

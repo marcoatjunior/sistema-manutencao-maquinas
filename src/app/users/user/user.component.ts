@@ -1,20 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
 import { User } from '@shared/models';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'app-user',
-    templateUrl: 'users.component.html',
-    styleUrls: ['users.component.scss']
+    templateUrl: 'user.component.html',
+    styleUrls: ['user.component.scss']
 })
-export class UserComponent {
+export class UserComponent implements OnInit, OnDestroy {
 
-    users$: Observable<User[]>;
+    user$: Observable<User>;
+    userId: number;
 
-    constructor(private userService: UserService) { }
+    constructor(
+        private route: ActivatedRoute,
+        private router: Router,
+        private userService: UserService,
+    ) {
+        this.userId = this.route.snapshot.params.id;
+    }
 
     ngOnInit() {
-        this.users$ = this.userService.get();
+        this.user$ = this.userService.getById(this.userId);
     }
+
+    goBack(): void {
+        this.router.navigate(['../../'], { relativeTo: this.route });
+    }
+
+    ngOnDestroy() { }
 }

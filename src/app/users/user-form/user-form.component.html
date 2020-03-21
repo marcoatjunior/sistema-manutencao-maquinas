@@ -17,7 +17,7 @@
                         <label for="profile">Perfil</label>
                         <select class="form-control" id="profile" formControlName="profile">
                             <option value="" selected disabled hidden>Selecione</option>
-                            <option *ngFor="let profile of profiles" [value]="profile.value">
+                            <option *ngFor="let profile of profiles" [value]="profile">
                                 {{ profile.value }}
                             </option>
                         </select>
@@ -77,8 +77,7 @@
                         <a class="btn btn-link clickable mr-2" (click)="goBack()">
                             <fa name="arrow-left"></fa> Voltar
                         </a>
-                        <button class="btn btn-default mr-2" *ngIf="!route.snapshot.params.id"
-                            (click)="formGroup.reset()">
+                        <button class="btn btn-default mr-2" *ngIf="!userId" (click)="formGroup.reset()">
                             <fa name="eraser"></fa> Limpar
                         </button>
                         <button [disabled]="disableSubmit() || loading" class="btn btn-success" (click)="submit()">

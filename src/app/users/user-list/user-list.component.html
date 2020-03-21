@@ -10,7 +10,7 @@
                             <th class="text-left" scope="row">Nome</th>
                             <th class="text-left" scope="row">E-mail</th>
                             <th class="text-center" scope="row">Perfil</th>
-                            <th class="text-center" scope="row" colspan="2">Ações</th>
+                            <th class="text-center" scope="row" colspan="3">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -19,6 +19,9 @@
                             <td class="text-left">{{ user.name }}</td>
                             <td class="text-left">{{ user.email }}</td>
                             <td class="text-center">{{ user.profile.name }}</td>
+                            <td class="text-center">
+                                <fa name="search" class="clickable" [routerLink]="[user.id, 'd']"></fa>
+                            </td>
                             <td class="text-center">
                                 <fa name="pencil" class="clickable" [routerLink]="[user.id]"></fa>
                             </td>
