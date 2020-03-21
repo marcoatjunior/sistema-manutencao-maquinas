@@ -10,7 +10,7 @@
                 <h6>Usuários do sistema</h6>
                 <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
                 <ul *ngIf="users">
-                    <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+                    <li *ngFor="let user of users">{{user.name}}</li>
                 </ul>
             </div>
         </div>

@@ -4,21 +4,26 @@ import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
 import { User } from '@shared/models';
+import { Profile } from '@shared/models/profile';
+
+const profile: Profile = { name: 'Administrador' }
 
 const users: User[] = [
     {
         id: 1,
+        name: 'Marco Taborda',
         username: 'marco.taborda',
+        email: 'marcotaborda.jr@gmail.com',
         password: 'teste',
-        firstName: 'Marco',
-        lastName: 'Taborda'
+        profile
     },
     {
         id: 2,
+        name: 'Ricardo Kovalski',
         username: 'ricardo.kovalski',
+        email: 'ricardokovalskicruz@gmail.com',
         password: 'teste',
-        firstName: 'Ricardo',
-        lastName: 'Kovalski'
+        profile
     }
 ];
 
@@ -39,6 +44,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return authenticate();
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
+                case url.endsWith('/users/1') && method === 'GET':
+                    return getUser(0);
+                case url.endsWith('/users/2') && method === 'GET':
+                    return getUser(1);
+                case url.endsWith('/users') && method === 'POST':
+                    return getUser(0);
+                case url.endsWith('/users') && method === 'PUT':
+                    return getUser(0);
+                case url.endsWith('/users') && method === 'DELETE':
+                    return ok(null);
                 default:
                     return next.handle(request);
             }
@@ -50,9 +65,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (!user) return error('Usuário e/ou senha inválidos.');
             return ok({
                 id: user.id,
-                username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
+                name: user.name,
+                email: user.email,
                 token: 'fake-jwt-token'
             })
         }
@@ -60,6 +74,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
             return ok(users);
+        }
+
+        function getUser(id) {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(users[id]);
         }
 
         function ok(body?) {

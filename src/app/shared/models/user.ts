@@ -1,8 +1,11 @@
-﻿export class User {
-    id: number;
-    username: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+﻿import { Profile } from './profile';
+
+export interface User {
+    id?: number;
+    name?: string;
+    username?: string;
+    email?: string;
+    password?: string;
+    profile?: Profile;
     token?: string;
 }

@@ -1,0 +1,93 @@
+<div class="card mt-4">
+    <h4 class="card-header">Cadastrar Usuário</h4>
+    <div class="card-body">
+        <form [formGroup]="formGroup">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="name">Nome Completo</label>
+                        <input class="form-control" id="name" formControlName="name">
+                        <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
+                            Campo 'Nome Completo' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="profile">Perfil</label>
+                        <select class="form-control" id="profile" formControlName="profile">
+                            <option value="" selected disabled hidden>Selecione</option>
+                            <option *ngFor="let profile of profiles" [value]="profile.value">
+                                {{ profile.value }}
+                            </option>
+                        </select>
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('profile').valid && formGroup.get('profile').dirty">
+                            Campo 'Perfil' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="username">Nome de Usuário</label>
+                        <input class="form-control" id="username" formControlName="username">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('username').valid && formGroup.get('username').dirty">
+                            Campo 'Nome de Usuário' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input class="form-control" id="email" type="email" formControlName="email">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('email').valid && formGroup.get('email').dirty">
+                            Campo 'E-mail' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input class="form-control" id="password" type="password" formControlName="password">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('password').valid && formGroup.get('password').dirty">
+                            Campo 'Senha' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Senha</label>
+                        <input class="form-control" id="confirm-password" type="password"
+                            formControlName="confirmPassword">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('confirmPassword').valid && formGroup.get('confirmPassword').dirty">
+                            Campo 'Confirmar Senha' é obrigatório.
+                        </div>
+                        <div class="has-error mt-2"
+                            *ngIf="formGroup.get('confirmPassword').value.length > 0 && formGroup.get('confirmPassword').value !== formGroup.get('password').value">
+                            As senhas não conferem.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="float-right">
+                        <a class="btn btn-link clickable mr-2" (click)="goBack()">
+                            <fa name="arrow-left"></fa> Voltar
+                        </a>
+                        <button class="btn btn-default mr-2" *ngIf="!route.snapshot.params.id"
+                            (click)="formGroup.reset()">
+                            <fa name="eraser"></fa> Limpar
+                        </button>
+                        <button [disabled]="disableSubmit() || loading" class="btn btn-success" (click)="submit()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <fa name="check"></fa> Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

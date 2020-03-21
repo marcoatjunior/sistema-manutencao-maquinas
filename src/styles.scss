@@ -1,5 +1,13 @@
-body { 
-    margin: 0; 
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #e8e6e6;
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #e8e6e6;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.has-error {
+  color: red;
 }

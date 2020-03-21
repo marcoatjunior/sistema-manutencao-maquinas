@@ -28,6 +28,9 @@
       ],
       "@environments/*": [
         "./src/environments/*"
+      ],
+      "@users/*": [
+        "./src/app/users/*"
       ]
     }
   }
