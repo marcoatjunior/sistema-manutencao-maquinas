@@ -35,7 +35,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
             username: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
-            confirmPassword: ['', Validators.required]
+            confirmPassword: ['', Validators.required],
+            telephone: ['', ],
+            additional: ['']
         });
 
         this.populateForm();

@@ -7,5 +7,7 @@ export interface User {
     email?: string;
     password?: string;
     profile?: Profile;
+    telephone?: string;
+    additional?: string;
     token?: string;
 }

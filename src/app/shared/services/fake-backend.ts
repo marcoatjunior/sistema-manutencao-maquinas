@@ -15,6 +15,8 @@ const users: User[] = [
         username: 'marco.taborda',
         email: 'marcotaborda.jr@gmail.com',
         password: 'teste',
+        telephone: '(51) 99340-5550',
+        additional: 'Não há informações adicionais',
         profile
     },
     {
@@ -23,6 +25,8 @@ const users: User[] = [
         username: 'ricardo.kovalski',
         email: 'ricardokovalskicruz@gmail.com',
         password: 'teste',
+        telephone: '(51) 99720-5007',
+        additional: 'Não há informações adicionais',
         profile
     }
 ];

@@ -20,13 +20,19 @@
                             <td class="text-left">{{ user.email }}</td>
                             <td class="text-center">{{ user.profile.name }}</td>
                             <td class="text-center">
-                                <fa name="search" class="clickable" [routerLink]="[user.id, 'd']"></fa>
+                                <a title="Consultar" class="clickable text-dark" [routerLink]="[user.id, 'd']">
+                                    <fa name="search"></fa>
+                                </a>
                             </td>
                             <td class="text-center">
-                                <fa name="pencil" class="clickable" [routerLink]="[user.id]"></fa>
+                                <a title="Editar" class="clickable text-dark" [routerLink]="[user.id]">
+                                    <fa name="pencil"></fa>
+                                </a>
                             </td>
                             <td class="text-center">
-                                <fa name="trash" class="clickable" (click)="openDeleteModal(content, user)"></fa>
+                                <a title="Excluir" class="clickable text-dark" (click)="openDeleteModal(content, user)">
+                                    <fa name="trash"></fa>
+                                </a>
                             </td>
                         </tr>
                     </tbody>

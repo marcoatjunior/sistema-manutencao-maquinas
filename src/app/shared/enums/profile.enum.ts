@@ -1,7 +1,8 @@
 export enum ProfileEnum {
     ADMIN = 'Administrador',
     FUNCIONARIO = 'Funcionário',
-    VISITANTE = 'Visitante'
+    RESPONSAVEL_TECNICO = 'Responsável Técnico',
+    VISITANTE = 'Visitante',
 }
 
 export function enumSelector(definition) {
