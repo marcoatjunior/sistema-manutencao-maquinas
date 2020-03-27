@@ -11,7 +11,7 @@ pipelines:
     - step:
         name: Create artifact
         script:
-          - tar czfv application.tgz package.json angular.json server.js ts* src
+          - npm pack
     - step:
         name: Deploy to Heroku
         deployment: test
@@ -20,5 +20,5 @@ pipelines:
           variables: 
             HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
             HEROKU_APP_NAME: 'angular-novus' 
-            ZIP_FILE: 'application.tgz'
+            ZIP_FILE: 'novus-1.0.0.tgz'
             WAIT: 'true'
