@@ -12,8 +12,14 @@ pipelines:
         name: Create artifact
         script:
           - npm pack
-    - step:
-        name: Deploy to Heroku
-        deployment: test
-        script:
-          - git push -f https://heroku:1a1f8db6-7c20-44e5-94a8-200f4bc03193@git.heroku.com/angular-novus.git
+  branches:
+    master:
+      - step:
+          name: Deploy to Heroku
+          deployment: test
+          script:
+          - pipe: atlassian/heroku-deploy:1.1.2
+            variables:
+              HEROKU_API_KEY: "1a1f8db6-7c20-44e5-94a8-200f4bc03193"
+              HEROKU_APP_NAME: "angular-novus"
+              ZIP_FILE: "novus-0.0.2.tgz"
