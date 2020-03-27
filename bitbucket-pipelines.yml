@@ -9,8 +9,6 @@ pipelines:
           - node
         script:
           - npm install
-          - npm install -g @angular/cli
-          - ng build --aot --prod
           - tar -zcvf angular-novus.tgz *
           - pipe: atlassian/heroku-deploy:1.1.2 
             variables: 
