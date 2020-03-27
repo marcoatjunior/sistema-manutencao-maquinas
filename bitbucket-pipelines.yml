@@ -11,7 +11,7 @@ pipelines:
           - npm install
           - npm install -g @angular/cli
           - ng build --aot --prod
-          - tar -zcvf angular-novus.tgz dist/
+          - tar -zcvf angular-novus.tgz *
           - pipe: atlassian/heroku-deploy:1.1.2 
             variables: 
               HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
