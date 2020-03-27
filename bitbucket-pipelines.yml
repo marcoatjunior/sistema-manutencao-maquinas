@@ -1,18 +1,21 @@
 image: node:10.15.3
 
 pipelines:
+  default:
+    - step:
+        name: Build Application
+        caches:
+          - node
+        script:
+          - npm install
+    - step:
+        name: Create artifact
+        script:
+          - npm pack
+        artifacts:
+          - novus-0.0.2.tgz
   branches:
     master:
-      - step:
-          name: Build Application
-          caches:
-            - node
-          script:
-            - npm install
-      - step:
-          name: Create artifact
-          script:
-            - npm pack
       - step:
           name: Deploy to Heroku
           deployment: production
