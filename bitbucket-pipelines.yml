@@ -16,9 +16,9 @@ pipelines:
         name: Deploy to Heroku
         deployment: test
         script:
-          - pipe: atlassian/heroku-deploy:1.1.2 
-              variables: 
-                HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
-                HEROKU_APP_NAME: 'angular-novus' 
-                ZIP_FILE: 'application.tgz'
-                WAIT: 'true'
+        - pipe: atlassian/heroku-deploy:1.1.2 
+          variables: 
+            HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
+            HEROKU_APP_NAME: 'angular-novus' 
+            ZIP_FILE: 'application.tgz'
+            WAIT: 'true'
