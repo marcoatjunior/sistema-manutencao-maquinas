@@ -9,7 +9,7 @@ pipelines:
           - node
         script:
           - npm install
-          - tar -zcvf --exclude='node_modules' angular-novus.tgz *
+          - tar --exclude='./node_modules' -zcvf angular-novus.tgz .
           - pipe: atlassian/heroku-deploy:1.1.2 
             variables: 
               HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
