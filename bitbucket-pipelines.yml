@@ -4,7 +4,7 @@ pipelines:
   default:
     - step:
         name: Heroku Deploy
-        deployment: Deploy to development
+        deployment: test
         caches:
           - node
         script:
