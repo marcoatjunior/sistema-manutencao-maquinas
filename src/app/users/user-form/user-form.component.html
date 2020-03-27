@@ -1,5 +1,5 @@
 <div class="card mt-4">
-    <h4 class="card-header">Cadastrar Usuário</h4>
+    <h4 class="card-header">{{ userId ? 'Editar' : 'Cadastrar' }} Usuário</h4>
     <div class="card-body">
         <form [formGroup]="formGroup">
             <div class="row">

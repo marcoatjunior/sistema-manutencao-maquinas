@@ -3,16 +3,23 @@ image: node:10.15.3
 pipelines:
   default:
     - step:
-        name: Heroku Deploy
-        deployment: test
+        name: Build Application
         caches:
           - node
         script:
           - npm install
-          - tar --exclude='./node_modules' -zcvf angular-novus.tgz .
-          - pipe: atlassian/heroku-deploy:1.1.2 
-            variables: 
-              HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
-              HEROKU_APP_NAME: 'angular-novus' 
-              ZIP_FILE: 'angular-novus.tgz'
-              WAIT: 'true'
+    - step:
+        name: Create artifact
+        script:
+          - npm pack
+  branches:
+    master:
+      - step:
+          name: Deploy to Heroku
+          deployment: test
+          script:
+          - pipe: atlassian/heroku-deploy:1.1.2
+            variables:
+              HEROKU_API_KEY: "1a1f8db6-7c20-44e5-94a8-200f4bc03193"
+              HEROKU_APP_NAME: "angular-novus"
+              ZIP_FILE: "novus-0.0.2.tgz"
