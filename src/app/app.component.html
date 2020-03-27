@@ -1,11 +1,4 @@
-﻿<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link clickable" routerLink="/">Home</a>
-        <a class="nav-item nav-link clickable" routerLink="/usuarios">Usuários</a>
-        <a class="nav-item nav-link clickable" (click)="logout()">Logout</a>
-    </div>
-</nav>
-
+﻿<app-navbar [isLogged]="currentUser"></app-navbar>
 <div class="container">
     <router-outlet></router-outlet>
 </div>

@@ -8,12 +8,14 @@ import { registerLocaleData } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@shared/shared.module';
 
 registerLocaleData(localePt, 'pt');
 
 @NgModule({
     declarations: [AppComponent],
     imports: [
+        SharedModule,
         BrowserModule,
         ReactiveFormsModule,
         AppRoutingModule,

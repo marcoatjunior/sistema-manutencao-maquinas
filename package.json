@@ -26,6 +26,7 @@
         "chart.js": "^2.9.3",
         "express": "^4.17.1",
         "font-awesome": "^4.7.0",
+        "moment": "^2.24.0",
         "ng2-charts": "^2.3.0",
         "ngx-take-until-destroy": "^5.4.0",
         "path": "^0.12.7",

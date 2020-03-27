@@ -36,7 +36,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
             email: ['', Validators.required],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required],
-            telephone: ['', ],
+            telephone: ['',],
             additional: ['']
         });
 
@@ -59,9 +59,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            this.userService.save(this.formGroup as User)
+            this.userService.save(this.formGroup.value as User)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.goBack(), (err) => { console.log(err); this.loading = false });
+                .subscribe(() => this.goBack(), () => { this.loading = false });
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }

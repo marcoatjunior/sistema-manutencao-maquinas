@@ -1,0 +1,70 @@
+<div class="card mt-4">
+    <h4 class="card-header">Dados da Máquina</h4>
+    <div class="card-body">
+        <div class="row" *ngIf="machine$ | async; let machine">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <p class="text">
+                        <b>{{ machine.name }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="description">Descrição</label>
+                    <p class="text">
+                        <b>{{ machine.description }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="technical">Informações Técnicas</label>
+                    <p class="text">
+                        <b>{{ machine.technical }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="patrimony">Patrimônio</label>
+                    <p class="text">
+                        <b>{{ machine.patrimony }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="reviewPeriod">Período de Revisão</label>
+                    <p class="text">
+                        <b>{{ machine.reviewPeriod | date: "dd/MM/yyyy" }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="warningPeriod">Período de Aviso</label>
+                    <p class="text">
+                        <b>{{ machine.warningPeriod | date: "dd/MM/yyyy" }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="warningEmailAddress">E-mail de Aviso</label>
+                    <p class="text">
+                        <b>{{ machine.warningEmailAddress }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="float-right">
+                    <a class="btn btn-link clickable mr-2" (click)="goBack()">
+                        <fa name="arrow-left"></fa> Voltar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

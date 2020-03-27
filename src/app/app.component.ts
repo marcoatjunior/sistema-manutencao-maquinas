@@ -1,25 +1,18 @@
-﻿import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+﻿import { Component, OnInit } from '@angular/core';
 
 import { AuthenticationService } from './shared/services';
 import { User } from './shared/models';
 
-@Component({ 
-    selector: 'app', 
+@Component({
+    selector: 'app',
     templateUrl: 'app.component.html'
- })
-export class AppComponent {
+})
+export class AppComponent implements OnInit {
     currentUser: User;
 
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService
-    ) {
-        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    }
+    constructor(private authenticationService: AuthenticationService) { }
 
-    logout() {
-        this.authenticationService.logout();
-        this.router.navigate(['/login']);
+    ngOnInit() {
+        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
 }

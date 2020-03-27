@@ -31,6 +31,9 @@
       ],
       "@users/*": [
         "./src/app/users/*"
+      ],
+      "@machines/*": [
+        "./src/app/machines/*"
       ]
     }
   }

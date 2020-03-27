@@ -2,34 +2,7 @@
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-
-import { User } from '@shared/models';
-import { Profile } from '@shared/models/profile';
-
-const profile: Profile = { name: 'Administrador' }
-
-const users: User[] = [
-    {
-        id: 1,
-        name: 'Marco Taborda',
-        username: 'marco.taborda',
-        email: 'marcotaborda.jr@gmail.com',
-        password: 'teste',
-        telephone: '(51) 99340-5550',
-        additional: 'Não há informações adicionais',
-        profile
-    },
-    {
-        id: 2,
-        name: 'Ricardo Kovalski',
-        username: 'ricardo.kovalski',
-        email: 'ricardokovalskicruz@gmail.com',
-        password: 'teste',
-        telephone: '(51) 99720-5007',
-        additional: 'Não há informações adicionais',
-        profile
-    }
-];
+import { users, machines } from '@shared/constants/';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -58,6 +31,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getUser(0);
                 case url.endsWith('/users') && method === 'DELETE':
                     return ok(null);
+                case url.endsWith('/machines') && method === 'GET':
+                    return getMachines();
+                case url.endsWith('/machines/1') && method === 'GET':
+                    return getMachine(0);
+                case url.endsWith('/machines/2') && method === 'GET':
+                    return getMachine(1);
+                case url.endsWith('/machines') && method === 'POST':
+                    return getMachine(0);
+                case url.endsWith('/machines') && method === 'PUT':
+                    return getMachine(0);
+                case url.endsWith('/machines') && method === 'DELETE':
+                    return ok(null);
                 default:
                     return next.handle(request);
             }
@@ -83,6 +68,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getUser(id) {
             if (!isLoggedIn()) return unauthorized();
             return ok(users[id]);
+        }
+
+        function getMachines() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(machines);
+        }
+
+        function getMachine(id) {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(machines[id]);
         }
 
         function ok(body?) {
