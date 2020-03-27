@@ -8,14 +8,22 @@ pipelines:
           - node
         script:
           - npm install
-    - step:
-        name: Create artifact
-        script:
-          - npm pack
-        artifacts:
-          - novus-0.0.2.tgz
+          - npm install -g @angular/cli
+          - ng build
   branches:
     master:
+      - step:
+          name: Install dependencies
+          caches:
+            - node
+          script:
+            - npm install
+      - step:
+          name: Create artifact
+          script:
+            - npm pack
+          artifacts:
+            - novus-0.0.2.tgz
       - step:
           name: Deploy to Heroku
           deployment: production
