@@ -20,5 +20,4 @@ pipelines:
           variables: 
             HEROKU_API_KEY: '1a1f8db6-7c20-44e5-94a8-200f4bc03193' 
             HEROKU_APP_NAME: 'angular-novus' 
-            ZIP_FILE: './novus-1.0.0.tgz'
-            WAIT: 'true'
+            ZIP_FILE: 'novus-0.0.2.tgz'
