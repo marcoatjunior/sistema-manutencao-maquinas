@@ -2,7 +2,7 @@
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { users, machines } from '@shared/constants/';
+import { users, machines, managers, pieces } from '@shared/constants/';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -19,6 +19,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             switch (true) {
                 case url.endsWith('/users/authenticate') && method === 'POST':
                     return authenticate();
+                case url.endsWith('/managers') && method === 'GET':
+                    return getManagers();
+                case url.endsWith('/managers/1') && method === 'GET':
+                    return getManager(0);
+                case url.endsWith('/managers/2') && method === 'GET':
+                    return getManager(1);
+                case url.endsWith('/managers') && method === 'POST':
+                    return getManager(0);
+                case url.endsWith('/managers') && method === 'PUT':
+                    return getManager(0);
+                case url.endsWith('/managers') && method === 'DELETE':
+                    return ok(null);
                 case url.endsWith('/users') && method === 'GET':
                     return getUsers();
                 case url.endsWith('/users/1') && method === 'GET':
@@ -30,6 +42,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 case url.endsWith('/users') && method === 'PUT':
                     return getUser(0);
                 case url.endsWith('/users') && method === 'DELETE':
+                    return ok(null);
+                case url.endsWith('/pieces') && method === 'GET':
+                    return getPieces();
+                case url.endsWith('/pieces/1') && method === 'GET':
+                    return getPiece(0);
+                case url.endsWith('/pieces/2') && method === 'GET':
+                    return getPiece(1);
+                case url.endsWith('/pieces') && method === 'POST':
+                    return getPiece(0);
+                case url.endsWith('/pieces') && method === 'PUT':
+                    return getPiece(0);
+                case url.endsWith('/pieces') && method === 'DELETE':
                     return ok(null);
                 case url.endsWith('/machines') && method === 'GET':
                     return getMachines();
@@ -60,6 +84,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             })
         }
 
+        function getManagers() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(managers);
+        }
+
+        function getManager(id) {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(managers[id]);
+        }
+
         function getUsers() {
             if (!isLoggedIn()) return unauthorized();
             return ok(users);
@@ -68,6 +102,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getUser(id) {
             if (!isLoggedIn()) return unauthorized();
             return ok(users[id]);
+        }
+
+        function getPieces() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(pieces);
+        }
+
+        function getPiece(id) {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(pieces[id]);
         }
 
         function getMachines() {

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '@shared/shared.module';
-import { HomeComponent } from './home.component';
-import { HomeRoutingModule } from './home-routing.module';
+import { DashboardComponent } from './dashboard.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -12,13 +12,13 @@ import { ChartsModule } from 'ng2-charts';
         SharedModule,
         FormsModule,
         ReactiveFormsModule,
-        HomeRoutingModule,
+        DashboardRoutingModule,
         ChartsModule
     ],
     declarations: [
-        HomeComponent
+        DashboardComponent
     ],
-    exports: [HomeComponent]
+    exports: [DashboardComponent]
 })
 
-export class HomeModule { }
+export class DashboardModule { }

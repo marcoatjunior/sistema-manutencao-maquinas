@@ -4,25 +4,17 @@
         <div class="row" *ngIf="user$ | async; let user">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="name">Nome Completo</label>
-                    <p class="text">
-                        <b>{{ user.name }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="profile">Perfil</label>
-                    <p class="text">
-                        <b>{{ user.profile.name }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="username">Nome de Usuário</label>
+                    <label for="username">Usuário</label>
                     <p class="text">
                         <b>{{ user.username }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <p class="text">
+                        <b>{{ user.name }}</b>
                     </p>
                 </div>
             </div>
@@ -36,17 +28,9 @@
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="email">Telefone</label>
+                    <label for="profile">Perfil</label>
                     <p class="text">
-                        <b>{{ user.telephone }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="email">Informações Adicionais</label>
-                    <p class="text">
-                        <b>{{ user.additional }}</b>
+                        <b>{{ user.profile.name }}</b>
                     </p>
                 </div>
             </div>

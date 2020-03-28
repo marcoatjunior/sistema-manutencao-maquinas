@@ -6,8 +6,7 @@ import { MachineService } from '@machines/shared/machine.service';
 
 @Component({
     selector: 'app-machine',
-    templateUrl: 'machine.component.html',
-    styleUrls: ['machine.component.scss']
+    templateUrl: 'machine.component.html'
 })
 export class MachineComponent implements OnInit, OnDestroy {
 

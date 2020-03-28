@@ -1,0 +1,29 @@
+<form [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="piece">Responsável</label>
+                <select class="form-control" id="manager" formControlName="manager">
+                    <option value="" selected disabled hidden>Selecione</option>
+                    <option *ngFor="let manager of managers$ | async" [value]="manager">
+                        {{ manager.name }}
+                    </option>
+                </select>
+                <div class="has-error mt-2" *ngIf="!formGroup.get('manager').valid && formGroup.get('manager').dirty">
+                    Campo 'Responsável' é obrigatório.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="float-right">
+                <a class="btn btn-link clickable mr-2" (click)="modal.dismiss()">
+                    <fa name="ban"></fa> Cancelar
+                </a>
+                <button [disabled]="loading" class="btn btn-primary" (click)="submit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <fa name="check"></fa> Adicionar Peça
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -7,8 +7,7 @@ import { MachineService } from '@machines/shared/machine.service';
 
 @Component({
     selector: 'app-machine-form',
-    templateUrl: 'machine-form.component.html',
-    styleUrls: ['machine-form.component.scss']
+    templateUrl: 'machine-form.component.html'
 })
 export class MachineFormComponent implements OnInit, OnDestroy {
 
@@ -43,11 +42,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
         if (this.machineId) {
             this.machineService.getById(this.machineId)
                 .pipe(untilDestroyed(this))
-                .subscribe((machine: Machine) => this.formGroup.patchValue({
-                    ...machine,
-                    reviewPeriod: machine.reviewPeriod.format('YYYY-MM-DD'),
-                    warningPeriod: machine.warningPeriod.format('YYYY-MM-DD')
-                }));
+                .subscribe((machine: Machine) => this.formGroup.patchValue({ ...machine }));
         }
     }
 

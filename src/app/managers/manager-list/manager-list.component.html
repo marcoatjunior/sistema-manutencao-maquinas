@@ -1,0 +1,67 @@
+<div class="card mt-4">
+    <h4 class="card-header">Responsáveis</h4>
+    <div class="card-body">
+        <div *ngIf="managers$ | async; let managers">
+            <div class="table-responsive" *ngIf="managers.length > 0">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center" scope="row">#</th>
+                            <th class="text-left" scope="row">Nome</th>
+                            <th class="text-left" scope="row">E-mail</th>
+                            <th class="text-center" scope="row">Telefone</th>
+                            <th class="text-center" scope="row">Inf. Adicionais</th>
+                            <th class="text-center" scope="row" colspan="3">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let manager of managers">
+                            <td class="text-center" scope="row">{{ manager.id }}</td>
+                            <td class="text-left">{{ manager.name }}</td>
+                            <td class="text-left">{{ manager.email }}</td>
+                            <td class="text-center">{{ manager.telephone }}</td>
+                            <td class="text-center">{{ manager.additional }}</td>
+                            <td class="text-center">
+                                <a title="Consultar" class="clickable text-dark" [routerLink]="[manager.id, 'd']">
+                                    <fa name="search"></fa>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a title="Editar" class="clickable text-dark" [routerLink]="[manager.id]">
+                                    <fa name="pencil"></fa>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a title="Excluir" class="clickable text-dark" (click)="openDeleteModal(content, manager)">
+                                    <fa name="trash"></fa>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="managers.length <= 0">
+                Não há informações a listar.
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Confirmação</h4>
+        <button type="button" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Confirma a exclusão do responsável <b>{{ selectedManager.name }}</b>?</p>
+        <div *ngIf="deleteError.length > 0">
+            <p class="has-error">{{ deleteError }}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button type="button" class="btn btn-primary" (click)="deleteManager()">Sim</button>
+    </div>
+</ng-template>

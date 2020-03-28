@@ -1,95 +1,42 @@
 import { Machine } from 'src/app/machines/shared/machine.model';
-import * as moment from 'moment';
+import { pieces } from './pieces';
+import { managers } from './managers';
 
 export const machines: Machine[] = [
     {
         id: 1,
-        name: 'Máquina A',
-        description: 'Descrição máquina A',
-        technical: 'Informações Técnicas Máquina A',
-        patrimony: 'Patrimônio A',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinaa@novus.com.br'
+        name: 'PC Lenovo Intel Core i3 teste',
+        description: 'PC Lenovo Intel Core i3 7100 3,90 GHz 4 GB HD 500 GB V520s SFF',
+        technical: 'Gabinete Small Form Factor Processador Intel Core i3-7100 Clock Máx. 3.9 GHz Cache 3MB Chipset Intel B250 Vpro Não',
+        patrimony: '010722',
+        reviewPeriod: 30,
+        warningPeriod: 10,
+        warningEmailAddress: 'enderecoEmail@gmail.com',
+        pieces: [ pieces[0], pieces[1] ],
+        managers: [ managers[0], managers[1] ]
     },
     {
         id: 2,
-        name: 'Máquina B',
-        description: 'Descrição máquina B',
-        technical: 'Informações Técnicas Máquina B',
-        patrimony: 'Patrimônio B',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinab@novus.com.br'
+        name: 'NOBREAK 600VA',
+        description: 'NOBREAK 600VA NEW SAVE E-BIV/S-115V 4125 PRETO - RAGTECH',
+        technical: 'Nobreak Microprocessado com memória Flash interna',
+        patrimony: '030391',
+        reviewPeriod: 30,
+        warningPeriod: 5,
+        warningEmailAddress: 'emaildeaviso@gmail.com',
+        pieces: [ pieces[0] ],
+        managers: [ managers[0] ]
     },
     {
         id: 3,
-        name: 'Máquina C',
-        description: 'Descrição máquina C',
-        technical: 'Informações Técnicas Máquina C',
-        patrimony: 'Patrimônio C',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinac@novus.com.br'
-    },
-    {
-        id: 4,
-        name: 'Máquina D',
-        description: 'Descrição máquina D',
-        technical: 'Informações Técnicas Máquina D',
-        patrimony: 'Patrimônio D',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinad@novus.com.br'
-    },
-    {
-        id: 5,
-        name: 'Máquina E',
-        description: 'Descrição máquina E',
-        technical: 'Informações Técnicas Máquina E',
-        patrimony: 'Patrimônio E',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinae@novus.com.br'
-    },
-    {
-        id: 6,
-        name: 'Máquina F',
-        description: 'Descrição máquina F',
-        technical: 'Informações Técnicas Máquina F',
-        patrimony: 'Patrimônio F',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinaf@novus.com.br'
-    },
-    {
-        id: 7,
-        name: 'Máquina G',
-        description: 'Descrição máquina G',
-        technical: 'Informações Técnicas Máquina G',
-        patrimony: 'Patrimônio G',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinag@novus.com.br'
-    },
-    {
-        id: 8,
-        name: 'Máquina H',
-        description: 'Descrição máquina H',
-        technical: 'Informações Técnicas Máquina H',
-        patrimony: 'Patrimônio H',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinah@novus.com.br'
-    },
-    {
-        id: 9,
-        name: 'Máquina I',
-        description: 'Descrição máquina I',
-        technical: 'Informações Técnicas Máquina I',
-        patrimony: 'Patrimônio I',
-        reviewPeriod: moment('2020-04-20'),
-        warningPeriod: moment('2020-04-10'),
-        warningEmailAddress: 'maquinai@novus.com.br'
-    },
+        name: 'Impressora 3D',
+        description: 'Impressora 3D à base de plástico.',
+        technical: 'Duplo motor, fuso trapezoidal no eixo Z e com sensor de filamento.',
+        patrimony: '025824',
+        reviewPeriod: 45,
+        warningPeriod: 7,
+        warningEmailAddress: 'josedevargas@gmail.com',
+        pieces: [ pieces[3] ],
+        managers: [ managers[1] ]
+    }
 ];

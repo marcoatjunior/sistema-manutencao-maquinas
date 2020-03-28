@@ -4,13 +4,15 @@
         <div class="row">
             <div class="col">
                 <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType"></canvas>
+                    [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
             </div>
             <div class="col">
-                <h6>Usuários do sistema</h6>
-                <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-                <ul *ngIf="users">
-                    <li *ngFor="let user of users">{{user.name}}</li>
+                <h2>Status</h2>
+                <br>
+                <ul>
+                    <li>Atrasados: {{ doughnutChartData[0] }}</li>
+                    <li>Manutenção: {{ doughnutChartData[1] }}</li>
+                    <li>Em Dia: {{ doughnutChartData[2] }}</li>
                 </ul>
             </div>
         </div>

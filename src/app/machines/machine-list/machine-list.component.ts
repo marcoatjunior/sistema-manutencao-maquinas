@@ -8,7 +8,7 @@ import { MachineService } from '@machines/shared/machine.service';
 @Component({
     selector: 'app-machine-list',
     templateUrl: 'machine-list.component.html',
-    styleUrls: ['machine-list.component.scss']
+    styleUrls: ['./machine-list.component.scss']
 })
 export class MachineListComponent implements OnInit, OnDestroy {
 
@@ -26,9 +26,9 @@ export class MachineListComponent implements OnInit, OnDestroy {
         this.machines$ = this.machineService.get();
     }
 
-    openDeleteModal(content, machine) {
+    openModal(content, machine) {
         this.selectedMachine = machine;
-        this.modalService.open(content);
+        this.modalService.open(content, { size: 'lg' });
     }
 
     deleteMachine() {

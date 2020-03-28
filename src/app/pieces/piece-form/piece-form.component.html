@@ -1,0 +1,52 @@
+<div class="card mt-4">
+    <h4 class="card-header">{{ pieceId ? 'Editar' : 'Cadastrar' }} Peça de Reposição</h4>
+    <div class="card-body">
+        <form [formGroup]="formGroup">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input class="form-control" id="name" formControlName="name">
+                        <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
+                            Campo 'Nome' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Descrição</label>
+                        <input class="form-control" id="description" formControlName="description">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
+                            Campo 'Descrição' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="stockQuantity">Estoque de Peças</label>
+                        <input class="form-control" id="stockQuantity" type="number" formControlName="stockQuantity">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('stockQuantity').valid && formGroup.get('stockQuantity').dirty">
+                            Campo 'Estoque de Peças' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="float-right">
+                        <a class="btn btn-link clickable mr-2" (click)="goBack()">
+                            <fa name="arrow-left"></fa> Voltar
+                        </a>
+                        <button class="btn btn-default mr-2" *ngIf="!pieceId" (click)="formGroup.reset()">
+                            <fa name="eraser"></fa> Limpar
+                        </button>
+                        <button [disabled]="loading" class="btn btn-success" (click)="submit()">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <fa name="check"></fa> Salvar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

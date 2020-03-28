@@ -8,8 +8,7 @@ import { ProfileEnum, enumSelector } from '@shared/enums/profile.enum';
 
 @Component({
     selector: 'app-user-form',
-    templateUrl: 'user-form.component.html',
-    styleUrls: ['user-form.component.scss']
+    templateUrl: 'user-form.component.html'
 })
 export class UserFormComponent implements OnInit, OnDestroy {
 
@@ -35,9 +34,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
             username: ['', Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
-            confirmPassword: ['', Validators.required],
-            telephone: ['',],
-            additional: ['']
+            confirmPassword: ['', Validators.required]
         });
 
         this.populateForm();

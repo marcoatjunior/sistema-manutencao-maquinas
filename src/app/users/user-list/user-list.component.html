@@ -6,19 +6,17 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th class="text-center" scope="row">#</th>
+                            <th class="text-left" scope="row">Usuário</th>
                             <th class="text-left" scope="row">Nome</th>
                             <th class="text-left" scope="row">E-mail</th>
-                            <th class="text-center" scope="row">Perfil</th>
                             <th class="text-center" scope="row" colspan="3">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of users">
-                            <td class="text-center" scope="row">{{ user.id }}</td>
+                            <td class="text-left" scope="row">{{ user.username }}</td>
                             <td class="text-left">{{ user.name }}</td>
                             <td class="text-left">{{ user.email }}</td>
-                            <td class="text-center">{{ user.profile.name }}</td>
                             <td class="text-center">
                                 <a title="Consultar" class="clickable text-dark" [routerLink]="[user.id, 'd']">
                                     <fa name="search"></fa>

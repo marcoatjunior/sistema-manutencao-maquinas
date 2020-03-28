@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: 'machines.component.html',
-    styleUrls: ['machines.component.scss']
+    templateUrl: 'machines.component.html'
 })
 export class MachinesComponent implements OnInit {
 

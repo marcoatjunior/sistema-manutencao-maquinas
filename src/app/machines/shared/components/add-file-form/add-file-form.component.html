@@ -1,0 +1,35 @@
+<form [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="file">Arquivo</label>
+                <input class="form-control" id="file" type="file" formControlName="file"
+                    (change)="handleFileInput($event.target.files)">
+                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty">
+                    Campo 'Arquivo' é obrigatório.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <input class="form-control" id="description" formControlName="description">
+                <div class="has-error mt-2"
+                    *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
+                    Campo 'Descrição' é obrigatório.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="float-right">
+                <a class="btn btn-link clickable mr-2" (click)="modal.dismiss()">
+                    <fa name="ban"></fa> Cancelar
+                </a>
+                <button [disabled]="loading" class="btn btn-primary" (click)="submit()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <fa name="check"></fa> Adicionar Arquivo
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
