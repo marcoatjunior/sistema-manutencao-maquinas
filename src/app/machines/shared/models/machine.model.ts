@@ -1,6 +1,6 @@
 import { Piece } from 'src/app/pieces/shared/piece.model';
 import { Manager } from 'src/app/managers/shared/manager.model';
-import { File } from './file.model';
+import { File } from '../../../shared/models/file.model';
 
 export interface Machine {
     id?: number;

@@ -3,6 +3,7 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 import { users, machines, managers, pieces, file } from '@shared/constants/';
+import { logs } from '@shared/constants/logs';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -16,6 +17,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             .pipe(dematerialize());
 
         function handleRoute() {
+            console.log(url)
             switch (true) {
                 case url.endsWith('/users/authenticate') && method === 'POST':
                     return authenticate();
@@ -69,6 +71,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getFile();
                 case url.endsWith('/machines') && method === 'DELETE':
                     return ok(null);
+                case url.endsWith('/logs') && method === 'GET':
+                    return getLogs();
+                case url.endsWith('/logs/1') && method === 'GET':
+                    return getLog(0);
+                case url.endsWith('/logs/2') && method === 'GET':
+                    return getLog(1);
+                case url.endsWith('/logs?machineId=1&action=ALTERACAO') && method === 'GET':
+                    return getLog(1);
                 default:
                     return next.handle(request);
             }
@@ -124,6 +134,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getMachine(id) {
             if (!isLoggedIn()) return unauthorized();
             return ok(machines[id]);
+        }
+
+        function getLogs() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(logs);
+        }
+
+        function getLog(id) {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(logs[id]);
         }
 
         function getFile() {

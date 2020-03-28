@@ -40,6 +40,9 @@
       ],
       "@machines/*": [
         "./src/app/machines/*"
+      ],
+      "@logs/*": [
+        "./src/app/logs/*"
       ]
     }
   }

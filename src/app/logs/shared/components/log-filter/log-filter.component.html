@@ -1,0 +1,34 @@
+<form [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="form-group">
+                <label for="machine" class="required">Máquina</label>
+                <select class="form-control" id="machine" formControlName="machine">
+                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
+                    <option *ngFor="let machine of machines$ | async" [ngValue]="machine">
+                        {{ machine.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="action" class="required">Ação</label>
+                <select class="form-control" id="action" formControlName="action">
+                    <option value="null" selected disabled hidden>Selecione</option>
+                    <option *ngFor="let action of actions" [ngValue]="action">
+                        {{ action.value }}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="float-right btn-col-align">
+                <button class="btn btn-primary" (click)="filter()">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <fa name="search"></fa> Pesquisar
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

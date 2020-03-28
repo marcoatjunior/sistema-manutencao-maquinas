@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { take } from 'rxjs/operators';
-import { File as FileI } from '@machines/shared/models/file.model';
+import { File as FileI } from '@shared/models/file.model';
 
 @Injectable({
     providedIn: 'root'

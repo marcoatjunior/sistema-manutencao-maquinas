@@ -1,7 +1,7 @@
 import { Machine } from '@machines/shared/models/machine.model';
 import { pieces } from './pieces';
 import { managers } from './managers';
-import { File } from '@machines/shared/models/file.model';
+import { File } from '@shared/models/file.model';
 import * as moment from 'moment';
 
 export const file: File = {

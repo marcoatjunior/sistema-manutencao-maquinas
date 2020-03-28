@@ -20,3 +20,10 @@ body {
   content: " *";
   color: red;
 }
+
+.btn-col-align {
+  width: 100%;
+  display: flex;
+  margin-top: 30px;
+  justify-content: flex-end;
+}
