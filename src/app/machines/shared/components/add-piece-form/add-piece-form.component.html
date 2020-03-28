@@ -4,8 +4,8 @@
             <div class="form-group">
                 <label for="piece">Peça de Reposição</label>
                 <select class="form-control" id="piece" formControlName="piece">
-                    <option value="" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces$ | async" [value]="piece">
+                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
+                    <option *ngFor="let piece of pieces$ | async" [ngValue]="piece">
                         {{ piece.name }}
                     </option>
                 </select>
@@ -17,7 +17,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="minQuantity">Quantidade Mínima</label>
-                <input class="form-control" id="minQuantity" formControlName="minQuantity">
+                <input class="form-control" id="minQuantity" type="number" formControlName="minQuantity">
                 <div class="has-error mt-2"
                     *ngIf="!formGroup.get('minQuantity').valid && formGroup.get('minQuantity').dirty">
                     Campo 'Quantidade Mínima' é obrigatória.

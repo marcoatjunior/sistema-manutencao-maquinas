@@ -1,6 +1,16 @@
 import { Machine } from 'src/app/machines/shared/machine.model';
 import { pieces } from './pieces';
 import { managers } from './managers';
+import { File } from '@machines/shared/file.model';
+import * as moment from 'moment';
+
+export const file: File = {
+    id: 1,
+    name: 'arquivox.png',
+    description: 'Arquivo X',
+    createdAt: moment('2020-03-28'),
+    type: 'image/png'
+}
 
 export const machines: Machine[] = [
     {
@@ -13,7 +23,8 @@ export const machines: Machine[] = [
         warningPeriod: 10,
         warningEmailAddress: 'enderecoEmail@gmail.com',
         pieces: [ pieces[0], pieces[1] ],
-        managers: [ managers[0], managers[1] ]
+        managers: [ managers[0], managers[1] ],
+        files: [file]
     },
     {
         id: 2,
@@ -25,7 +36,8 @@ export const machines: Machine[] = [
         warningPeriod: 5,
         warningEmailAddress: 'emaildeaviso@gmail.com',
         pieces: [ pieces[0] ],
-        managers: [ managers[0] ]
+        managers: [ managers[0] ],
+        files: []
     },
     {
         id: 3,
@@ -37,6 +49,7 @@ export const machines: Machine[] = [
         warningPeriod: 7,
         warningEmailAddress: 'josedevargas@gmail.com',
         pieces: [ pieces[3] ],
-        managers: [ managers[1] ]
+        managers: [ managers[1] ],
+        files: [file]
     }
 ];

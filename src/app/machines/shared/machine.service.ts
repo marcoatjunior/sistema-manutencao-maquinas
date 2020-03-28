@@ -23,7 +23,6 @@ export class MachineService {
     }
 
     save(machine: Machine): Observable<Machine> {
-        console.log(machine)
         if (machine.id === null) {
             return this.insert(machine);
         }

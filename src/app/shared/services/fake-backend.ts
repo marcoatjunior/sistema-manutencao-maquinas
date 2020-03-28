@@ -2,7 +2,7 @@
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-import { users, machines, managers, pieces } from '@shared/constants/';
+import { users, machines, managers, pieces, file } from '@shared/constants/';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -65,6 +65,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                     return getMachine(0);
                 case url.endsWith('/machines') && method === 'PUT':
                     return getMachine(0);
+                case url.endsWith('/uploadFile') && method === 'POST':
+                    return getFile();
                 case url.endsWith('/machines') && method === 'DELETE':
                     return ok(null);
                 default:
@@ -122,6 +124,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         function getMachine(id) {
             if (!isLoggedIn()) return unauthorized();
             return ok(machines[id]);
+        }
+
+        function getFile() {
+            if (!isLoggedIn()) return unauthorized();
+            return ok(file);
         }
 
         function ok(body?) {

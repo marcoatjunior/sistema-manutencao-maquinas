@@ -4,8 +4,8 @@
             <div class="form-group">
                 <label for="piece">Responsável</label>
                 <select class="form-control" id="manager" formControlName="manager">
-                    <option value="" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let manager of managers$ | async" [value]="manager">
+                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
+                    <option *ngFor="let manager of managers$ | async" [ngValue]="manager">
                         {{ manager.name }}
                     </option>
                 </select>

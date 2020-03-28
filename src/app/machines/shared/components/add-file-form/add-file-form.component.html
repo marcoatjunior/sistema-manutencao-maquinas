@@ -5,8 +5,12 @@
                 <label for="file">Arquivo</label>
                 <input class="form-control" id="file" type="file" formControlName="file"
                     (change)="handleFileInput($event.target.files)">
-                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty">
+                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && formGroup.get('file').errors.required">
                     Campo 'Arquivo' é obrigatório.
+                </div>
+                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && !formGroup.get('file').errors.upload">
+                    Ocorreu um erro ao efetuar o upload do arquivo.
+                    <span (click)="formGroup.get('file').reset()" class="float-right clickable text-dark"><b>Remover seleção</b></span>
                 </div>
             </div>
         </div>

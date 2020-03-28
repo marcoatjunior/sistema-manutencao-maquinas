@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Machine } from '@machines/shared/machine.model';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Manager } from 'src/app/managers/shared/manager.model';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -16,7 +16,7 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 export class AddManagerFormComponent implements OnInit, OnDestroy {
 
     @Input() machine: Machine;
-    @Input() modal: NgbModal;
+    @Input() modal: NgbActiveModal;
 
     managers$: Observable<Manager[]>;
     loading = false;
@@ -32,7 +32,7 @@ export class AddManagerFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
-            manager: ['', Validators.required]
+            manager: [null, Validators.required]
         });
 
         this.managers$ = this.managerService.get();
@@ -41,7 +41,7 @@ export class AddManagerFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            this.machine.managers.push(this.formGroup.get('manager').value as Manager);
+            this.machine.managers = [this.formGroup.get('manager').value as Manager];
             this.machineService.save(this.machine)
                 .pipe(untilDestroyed(this))
                 .subscribe(() => this.updatePage(), () => { this.loading = false });
