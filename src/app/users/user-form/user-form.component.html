@@ -5,41 +5,26 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name">Nome Completo</label>
-                        <input class="form-control" id="name" formControlName="name">
-                        <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
-                            Campo 'Nome Completo' é obrigatório.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="profile">Perfil</label>
-                        <select class="form-control" id="profile" formControlName="profile">
-                            <option value="" selected disabled hidden>Selecione</option>
-                            <option *ngFor="let profile of profiles" [value]="profile">
-                                {{ profile.value }}
-                            </option>
-                        </select>
-                        <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('profile').valid && formGroup.get('profile').dirty">
-                            Campo 'Perfil' é obrigatório.
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="username">Nome de Usuário</label>
+                        <label for="username" class="required">Usuário</label>
                         <input class="form-control" id="username" formControlName="username">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('username').valid && formGroup.get('username').dirty">
-                            Campo 'Nome de Usuário' é obrigatório.
+                            Campo 'Usuário' é obrigatório.
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="email">E-mail</label>
+                        <label for="name" class="required">Nome</label>
+                        <input class="form-control" id="name" formControlName="name">
+                        <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
+                            Campo 'Nome' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="email" class="required">E-mail</label>
                         <input class="form-control" id="email" type="email" formControlName="email">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('email').valid && formGroup.get('email').dirty">
@@ -49,7 +34,22 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="password">Senha</label>
+                        <label for="profile" class="required">Tipo de Usuário</label>
+                        <select class="form-control" id="profile" formControlName="profile">
+                            <option value="" selected disabled hidden>Selecione</option>
+                            <option *ngFor="let profile of profiles" [value]="profile">
+                                {{ profile.value }}
+                            </option>
+                        </select>
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('profile').valid && formGroup.get('profile').dirty">
+                            Campo 'Tipo de Usuário' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="password" class="required">Senha</label>
                         <input class="form-control" id="password" type="password" formControlName="password">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('password').valid && formGroup.get('password').dirty">
@@ -59,7 +59,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="confirm-password">Confirmar Senha</label>
+                        <label for="confirm-password" class="required">Confirmar Senha</label>
                         <input class="form-control" id="confirm-password" type="password"
                             formControlName="confirmPassword">
                         <div class="has-error mt-2"

@@ -1,8 +1,8 @@
 <form [formGroup]="formGroup">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-8">
             <div class="form-group">
-                <label for="piece">Peça de Reposição</label>
+                <label for="piece" class="required">Peça de Reposição</label>
                 <select class="form-control" id="piece" formControlName="piece">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
                     <option *ngFor="let piece of pieces$ | async" [ngValue]="piece">
@@ -14,9 +14,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-4">
             <div class="form-group">
-                <label for="minQuantity">Quantidade Mínima</label>
+                <label for="minQuantity" class="required">Quantidade Mínima</label>
                 <input class="form-control" id="minQuantity" type="number" formControlName="minQuantity">
                 <div class="has-error mt-2"
                     *ngIf="!formGroup.get('minQuantity').valid && formGroup.get('minQuantity').dirty">

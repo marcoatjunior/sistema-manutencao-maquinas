@@ -3,9 +3,9 @@
     <div class="card-body">
         <form [formGroup]="formGroup">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="name">Nome</label>
+                        <label for="name" class="required">Nome</label>
                         <input class="form-control" id="name" formControlName="name">
                         <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
                             Campo 'Nome' é obrigatório.
@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="description">Descrição</label>
-                        <input class="form-control" id="description" formControlName="description">
+                        <label for="description" class="required">Descrição</label>
+                        <textarea formControlName="description" name="description" id="description" class="form-control" rows="4"></textarea>
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
                             Campo 'Descrição' é obrigatório.
@@ -24,13 +24,17 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="technical">Informações Técnicas</label>
-                        <input class="form-control" id="technical" formControlName="technical">
+                        <label for="technical" class="required">Características</label>
+                        <textarea formControlName="technical" name="technical" id="technical" class="form-control" rows="4"></textarea>
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('technical').valid && formGroup.get('technical').dirty">
+                            Campo 'Características' é obrigatório.
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="patrimony">Patrimônio</label>
+                        <label for="patrimony" class="required">Patrimônio</label>
                         <input class="form-control" id="patrimony" type="patrimony" formControlName="patrimony">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('patrimony').valid && formGroup.get('patrimony').dirty">
@@ -38,36 +42,161 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="reviewPeriod">Período de Revisão</label>
-                        <input class="form-control" id="reviewPeriod" type="date" formControlName="reviewPeriod">
+                        <label for="reviewPeriod" class="required">Período de Manutenção <sup>(em dias)</sup></label>
+                        <input class="form-control" id="reviewPeriod" type="number" formControlName="reviewPeriod">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('reviewPeriod').valid && formGroup.get('reviewPeriod').dirty">
-                            Campo 'Período de Revisão' é obrigatório.
+                            Campo 'Período de Manutenção' é obrigatório.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
-                        <label for="warningPeriod">Período de Aviso</label>
-                        <input class="form-control" id="warningPeriod" type="date" formControlName="warningPeriod">
+                        <label for="warningPeriod" class="required" class="required">Tempo antes do e-mail de aviso <sup>(em dias)</sup></label>
+                        <input class="form-control" id="warningPeriod" type="number" formControlName="warningPeriod">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('warningPeriod').valid && formGroup.get('warningPeriod').dirty">
-                            Campo 'Período de Aviso' é obrigatório.
+                            Campo 'Tempo' é obrigatório.
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="form-group">
-                        <label for="warningEmailAddress">E-mail de Aviso</label>
-                        <input class="form-control" id="warningEmailAddress" type="email" formControlName="warningEmailAddress">
+                        <label for="warningEmailAddress" class="required">Endereço de e-mail para enviar o aviso</label>
+                        <input class="form-control" id="warningEmailAddress" type="email"
+                            formControlName="warningEmailAddress">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('warningEmailAddress').valid && formGroup.get('warningEmailAddress').dirty">
                             Campo 'E-mail de Aviso' é obrigatório.
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12" *ngIf="!machineId">
+                    <div class="form-group">
+                        <label for="piece">Responsável</label>
+                        <select class="form-control" id="manager" formControlName="manager">
+                            <option [ngValue]="null" selected disabled hidden>Selecione</option>
+                            <option *ngFor="let manager of managers$ | async" [ngValue]="manager">
+                                {{ manager.name }}
+                            </option>
+                        </select>
+                        <div class="has-error mt-2" *ngIf="!formGroup.get('manager').valid && formGroup.get('manager').dirty">
+                            Campo 'Responsável' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="machine && machine.pieces.length > 0">
+                <div class="col-md-12">
+                    <div class="card mt-4">
+                        <h5 class="card-header">Peças de Reposição</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left" scope="row">Nome</th>
+                                            <th class="text-left" scope="row">Descrição</th>
+                                            <th class="text-center" scope="row">Quant. Mínima</th>
+                                            <th class="text-center" scope="row">Em Estoque</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let piece of machine.pieces">
+                                            <td class="text-left">{{ piece.name }}</td>
+                                            <td class="text-left">{{ piece.description }}</td>
+                                            <td class="text-center">{{ piece.minQuantity }}</td>
+                                            <td class="text-center">{{ piece.stockQuantity }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="machine.pieces <= 0">
+                                Não há nenhum registro.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="machine && machine.managers.length > 0">
+                <div class="col-md-12">
+                    <div class="card mt-4">
+                        <h5 class="card-header">Responsáveis</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left" scope="row">Nome</th>
+                                            <th class="text-left" scope="row">Descrição</th>
+                                            <th class="text-left" scope="row">Telefone</th>
+                                            <th class="text-center" scope="row">Inf. Adicionais</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let manager of machine.managers">
+                                            <td class="text-left">{{ manager.name }}</td>
+                                            <td class="text-left">{{ manager.email }}</td>
+                                            <td class="text-left">{{ manager.telephone }}</td>
+                                            <td class="text-center">{{ manager.additional }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div *ngIf="machine.managers <= 0">
+                                Não há nenhum registro.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="machine && machine.files.length > 0">
+                <div class="col-md-12">
+                    <div class="card mt-4">
+                        <h5 class="card-header">Arquivos</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left" scope="row">Nome</th>
+                                            <th class="text-left" scope="row">Descrição</th>
+                                            <th class="text-center" scope="row">Data de Inclusão</th>
+                                            <th class="text-center" scope="row">Tipo</th>
+                                            <th class="text-center" scope="row">Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let file of machine.files">
+                                            <td class="text-left">{{ file.name }}</td>
+                                            <td class="text-left">{{ file.description }}</td>
+                                            <td class="text-center">{{ file.createdAt | date: "dd/MM/yyyy" }}</td>
+                                            <td class="text-center">{{ file.type }}</td>
+                                            <td class="text-center">
+                                                <a title="Baixar Arquivo" class="clickable"
+                                                    (click)="downloadFile(file.id)">
+                                                    <fa name="download"></fa>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="downloadError">
+                                    <p class="has-errors">
+                                        Ocorreu um erro ao efetuar o download.
+                                    </p>
+                                </div>
+                            </div>
+                            <div *ngIf="machine.files <= 0">
+                                Não há nenhum registro.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
                 <div class="col-md-12">
                     <div class="float-right">
                         <a class="btn btn-link clickable mr-2" (click)="goBack()">

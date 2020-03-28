@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Machine } from './machine.model';
 import { take } from 'rxjs/operators';
 import { environment } from '@environments/environment';
+import { Machine } from '@machines/shared/models/machine.model';
 
 @Injectable()
 export class MachineService {

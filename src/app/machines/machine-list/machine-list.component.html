@@ -3,7 +3,7 @@
     <div class="card-body">
         <div *ngIf="machines$ | async; let machines">
             <div class="table-responsive" *ngIf="machines.length > 0">
-                <table class="table">
+                <table class="table table-sm">
                     <thead>
                         <tr>
                             <th class="text-left" scope="row">Nome</th>
@@ -11,7 +11,7 @@
                             <th class="text-left" scope="row">Características</th>
                             <th class="text-center" scope="row">Patrimônio</th>
                             <th class="text-center" scope="row">E-mail Aviso</th>
-                            <th class="text-center" scope="row">Ações</th>
+                            <th class="text-center" scope="row" colspan="7">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -22,30 +22,41 @@
                             <td class="v-align text-center">{{ machine.patrimony }}</td>
                             <td class="v-align text-center">{{ machine.warningEmailAddress }}</td>
                             <td class="v-align text-center">
-                                <a title="Consultar" class="clickable space-between text-dark"
+                                <a title="Consultar" class="clickable text-dark"
                                     [routerLink]="[machine.id, 'd']">
                                     <fa name="search"></fa>
                                 </a>
-                                <a title="Editar" class="clickable space-between text-dark" [routerLink]="[machine.id]">
+                            <td class="v-align text-center">
+                                <a title="Editar" class="clickable text-dark" [routerLink]="[machine.id]">
                                     <fa name="pencil"></fa>
                                 </a>
-                                <a title="Excluir" class="clickable space-between text-dark"
+                            </td>
+                            <td class="v-align text-center">
+                                <a title="Excluir" class="clickable text-dark"
                                     (click)="openModal(delete, machine)">
                                     <fa name="trash"></fa>
                                 </a>
-                                <a title="Adicionar Arquivo" class="clickable space-between text-dark"
+                            </td>
+                            <td class="v-align text-center">
+                                <a title="Adicionar Arquivo" class="clickable text-dark"
                                     (click)="openModal(addFile, machine)">
                                     <fa name="paperclip"></fa>
                                 </a>
-                                <a title="Vincular Peça de Reposição" class="clickable space-between text-dark"
+                            </td>
+                            <td class="v-align text-center">
+                                <a title="Vincular Peça de Reposição" class="clickable text-dark"
                                     (click)="openModal(addPiece, machine)">
                                     <fa name="archive"></fa>
                                 </a>
-                                <a title="Realizar Manutenção" class="clickable space-between text-dark"
+                            </td>
+                            <td class="v-align text-center">
+                                <a title="Realizar Manutenção" class="clickable text-dark"
                                     (click)="openModal(addMaintenance, machine)">
                                     <fa name="wrench"></fa>
                                 </a>
-                                <a title="Vincular Responsável" class="clickable space-between text-dark"
+                            </td>
+                            <td class="v-align text-center">
+                                <a title="Vincular Responsável" class="clickable text-dark"
                                     (click)="openModal(addManager, machine)">
                                     <fa name="user"></fa>
                                 </a>
@@ -63,7 +74,7 @@
 
 <ng-template #delete let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Exclusão</h4>
+        <h5 class="modal-title">Exclusão</h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -82,7 +93,7 @@
 
 <ng-template #addFile let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Adicionar arquivo à máquina {{ selectedMachine.name }}</h4>
+        <h5 class="modal-title">Adicionar arquivo à máquina <b>{{ selectedMachine.name }}</b></h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -94,7 +105,7 @@
 
 <ng-template #addPiece let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Vincular peça de reposição à máquina {{ selectedMachine.name }}</h4>
+        <h5 class="modal-title">Vincular peça de reposição à máquina <b>{{ selectedMachine.name }}</b></h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -106,23 +117,19 @@
 
 <ng-template #addMaintenance let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Realizar manutenção para a máquina {{ selectedMachine.name }}</h4>
+        <h5 class="modal-title">Realizar manutenção para a máquina <b>{{ selectedMachine.name }}</b></h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
     <div class="modal-body">
-        <p>Form manutenção</p>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Cancelar</button>
-        <button type="button" class="btn btn-primary" (click)="addMaintenance()">Realizar Manutenção</button>
+        <app-add-maintenance-form [machine]="selectedMachine" [modal]="modal"></app-add-maintenance-form>
     </div>
 </ng-template>
 
 <ng-template #addManager let-modal>
     <div class="modal-header">
-        <h4 class="modal-title">Vincular responsável à máquina {{ selectedMachine.name }}</h4>
+        <h5 class="modal-title">Vincular responsável à máquina <b>{{ selectedMachine.name }}</b></h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>

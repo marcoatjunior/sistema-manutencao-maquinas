@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { File } from '@machines/shared/file.model';
-import { MachineService } from '@machines/shared/machine.service';
+import { File } from '@machines/shared/models/file.model';
+import { MachineService } from '@machines/shared/services/machine.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Machine } from '@machines/shared/machine.model';
-import { FileUploadService } from '@shared/services/file-upload.service';
+import { Machine } from '@machines/shared/models/machine.model';
+import { FileService } from '@shared/services/file-upload.service';
 
 @Component({
     selector: 'app-add-file-form',
@@ -26,7 +26,7 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
         private router: Router,
         private formBuilder: FormBuilder,
         private machineService: MachineService,
-        private fileUploadService: FileUploadService
+        private fileService: FileService
     ) { }
 
     ngOnInit() {
@@ -38,7 +38,7 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
 
     handleFileInput(files: FileList) {
         this.loading = true;
-        this.fileUploadService.post(files[0])
+        this.fileService.post(files[0])
             .pipe(untilDestroyed(this))
             .subscribe((file: File) => this.fileUploaded(file), () => this.setFileUploadError());
     }

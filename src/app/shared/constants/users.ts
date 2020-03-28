@@ -1,5 +1,5 @@
 import { User } from '@shared/models';
-import { Profile } from '@shared/models/profile';
+import { Profile } from '@shared/models/profile.model';
 
 const profile: Profile = { name: 'Administrador' };
 

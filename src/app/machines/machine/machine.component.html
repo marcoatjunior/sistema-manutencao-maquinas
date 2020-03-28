@@ -1,68 +1,171 @@
-<div class="card mt-4">
-    <h4 class="card-header">Dados da Máquina</h4>
-    <div class="card-body">
-        <div class="row" *ngIf="machine$ | async; let machine">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="name">Nome</label>
-                    <p class="text">
-                        <b>{{ machine.name }}</b>
-                    </p>
+<div *ngIf="machine$ | async; let machine" class="mb-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="float-right">
+                <a class="btn btn-light clickable mr-2 mt-4" (click)="goBack()">
+                    <fa name="arrow-left"></fa> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Dados da Máquina</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-bold" for="name">Nome</label>
+                                <p class="text">{{ machine.name }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-bold" for="description">Descrição</label>
+                                <p class="text">{{ machine.description }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="text-bold" for="technical">Informações Técnicas</label>
+                                <p class="text">{{ machine.technical }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="text-bold" for="patrimony">Patrimônio</label>
+                                <p class="text">{{ machine.patrimony }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="text-bold" for="reviewPeriod">Período de Revisão</label>
+                                <p class="text">{{ machine.reviewPeriod }} dias</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="text-bold" for="warningPeriod">Período de Aviso</label>
+                                <p class="text">{{ machine.warningPeriod }} dias</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="text-bold" for="warningEmailAddress">E-mail de Aviso</label>
+                                <p class="text">
+                                    {{ machine.warningEmailAddress }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="description">Descrição</label>
-                    <p class="text">
-                        <b>{{ machine.description }}</b>
-                    </p>
+        </div>
+    </div>
+    <div class="row" *ngIf="machine.pieces.length > 0">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Peças de Reposição</h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" scope="row">Nome</th>
+                                    <th class="text-left" scope="row">Descrição</th>
+                                    <th class="text-center" scope="row">Quant. Mínima</th>
+                                    <th class="text-center" scope="row">Em Estoque</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let piece of machine.pieces">
+                                    <td class="text-left">{{ piece.name }}</td>
+                                    <td class="text-left">{{ piece.description }}</td>
+                                    <td class="text-center">{{ piece.minQuantity }}</td>
+                                    <td class="text-center">{{ piece.stockQuantity }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="machine.pieces <= 0">
+                        Não há nenhum registro.
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="technical">Informações Técnicas</label>
-                    <p class="text">
-                        <b>{{ machine.technical }}</b>
-                    </p>
+        </div>
+    </div>
+    <div class="row" *ngIf="machine.managers.length > 0">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Responsáveis</h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" scope="row">Nome</th>
+                                    <th class="text-left" scope="row">Descrição</th>
+                                    <th class="text-center" scope="row">Telefone</th>
+                                    <th class="text-center" scope="row">Inf. Adicionais</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let manager of machine.managers">
+                                    <td class="text-left">{{ manager.name }}</td>
+                                    <td class="text-left">{{ manager.email }}</td>
+                                    <td class="text-center">{{ manager.telephone }}</td>
+                                    <td class="text-center">{{ manager.additional }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div *ngIf="machine.managers <= 0">
+                        Não há nenhum registro.
+                    </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="patrimony">Patrimônio</label>
-                    <p class="text">
-                        <b>{{ machine.patrimony }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="reviewPeriod">Período de Revisão</label>
-                    <p class="text">
-                        <b>{{ machine.reviewPeriod }} dias</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="warningPeriod">Período de Aviso</label>
-                    <p class="text">
-                        <b>{{ machine.warningPeriod }} dias</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="warningEmailAddress">E-mail de Aviso</label>
-                    <p class="text">
-                        <b>{{ machine.warningEmailAddress }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="float-right">
-                    <a class="btn btn-link clickable mr-2" (click)="goBack()">
-                        <fa name="arrow-left"></fa> Voltar
-                    </a>
+        </div>
+    </div>
+    <div class="row" *ngIf="machine.files.length > 0">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Arquivos</h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" scope="row">Nome</th>
+                                    <th class="text-left" scope="row">Descrição</th>
+                                    <th class="text-center" scope="row">Data de Inclusão</th>
+                                    <th class="text-center" scope="row">Tipo</th>
+                                    <th class="text-center" scope="row">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let file of machine.files">
+                                    <td class="text-left">{{ file.name }}</td>
+                                    <td class="text-left">{{ file.description }}</td>
+                                    <td class="text-center">{{ file.createdAt | date: "dd/MM/yyyy" }}</td>
+                                    <td class="text-center">{{ file.type }}</td>
+                                    <td class="text-center">
+                                        <a title="Baixar Arquivo" class="clickable" (click)="downloadFile(file.id)">
+                                            <fa name="download"></fa>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div *ngIf="downloadError">
+                            <p class="has-error ml-2">
+                                Ocorreu um erro ao efetuar o download.
+                            </p>
+                        </div>
+                    </div>
+                    <div *ngIf="machine.files <= 0">
+                        Não há nenhum registro.
+                    </div>
                 </div>
             </div>
         </div>

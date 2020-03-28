@@ -3,14 +3,20 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { take } from 'rxjs/operators';
-import { File as FileI } from '@machines/shared/file.model';
+import { File as FileI } from '@machines/shared/models/file.model';
 
 @Injectable({
     providedIn: 'root'
 })
-export class FileUploadService {
+export class FileService {
 
     constructor(private httpClient: HttpClient) { }
+
+    getById(id: number): Observable<Blob> {
+        return this.httpClient
+            .post<Blob>(`${environment.apiUrl}/uploadFile/${id}`, { responseType: 'blob' })
+            .pipe(take(1));
+    }
 
     post(file: File): Observable<FileI> {
         let formData = new FormData();

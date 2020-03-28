@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="piece">Responsável</label>
+                <label for="piece" class="required">Responsável</label>
                 <select class="form-control" id="manager" formControlName="manager">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
                     <option *ngFor="let manager of managers$ | async" [ngValue]="manager">

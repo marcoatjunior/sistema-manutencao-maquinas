@@ -11,3 +11,12 @@ body {
 .has-error {
   color: red;
 }
+
+.text-bold {
+  font-weight: 600;
+}
+
+.required:after {
+  content: " *";
+  color: red;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserService } from '@shared/services/user.service';
 import { Observable } from 'rxjs';
-import { User } from '@shared/models/user';
+import { User } from '@shared/models/user.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 

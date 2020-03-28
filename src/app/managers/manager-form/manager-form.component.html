@@ -5,7 +5,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name">Nome</label>
+                        <label for="name" class="required">Nome</label>
                         <input class="form-control" id="name" formControlName="name">
                         <div class="has-error mt-2" *ngIf="!formGroup.get('name').valid && formGroup.get('name').dirty">
                             Campo 'Nome' é obrigatório.
@@ -14,7 +14,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="email">E-mail</label>
+                        <label for="email" class="required">E-mail</label>
                         <input class="form-control" id="email" type="email" formControlName="email">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('email').valid && formGroup.get('email').dirty">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="telephone">Telefone</label>
+                        <label for="telephone" class="required">Telefone</label>
                         <input class="form-control" id="telephone" type="tel" formControlName="telephone">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('telephone').valid && formGroup.get('telephone').dirty">

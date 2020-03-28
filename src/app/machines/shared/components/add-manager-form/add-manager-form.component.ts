@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Machine } from '@machines/shared/machine.model';
+import { Machine } from '@machines/shared/models/machine.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Manager } from 'src/app/managers/shared/manager.model';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerService } from 'src/app/managers/shared/manager.service';
-import { MachineService } from '@machines/shared/machine.service';
+import { MachineService } from '@machines/shared/services/machine.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 
 @Component({

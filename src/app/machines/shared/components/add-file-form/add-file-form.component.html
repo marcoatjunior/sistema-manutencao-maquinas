@@ -2,7 +2,17 @@
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="file">Arquivo</label>
+                <label for="description" class="required">Descrição</label>
+                <input class="form-control" id="description" formControlName="description">
+                <div class="has-error mt-2"
+                    *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
+                    Campo 'Descrição' é obrigatório.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="file" class="required">Arquivo</label>
                 <input class="form-control" id="file" type="file" formControlName="file"
                     (change)="handleFileInput($event.target.files)">
                 <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && formGroup.get('file').errors.required">
@@ -11,16 +21,6 @@
                 <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && !formGroup.get('file').errors.upload">
                     Ocorreu um erro ao efetuar o upload do arquivo.
                     <span (click)="formGroup.get('file').reset()" class="float-right clickable text-dark"><b>Remover seleção</b></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="description">Descrição</label>
-                <input class="form-control" id="description" formControlName="description">
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
-                    Campo 'Descrição' é obrigatório.
                 </div>
             </div>
         </div>
