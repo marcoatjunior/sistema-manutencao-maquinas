@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Machine } from '@machines/shared/models/machine.model';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Manager } from 'src/app/managers/shared/manager.model';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ManagerService } from 'src/app/managers/shared/manager.service';
 import { MachineService } from '@machines/shared/services/machine.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-add-manager-form',
@@ -19,15 +20,14 @@ export class AddManagerFormComponent implements OnInit, OnDestroy {
     @Input() modal: NgbActiveModal;
 
     managers$: Observable<Manager[]>;
-    loading = false;
+    including = false;
     formGroup: FormGroup;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
         private formBuilder: FormBuilder,
         private managerService: ManagerService,
-        private machineService: MachineService
+        private machineService: MachineService,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
@@ -40,18 +40,18 @@ export class AddManagerFormComponent implements OnInit, OnDestroy {
 
     submit() {
         if (this.formGroup.valid) {
-            this.loading = true;
-            this.machine.managers = [this.formGroup.get('manager').value as Manager];
+            this.including = true;
+            this.machine.users = [this.formGroup.get('manager').value as Manager];
             this.machineService.save(this.machine)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.updatePage(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
 
-    updatePage(): void {
-        this.router.navigate(['/'], { relativeTo: this.route });
+    ngOnDestroy() {
+        this.including = false;
     }
-
-    ngOnDestroy() { }
 }

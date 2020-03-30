@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { MachineService } from '@machines/shared/services/machine.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Machine } from '@machines/shared/models/machine.model';
 import { Piece } from 'src/app/pieces/shared/piece.model';
 import { Observable } from 'rxjs';
 import { PieceService } from '@pieces/shared/piece.service';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-add-piece-form',
@@ -19,21 +20,20 @@ export class AddPieceFormComponent implements OnInit, OnDestroy {
     @Input() modal: NgbActiveModal;
 
     pieces$: Observable<Piece[]>;
-    loading = false;
+    including = false;
     formGroup: FormGroup;
 
     constructor(
-        private route: ActivatedRoute,
-        private router: Router,
         private formBuilder: FormBuilder,
         private pieceService: PieceService,
-        private machineService: MachineService
+        private machineService: MachineService,
+        private modalService: NgbModal
     ) { }
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
             piece: [null, Validators.required],
-            minQuantity: ['', Validators.required]
+            minimal_quantity: ['', Validators.required]
         });
 
         this.pieces$ = this.pieceService.get();
@@ -41,18 +41,18 @@ export class AddPieceFormComponent implements OnInit, OnDestroy {
 
     submit() {
         if (this.formGroup.valid) {
-            this.loading = true;
-            this.machine.pieces = [{ ...this.formGroup.get('piece').value, minQuantity: this.formGroup.get('minQuantity').value } as Piece];
+            this.including = true;
+            this.machine.pieces = [{ ...this.formGroup.get('piece').value, minimal_quantity: this.formGroup.get('minimal_quantity').value } as Piece];
             this.machineService.save(this.machine)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.updatePage(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
 
-    updatePage(): void {
-        this.router.navigate(['/'], { relativeTo: this.route });
+    ngOnDestroy() {
+        this.including = false;
     }
-
-    ngOnDestroy() { }
 }

@@ -7,6 +7,10 @@ import { MachineService } from '@machines/shared/services/machine.service';
 import { ManagerService } from 'src/app/managers/shared/manager.service';
 import { Observable } from 'rxjs';
 import { Manager } from 'src/app/managers/shared/manager.model';
+import { FileService } from '@shared/services/file-upload.service';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-machine-form',
@@ -19,6 +23,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
     machineId: number;
     machine: Machine;
 
+    downloadError = '';
     loading = false;
 
     constructor(
@@ -26,7 +31,9 @@ export class MachineFormComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private machineService: MachineService,
-        private managerService: ManagerService
+        private managerService: ManagerService,
+        private fileService: FileService,
+        private modalService: NgbModal
     ) {
         this.machineId = this.route.snapshot.params.id;
     }
@@ -37,10 +44,10 @@ export class MachineFormComponent implements OnInit, OnDestroy {
             description: ['', Validators.required],
             technical: ['', Validators.required],
             patrimony: ['', Validators.required],
-            reviewPeriod: ['', Validators.required],
-            warningPeriod: ['', Validators.required],
-            warningEmailAddress: ['', Validators.required],
-            manager: [null]
+            review_period: ['', Validators.required],
+            warning_period: ['', Validators.required],
+            warning_email_address: ['', Validators.required],
+            user: [null]
         });
         this.managers$ = this.managerService.get();
         this.populateForm();
@@ -57,14 +64,27 @@ export class MachineFormComponent implements OnInit, OnDestroy {
         }
     }
 
+    downloadFile(id: number) {
+        this.fileService.getById(id)
+            .pipe(untilDestroyed(this))
+            .subscribe((blob: Blob) => this.saveBlob(blob), (error) => this.downloadError = error);
+    }
+
+    saveBlob(blob: Blob) {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url);
+    }
+
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
             let machine = this.formGroup.value as Machine;
-            machine.managers = [this.formGroup.get('manager').value as Manager];
+            machine.users = [this.formGroup.get('user').value as Manager];
             this.machineService.save(machine)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.goBack(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
@@ -73,5 +93,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.loading = false;
+    }
 }

@@ -1,15 +1,7 @@
 <div class="card mt-4">
     <h4 class="card-header">Dados do Usuário</h4>
     <div class="card-body">
-        <div class="row" *ngIf="user$ | async; let user">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="username">Usuário</label>
-                    <p class="text">
-                        <b>{{ user.username }}</b>
-                    </p>
-                </div>
-            </div>
+        <div class="row" *ngIf="user$ | async as user else loading">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="name">Nome</label>
@@ -23,6 +15,14 @@
                     <label for="email">E-mail</label>
                     <p class="text">
                         <b>{{ user.email }}</b>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="username">Usuário</label>
+                    <p class="text">
+                        <b>{{ user.username }}</b>
                     </p>
                 </div>
             </div>
@@ -42,5 +42,8 @@
                 </div>
             </div>
         </div>
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
     </div>
 </div>

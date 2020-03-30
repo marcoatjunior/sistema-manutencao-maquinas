@@ -1,5 +1,4 @@
-﻿import { fakeBackendProvider } from './shared/services';
-import { JwtInterceptor, ErrorInterceptor } from './shared/interceptor';
+﻿import { JwtInterceptor, ErrorInterceptor } from './shared/interceptor';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import localePt from '@angular/common/locales/pt';
@@ -24,7 +23,6 @@ registerLocaleData(localePt, 'pt');
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        fakeBackendProvider
     ],
     bootstrap: [AppComponent]
 })

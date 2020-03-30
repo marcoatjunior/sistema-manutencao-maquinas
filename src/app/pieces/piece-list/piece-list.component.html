@@ -1,14 +1,14 @@
 <div class="card mt-4">
     <h4 class="card-header">Peças de Reposição</h4>
     <div class="card-body">
-        <div *ngIf="pieces$ | async; let pieces">
+        <div *ngIf="pieces$ | async as pieces else loading">
             <div class="table-responsive" *ngIf="pieces.length > 0">
                 <table class="table table-sm">
                     <thead>
                         <tr>
                             <th class="text-left" scope="row">Nome</th>
                             <th class="text-left" scope="row">Descrição</th>
-                            <th class="text-center" scope="row">Em Estoque</th>
+                            <th class="text-center" scope="row">Estoque</th>
                             <th class="text-center" scope="row" colspan="3">Ações</th>
                         </tr>
                     </thead>
@@ -16,7 +16,7 @@
                         <tr *ngFor="let piece of pieces">
                             <td class="text-left">{{ piece.name }}</td>
                             <td class="text-left">{{ piece.description }}</td>
-                            <td class="text-center">{{ piece.stockQuantity }}</td>
+                            <td class="text-center">{{ piece.stock_quantity }}</td>
                             <td class="text-center">
                                 <a title="Consultar" class="clickable text-dark" [routerLink]="[piece.id, 'd']">
                                     <fa name="search"></fa>
@@ -28,7 +28,8 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a title="Excluir" class="clickable text-dark" (click)="openDeleteModal(content, piece)">
+                                <a title="Excluir" class="clickable text-dark"
+                                    (click)="openDeleteModal(content, piece)">
                                     <fa name="trash"></fa>
                                 </a>
                             </td>
@@ -40,6 +41,9 @@
                 Não há informações a listar.
             </div>
         </div>
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
     </div>
 </div>
 
@@ -52,12 +56,12 @@
     </div>
     <div class="modal-body">
         <p>Confirma a exclusão da peça de reposição <b>{{ selectedPiece.name }}</b>?</p>
-        <div *ngIf="deleteError.length > 0">
-            <p class="has-error">{{ deleteError }}</p>
-        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
-        <button type="button" class="btn btn-primary" (click)="deletePiece()">Sim</button>
+        <button [disabled]="excluding" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button [disabled]="excluding" type="button" class="btn btn-primary" (click)="deletePiece()">
+            <span *ngIf="excluding" class="spinner-border spinner-border-sm mr-1"></span>
+            Sim
+        </button>
     </div>
 </ng-template>

@@ -5,6 +5,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   imports: [
@@ -16,13 +18,19 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgbModule
   ],
   declarations: [
-    NavbarComponent
+    NavbarComponent,
+    ModalDialogComponent,
+    LoadingComponent
   ],
   exports: [
     NgbModule,
     AngularFontAwesomeModule,
-    NavbarComponent
+    NavbarComponent,
+    LoadingComponent
   ],
+  entryComponents: [
+    ModalDialogComponent
+  ]
 })
 export class SharedModule {
 }

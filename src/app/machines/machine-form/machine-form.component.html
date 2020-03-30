@@ -15,7 +15,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="description" class="required">Descrição</label>
-                        <textarea formControlName="description" name="description" id="description" class="form-control" rows="4"></textarea>
+                        <textarea formControlName="description" name="description" id="description" class="form-control"
+                            rows="4"></textarea>
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
                             Campo 'Descrição' é obrigatório.
@@ -25,7 +26,8 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="technical" class="required">Características</label>
-                        <textarea formControlName="technical" name="technical" id="technical" class="form-control" rows="4"></textarea>
+                        <textarea formControlName="technical" name="technical" id="technical" class="form-control"
+                            rows="4"></textarea>
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('technical').valid && formGroup.get('technical').dirty">
                             Campo 'Características' é obrigatório.
@@ -44,31 +46,33 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="reviewPeriod" class="required">Período de Manutenção <sup>(em dias)</sup></label>
-                        <input class="form-control" id="reviewPeriod" type="number" formControlName="reviewPeriod">
+                        <label for="review_period" class="required">Período de Manutenção <sup>(em dias)</sup></label>
+                        <input class="form-control" id="review_period" type="number" formControlName="review_period">
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('reviewPeriod').valid && formGroup.get('reviewPeriod').dirty">
+                            *ngIf="!formGroup.get('review_period').valid && formGroup.get('review_period').dirty">
                             Campo 'Período de Manutenção' é obrigatório.
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="warningPeriod" class="required" class="required">Tempo antes do e-mail de aviso <sup>(em dias)</sup></label>
-                        <input class="form-control" id="warningPeriod" type="number" formControlName="warningPeriod">
+                        <label for="warning_period" class="required" class="required">Tempo antes do e-mail de aviso
+                            <sup>(em dias)</sup></label>
+                        <input class="form-control" id="warning_period" type="number" formControlName="warning_period">
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('warningPeriod').valid && formGroup.get('warningPeriod').dirty">
+                            *ngIf="!formGroup.get('warning_period').valid && formGroup.get('warning_period').dirty">
                             Campo 'Tempo' é obrigatório.
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="warningEmailAddress" class="required">Endereço de e-mail para enviar o aviso</label>
-                        <input class="form-control" id="warningEmailAddress" type="email"
-                            formControlName="warningEmailAddress">
+                        <label for="warning_email_address" class="required">Endereço de e-mail para enviar o
+                            aviso</label>
+                        <input class="form-control" id="warning_email_address" type="email"
+                            formControlName="warning_email_address">
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('warningEmailAddress').valid && formGroup.get('warningEmailAddress').dirty">
+                            *ngIf="!formGroup.get('warning_email_address').valid && formGroup.get('warning_email_address').dirty">
                             Campo 'E-mail de Aviso' é obrigatório.
                         </div>
                     </div>
@@ -76,19 +80,20 @@
                 <div class="col-md-12" *ngIf="!machineId">
                     <div class="form-group">
                         <label for="piece">Responsável</label>
-                        <select class="form-control" id="manager" formControlName="manager">
+                        <select class="form-control" id="user" formControlName="user">
                             <option [ngValue]="null" selected disabled hidden>Selecione</option>
                             <option *ngFor="let manager of managers$ | async" [ngValue]="manager">
                                 {{ manager.name }}
                             </option>
                         </select>
-                        <div class="has-error mt-2" *ngIf="!formGroup.get('manager').valid && formGroup.get('manager').dirty">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('manager').valid && formGroup.get('manager').dirty">
                             Campo 'Responsável' é obrigatório.
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="machine && machine.pieces.length > 0">
+            <div class="row" *ngIf="machine && machine.pieces && machine.pieces.length > 0">
                 <div class="col-md-12">
                     <div class="card mt-4">
                         <h5 class="card-header">Peças de Reposição</h5>
@@ -107,8 +112,8 @@
                                         <tr *ngFor="let piece of machine.pieces">
                                             <td class="text-left">{{ piece.name }}</td>
                                             <td class="text-left">{{ piece.description }}</td>
-                                            <td class="text-center">{{ piece.minQuantity }}</td>
-                                            <td class="text-center">{{ piece.stockQuantity }}</td>
+                                            <td class="text-center">{{ piece.minimal_quantity }}</td>
+                                            <td class="text-center">{{ piece.stock_quantity }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -120,7 +125,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="machine && machine.managers.length > 0">
+            <div class="row" *ngIf="machine && machine.users&& machine.users.length > 0">
                 <div class="col-md-12">
                     <div class="card mt-4">
                         <h5 class="card-header">Responsáveis</h5>
@@ -136,7 +141,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let manager of machine.managers">
+                                        <tr *ngFor="let manager of machine.users">
                                             <td class="text-left">{{ manager.name }}</td>
                                             <td class="text-left">{{ manager.email }}</td>
                                             <td class="text-left">{{ manager.telephone }}</td>
@@ -152,7 +157,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="machine && machine.files.length > 0">
+            <div class="row" *ngIf="machine && machine.files && machine.files.length > 0">
                 <div class="col-md-12">
                     <div class="card mt-4">
                         <h5 class="card-header">Arquivos</h5>

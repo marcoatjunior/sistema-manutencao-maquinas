@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { ManagerService } from '@managers/shared/manager.service';
 import { Manager } from '@managers/shared/manager.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-manager-form',
@@ -20,7 +23,8 @@ export class ManagerFormComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private managerService: ManagerService
+        private managerService: ManagerService,
+        private modalService: NgbModal
     ) {
         this.managerId = this.route.snapshot.params.id;
     }
@@ -49,7 +53,9 @@ export class ManagerFormComponent implements OnInit, OnDestroy {
             this.loading = true;
             this.managerService.save(this.formGroup.value as Manager)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.goBack(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'responsaveis' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'responsaveis' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
@@ -58,5 +64,7 @@ export class ManagerFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.loading = false;
+    }
 }

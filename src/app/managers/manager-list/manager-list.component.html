@@ -1,12 +1,11 @@
 <div class="card mt-4">
     <h4 class="card-header">Responsáveis</h4>
     <div class="card-body">
-        <div *ngIf="managers$ | async; let managers">
+        <div *ngIf="managers$ | async as managers else loading">
             <div class="table-responsive" *ngIf="managers.length > 0">
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th class="text-center" scope="row">#</th>
                             <th class="text-left" scope="row">Nome</th>
                             <th class="text-left" scope="row">E-mail</th>
                             <th class="text-center" scope="row">Telefone</th>
@@ -16,7 +15,6 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let manager of managers">
-                            <td class="text-center" scope="row">{{ manager.id }}</td>
                             <td class="text-left">{{ manager.name }}</td>
                             <td class="text-left">{{ manager.email }}</td>
                             <td class="text-center">{{ manager.telephone }}</td>
@@ -32,7 +30,8 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a title="Excluir" class="clickable text-dark" (click)="openDeleteModal(content, manager)">
+                                <a title="Excluir" class="clickable text-dark"
+                                    (click)="openDeleteModal(content, manager)">
                                     <fa name="trash"></fa>
                                 </a>
                             </td>
@@ -44,6 +43,9 @@
                 Não há informações a listar.
             </div>
         </div>
+        <ng-template #loading>
+            <app-loading></app-loading>
+        </ng-template>
     </div>
 </div>
 
@@ -56,12 +58,12 @@
     </div>
     <div class="modal-body">
         <p>Confirma a exclusão do responsável <b>{{ selectedManager.name }}</b>?</p>
-        <div *ngIf="deleteError.length > 0">
-            <p class="has-error">{{ deleteError }}</p>
-        </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
-        <button type="button" class="btn btn-primary" (click)="deleteManager()">Sim</button>
+        <button [disabled]="excluding" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button [disabled]="excluding" type="button" class="btn btn-primary" (click)="deleteManager()">
+            <span *ngIf="excluding" class="spinner-border spinner-border-sm mr-1"></span>
+            Sim
+        </button>
     </div>
 </ng-template>

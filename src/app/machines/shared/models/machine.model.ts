@@ -1,6 +1,6 @@
-import { Piece } from 'src/app/pieces/shared/piece.model';
-import { Manager } from 'src/app/managers/shared/manager.model';
-import { File } from '../../../shared/models/file.model';
+import { Piece } from '@pieces/shared/piece.model';
+import { Manager } from '@managers/shared/manager.model';
+import { File } from '@shared/models/file.model';
 
 export interface Machine {
     id?: number;
@@ -8,10 +8,10 @@ export interface Machine {
     description?: string;
     technical?: string;
     patrimony?: string;
-    reviewPeriod?: number;
-    warningPeriod?: number;
-    warningEmailAddress?: string;
+    review_period?: number;
+    warning_period?: number;
+    warning_email_address?: string;
     pieces?: Piece[],
-    managers?: Manager[],
+    users?: Manager[],
     files?: File[]
 }

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { User } from '@shared/models/user.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { untilDestroyed } from 'ngx-take-until-destroy';
+import { openModalDialog } from '@shared/components/modal-dialog/modal-dialog.component';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-user-list',
@@ -14,7 +16,7 @@ export class UserListComponent implements OnInit, OnDestroy {
     users$: Observable<User[]>;
     selectedUser: User;
 
-    deleteError = '';
+    excluding = false;
 
     constructor(
         private userService: UserService,
@@ -31,10 +33,15 @@ export class UserListComponent implements OnInit, OnDestroy {
     }
 
     deleteUser() {
+        this.excluding = true;
         this.userService.delete(this.selectedUser.id)
             .pipe(untilDestroyed(this))
-            .subscribe(() => this.userService.get(), (err) => this.deleteError = err);
+            .subscribe(
+                () => openModalDialog(this.modalService, { ...modalSuccess, route: 'usuarios' }),
+                () => openModalDialog(this.modalService, { ...modalError, route: 'usuarios' }));
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() { 
+        this.excluding = false;
+    }
 }

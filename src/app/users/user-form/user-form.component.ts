@@ -2,9 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '@shared/services';
-import { User } from '@shared/models';
+import { User, modalSuccess, modalError } from '@shared/models';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { ProfileEnum, enumSelector } from '@shared/enums/profile.enum';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-user-form',
@@ -22,7 +24,8 @@ export class UserFormComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private userService: UserService
+        private userService: UserService,
+        private modalService: NgbModal
     ) {
         this.userId = this.route.snapshot.params.id;
     }
@@ -58,7 +61,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
             this.loading = true;
             this.userService.save(this.formGroup.value as User)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.goBack(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'usuarios' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'usuarios' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
@@ -67,5 +72,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.loading = false
+    }
 }

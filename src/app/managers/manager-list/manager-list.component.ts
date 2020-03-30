@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Manager } from '@managers/shared/manager.model';
 import { ManagerService } from '@managers/shared/manager.service';
+import { openModalDialog } from '@shared/components/modal-dialog/modal-dialog.component';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-manager-list',
@@ -14,7 +16,7 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     managers$: Observable<Manager[]>;
     selectedManager: Manager;
 
-    deleteError = '';
+    excluding = false;
 
     constructor(
         private managerService: ManagerService,
@@ -31,10 +33,14 @@ export class ManagerListComponent implements OnInit, OnDestroy {
     }
 
     deleteManager() {
+        this.excluding = true;
         this.managerService.delete(this.selectedManager.id)
             .pipe(untilDestroyed(this))
-            .subscribe(() => this.managerService.get(), (err) => this.deleteError = err);
+            .subscribe(() => openModalDialog(this.modalService, { ...modalSuccess, route: 'responsaveis' }),
+                () => openModalDialog(this.modalService, { ...modalError, route: 'responsaveis' }));
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.excluding = false;
+    }
 }

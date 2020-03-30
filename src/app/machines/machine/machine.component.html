@@ -1,13 +1,4 @@
-<div *ngIf="machine$ | async; let machine" class="mb-4">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="float-right">
-                <a class="btn btn-light clickable mr-2 mt-4" (click)="goBack()">
-                    <fa name="arrow-left"></fa> Voltar
-                </a>
-            </div>
-        </div>
-    </div>
+<div *ngIf="machine$ | async as machine else loading" class="mb-4">
     <div class="row">
         <div class="col-md-12">
             <div class="card mt-4">
@@ -40,21 +31,21 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class="text-bold" for="reviewPeriod">Período de Revisão</label>
-                                <p class="text">{{ machine.reviewPeriod }} dias</p>
+                                <label class="text-bold" for="review_period">Período de Revisão</label>
+                                <p class="text">{{ machine.review_period }} dias</p>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label class="text-bold" for="warningPeriod">Período de Aviso</label>
-                                <p class="text">{{ machine.warningPeriod }} dias</p>
+                                <label class="text-bold" for="warning_period">Período de Aviso</label>
+                                <p class="text">{{ machine.warning_period }} dias</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="text-bold" for="warningEmailAddress">E-mail de Aviso</label>
+                                <label class="text-bold" for="warning_email_address">E-mail de Aviso</label>
                                 <p class="text">
-                                    {{ machine.warningEmailAddress }}
+                                    {{ machine.warning_email_address }}
                                 </p>
                             </div>
                         </div>
@@ -63,7 +54,7 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="machine.pieces.length > 0">
+    <div class="row" *ngIf="machine.pieces && machine.pieces.length > 0">
         <div class="col-md-12">
             <div class="card mt-4">
                 <h5 class="card-header">Peças de Reposição</h5>
@@ -82,8 +73,8 @@
                                 <tr *ngFor="let piece of machine.pieces">
                                     <td class="text-left">{{ piece.name }}</td>
                                     <td class="text-left">{{ piece.description }}</td>
-                                    <td class="text-center">{{ piece.minQuantity }}</td>
-                                    <td class="text-center">{{ piece.stockQuantity }}</td>
+                                    <td class="text-center">{{ piece.minimal_quantity }}</td>
+                                    <td class="text-center">{{ piece.stock_quantity }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -95,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="machine.managers.length > 0">
+    <div class="row" *ngIf="machine.users && machine.users.length > 0">
         <div class="col-md-12">
             <div class="card mt-4">
                 <h5 class="card-header">Responsáveis</h5>
@@ -111,7 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let manager of machine.managers">
+                                <tr *ngFor="let manager of machine.users">
                                     <td class="text-left">{{ manager.name }}</td>
                                     <td class="text-left">{{ manager.email }}</td>
                                     <td class="text-center">{{ manager.telephone }}</td>
@@ -120,14 +111,14 @@
                             </tbody>
                         </table>
                     </div>
-                    <div *ngIf="machine.managers <= 0">
+                    <div *ngIf="machine.users <= 0">
                         Não há nenhum registro.
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="machine.files.length > 0">
+    <div class="row" *ngIf="machine.files && machine.files.length > 0">
         <div class="col-md-12">
             <div class="card mt-4">
                 <h5 class="card-header">Arquivos</h5>
@@ -170,4 +161,29 @@
             </div>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col-md-12">
+            <div class="float-right">
+                <a class="btn btn-light clickable" (click)="goBack()">
+                    <fa name="arrow-left"></fa> Voltar
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+<ng-template #loading>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-4">
+                <h5 class="card-header">Dados da Máquina</h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <app-loading></app-loading>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

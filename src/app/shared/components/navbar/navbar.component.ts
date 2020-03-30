@@ -15,7 +15,9 @@ export class NavbarComponent implements OnInit {
         private authenticationService: AuthenticationService
     ) { }
 
-    ngOnInit() { }
+    ngOnInit() {
+        this.isLogged = true;
+    }
 
     logout() {
         this.authenticationService.logout();

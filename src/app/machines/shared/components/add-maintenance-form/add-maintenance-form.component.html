@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup">
-    <div class="row">
+    <div class="row" *ngIf="pieces$ | async as pieces else loading">
         <div class="col-md-12">
             <div class="form-group">
                 <label for="description" class="required">Descrição</label>
@@ -12,15 +12,15 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="reviewType" class="required">Tipo de Manutenção</label>
-                <select class="form-control" id="reviewType" formControlName="reviewType">
+                <label for="review_type" class="required">Tipo de Manutenção</label>
+                <select class="form-control" id="review_type" formControlName="review_type">
                     <option value="null" selected disabled hidden>Selecione</option>
                     <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType">
-                        {{ reviewType.value }}
+                        {{ reviewType.name }}
                     </option>
                 </select>
                 <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('reviewType').valid && formGroup.get('reviewType').dirty">
+                    *ngIf="!formGroup.get('review_type').valid && formGroup.get('review_type').dirty">
                     Campo 'Tipo de Manutenção' é obrigatório.
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <label for="piece" class="required">Peça utilizada na Manutenção</label>
                 <select class="form-control" id="piece" formControlName="piece">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces$ | async" [ngValue]="piece">
+                    <option *ngFor="let piece of pieces" [ngValue]="piece">
                         {{ piece.name }}
                     </option>
                 </select>
@@ -41,33 +41,37 @@
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="userQuantity" class="required">Quantidade Utilizada</label>
-                <input class="form-control" id="userQuantity" type="number" formControlName="userQuantity">
+                <label for="amount_used" class="required">Quantidade Utilizada</label>
+                <input class="form-control" id="amount_used" type="number" formControlName="amount_used">
                 <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('userQuantity').valid && formGroup.get('userQuantity').dirty">
+                    *ngIf="!formGroup.get('amount_used').valid && formGroup.get('amount_used').dirty">
                     Campo 'Quantidade Utilizada' é obrigatória.
                 </div>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
-                <label for="reviewAt" class="required">Data da Manutenção</label>
-                <input class="form-control" id="reviewAt" type="date" formControlName="reviewAt">
-                <div class="has-error mt-2" *ngIf="!formGroup.get('reviewAt').valid && formGroup.get('reviewAt').dirty">
+                <label for="review_at" class="required">Data da Manutenção</label>
+                <input class="form-control" id="review_at" type="date" formControlName="review_at">
+                <div class="has-error mt-2"
+                    *ngIf="!formGroup.get('review_at').valid && formGroup.get('review_at').dirty">
                     Campo 'Data da Manutenção' é obrigatória.
                 </div>
             </div>
         </div>
         <div class="col-md-12">
             <div class="float-right">
-                <a class="btn btn-link clickable mr-2" (click)="modal.dismiss()">
+                <button [disabled]="including" class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
                     <fa name="ban"></fa> Cancelar
-                </a>
-                <button [disabled]="loading" class="btn btn-primary" (click)="submit()">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                </button>
+                <button [disabled]="including" class="btn btn-primary" (click)="submit()">
+                    <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
                     <fa name="check"></fa> Realizar Manutenção
                 </button>
             </div>
         </div>
     </div>
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>
 </form>

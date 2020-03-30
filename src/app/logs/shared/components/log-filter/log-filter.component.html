@@ -1,11 +1,11 @@
 <form [formGroup]="formGroup">
-    <div class="row">
+    <div class="row" *ngIf="machines$ | async as machines else loading">
         <div class="col-md-5">
             <div class="form-group">
                 <label for="machine" class="required">Máquina</label>
                 <select class="form-control" id="machine" formControlName="machine">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let machine of machines$ | async" [ngValue]="machine">
+                    <option *ngFor="let machine of machines" [ngValue]="machine">
                         {{ machine.name }}
                     </option>
                 </select>
@@ -30,4 +30,7 @@
             </div>
         </div>
     </div>
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>
 </form>

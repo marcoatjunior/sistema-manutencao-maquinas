@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { PieceService } from '@pieces/shared/piece.service';
 import { Piece } from '@pieces/shared/piece.model';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-piece-form',
@@ -20,7 +23,8 @@ export class PieceFormComponent implements OnInit, OnDestroy {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private pieceService: PieceService
+        private pieceService: PieceService,
+        private modalService: NgbModal
     ) {
         this.pieceId = this.route.snapshot.params.id;
     }
@@ -29,7 +33,7 @@ export class PieceFormComponent implements OnInit, OnDestroy {
         this.formGroup = this.formBuilder.group({
             name: ['', Validators.required],
             description: ['', Validators.required],
-            stockQuantity: ['', Validators.required]
+            stock_quantity: ['', Validators.required]
         });
 
         this.populateForm();
@@ -48,7 +52,9 @@ export class PieceFormComponent implements OnInit, OnDestroy {
             this.loading = true;
             this.pieceService.save(this.formGroup.value as Piece)
                 .pipe(untilDestroyed(this))
-                .subscribe(() => this.goBack(), () => { this.loading = false });
+                .subscribe(
+                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'pecas' }),
+                    () => openModalDialog(this.modalService, { ...modalError, route: 'pecas' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }
@@ -57,5 +63,7 @@ export class PieceFormComponent implements OnInit, OnDestroy {
         this.router.navigate(['../'], { relativeTo: this.route });
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.loading = false;
+    }
 }

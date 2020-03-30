@@ -4,6 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { Machine } from '@machines/shared/models/machine.model';
 import { MachineService } from '@machines/shared/services/machine.service';
+import { openModalDialog } from '@shared/components/modal-dialog';
+import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-machine-list',
@@ -15,7 +17,7 @@ export class MachineListComponent implements OnInit, OnDestroy {
     machines$: Observable<Machine[]>;
     selectedMachine: Machine;
 
-    deleteError = '';
+    excluding = false;
 
     constructor(
         private machineService: MachineService,
@@ -32,10 +34,15 @@ export class MachineListComponent implements OnInit, OnDestroy {
     }
 
     deleteMachine() {
+        this.excluding = true;
         this.machineService.delete(this.selectedMachine.id)
             .pipe(untilDestroyed(this))
-            .subscribe(() => this.machineService.get(), (err) => this.deleteError = err);
+            .subscribe(
+                () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
+                () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' }));
     }
 
-    ngOnDestroy() { }
+    ngOnDestroy() {
+        this.excluding = false;
+    }
 }

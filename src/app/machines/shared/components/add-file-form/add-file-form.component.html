@@ -18,7 +18,7 @@
                 <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && formGroup.get('file').errors.required">
                     Campo 'Arquivo' é obrigatório.
                 </div>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && !formGroup.get('file').errors.upload">
+                <div class="has-error mt-2" *ngIf="!formGroup.get('file').valid && formGroup.get('file').dirty && formGroup.get('file').errors.upload">
                     Ocorreu um erro ao efetuar o upload do arquivo.
                     <span (click)="formGroup.get('file').reset()" class="float-right clickable text-dark"><b>Remover seleção</b></span>
                 </div>
@@ -26,11 +26,11 @@
         </div>
         <div class="col-md-12">
             <div class="float-right">
-                <a class="btn btn-link clickable mr-2" (click)="modal.dismiss()">
+                <button [disabled]="including" class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
                     <fa name="ban"></fa> Cancelar
-                </a>
-                <button [disabled]="loading" class="btn btn-primary" (click)="submit()">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                </button>
+                <button [disabled]="including" class="btn btn-primary" (click)="submit()">
+                    <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
                     <fa name="check"></fa> Adicionar Arquivo
                 </button>
             </div>

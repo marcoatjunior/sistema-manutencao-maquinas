@@ -24,10 +24,10 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="stockQuantity" class="required">Estoque de Peças</label>
-                        <input class="form-control" id="stockQuantity" type="number" formControlName="stockQuantity">
+                        <label for="stock_quantity" class="required">Estoque de Peças</label>
+                        <input class="form-control" id="stock_quantity" type="number" formControlName="stock_quantity">
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('stockQuantity').valid && formGroup.get('stockQuantity').dirty">
+                            *ngIf="!formGroup.get('stock_quantity').valid && formGroup.get('stock_quantity').dirty">
                             Campo 'Estoque de Peças' é obrigatório.
                         </div>
                     </div>
