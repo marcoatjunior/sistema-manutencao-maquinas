@@ -25,7 +25,7 @@ export class ManagerService {
     }
 
     save(manager: Manager): Observable<Manager> {
-        if (manager.id === null) {
+        if (!manager.id) {
             return this.insert(manager);
         }
         return this.update(manager);
@@ -33,13 +33,13 @@ export class ManagerService {
 
     private insert(manager: Manager): Observable<Manager> {
         return this.httpClient
-            .post<Manager>(`${environment.apiUrl}/technical-managers/`, manager)
+            .post<Manager>(`${environment.apiUrl}/technical-managers`, manager)
             .pipe(take(1));
     }
 
     private update(manager: Manager): Observable<Manager> {
         return this.httpClient
-            .put<Manager>(`${environment.apiUrl}/technical-managers/`, manager)
+            .put<Manager>(`${environment.apiUrl}/technical-managers/${manager.id}`, manager)
             .pipe(take(1));
     }
 

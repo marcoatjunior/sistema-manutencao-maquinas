@@ -25,7 +25,7 @@ export class UserService {
     }
 
     save(user: User): Observable<User> {
-        if (user.id === null || user.id === undefined) {
+        if (!user.id) {
             return this.insert(user);
         }
         return this.update(user);
@@ -33,13 +33,13 @@ export class UserService {
 
     private insert(user: User): Observable<User> {
         return this.httpClient
-            .post<User>(`${environment.apiUrl}/users/`, user)
+            .post<User>(`${environment.apiUrl}/users`, user)
             .pipe(take(1));
     }
 
     private update(user: User): Observable<User> {
         return this.httpClient
-            .put<User>(`${environment.apiUrl}/users/`, user)
+            .put<User>(`${environment.apiUrl}/users/${user.id}`, user)
             .pipe(take(1));
     }
 

@@ -31,8 +31,10 @@ export class PieceFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
+            id: [''],
             name: ['', Validators.required],
             description: ['', Validators.required],
+            code: ['', Validators.required],
             stock_quantity: ['', Validators.required]
         });
 

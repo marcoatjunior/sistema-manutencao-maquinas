@@ -7,7 +7,6 @@ import { untilDestroyed } from 'ngx-take-until-destroy';
 import { roles } from '@shared/constants';
 import { openModalDialog } from '@shared/components/modal-dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { UserDTO } from '@users/shared/user-dto.model';
 
 @Component({
     selector: 'app-user-form',
@@ -33,8 +32,9 @@ export class UserFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
+            id: [''],
             name: ['', Validators.required],
-            role: [null, Validators.required],
+            profile_id: [null, Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required]
@@ -47,7 +47,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
         if (this.userId) {
             this.userService.getById(this.userId)
                 .pipe(untilDestroyed(this))
-                .subscribe((user: User) => this.formGroup.patchValue({ ...user }));
+                .subscribe((user: User) =>
+                    this.formGroup.patchValue({
+                        ...user,
+                        profile_id: user.roles.length > 0
+                            ? user.roles[0].id
+                            : null
+                    }));
         }
     }
 
@@ -59,23 +65,13 @@ export class UserFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            this.userService.save(this.montaUser(this.formGroup.value))
+            this.userService.save(this.formGroup.value as User)
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'usuarios' }),
                     () => openModalDialog(this.modalService, { ...modalError, route: 'usuarios' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
-    }
-
-    montaUser(data) {
-        let userDTO = new UserDTO();
-        userDTO.id = this.userId;
-        userDTO.name = data.name;
-        userDTO.email = data.email;
-        userDTO.password = data.password;
-        userDTO.profile_id = data.role.id;
-        return userDTO;
     }
 
     goBack(): void {

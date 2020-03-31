@@ -40,6 +40,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
+            id: [''],
             name: ['', Validators.required],
             description: ['', Validators.required],
             technical: ['', Validators.required],

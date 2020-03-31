@@ -13,7 +13,7 @@ export class MaintenanceService {
     post(maintenance: Maintenance): Observable<Maintenance> {
         console.log(maintenance)
         return this.httpClient
-            .post<Maintenance>(`${environment.apiUrl}/maintenances/`, maintenance)
+            .post<Maintenance>(`${environment.apiUrl}/maintenances`, maintenance)
             .pipe(take(1));
     }
 }

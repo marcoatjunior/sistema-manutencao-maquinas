@@ -12,7 +12,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-9">
                     <div class="form-group">
                         <label for="description" class="required">Descrição</label>
                         <input class="form-control" id="description" formControlName="description">
@@ -24,11 +24,21 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="stock_quantity" class="required">Estoque de Peças</label>
+                        <label for="stock_quantity" class="required">Estoque</label>
                         <input class="form-control" id="stock_quantity" type="number" formControlName="stock_quantity">
                         <div class="has-error mt-2"
                             *ngIf="!formGroup.get('stock_quantity').valid && formGroup.get('stock_quantity').dirty">
-                            Campo 'Estoque de Peças' é obrigatório.
+                            Campo 'Estoque' é obrigatório.
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="code" class="required">Código</label>
+                        <input class="form-control" id="code" formControlName="code">
+                        <div class="has-error mt-2"
+                            *ngIf="!formGroup.get('code').valid && formGroup.get('code').dirty">
+                            Campo 'Código' é obrigatório.
                         </div>
                     </div>
                 </div>

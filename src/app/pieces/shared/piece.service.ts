@@ -23,7 +23,7 @@ export class PieceService {
     }
 
     save(piece: Piece): Observable<Piece> {
-        if (piece.id === null) {
+        if (!piece.id) {
             return this.insert(piece);
         }
         return this.update(piece);
@@ -31,13 +31,13 @@ export class PieceService {
 
     private insert(piece: Piece): Observable<Piece> {
         return this.httpClient
-            .post<Piece>(`${environment.apiUrl}/pieces/`, piece)
+            .post<Piece>(`${environment.apiUrl}/pieces`, piece)
             .pipe(take(1));
     }
 
     private update(piece: Piece): Observable<Piece> {
         return this.httpClient
-            .put<Piece>(`${environment.apiUrl}/pieces/`, piece)
+            .put<Piece>(`${environment.apiUrl}/pieces/${piece.id}`, piece)
             .pipe(take(1));
     }
 

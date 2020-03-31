@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { RolePipe } from './pipes/role.pipe';
 
 @NgModule({
   imports: [
@@ -20,13 +21,15 @@ import { LoadingComponent } from './components/loading/loading.component';
   declarations: [
     NavbarComponent,
     ModalDialogComponent,
-    LoadingComponent
+    LoadingComponent,
+    RolePipe
   ],
   exports: [
     NgbModule,
     AngularFontAwesomeModule,
     NavbarComponent,
-    LoadingComponent
+    LoadingComponent,
+    RolePipe
   ],
   entryComponents: [
     ModalDialogComponent

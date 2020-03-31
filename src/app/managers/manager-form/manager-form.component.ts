@@ -31,6 +31,7 @@ export class ManagerFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
+            id: [''],
             name: ['', Validators.required],
             email: ['', Validators.required],
             telephone: ['', Validators.required],

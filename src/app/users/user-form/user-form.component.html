@@ -24,15 +24,15 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="role" class="required">Tipo de Usuário</label>
-                        <select class="form-control" id="role" formControlName="role">
+                        <label for="profile_id" class="required">Tipo de Usuário</label>
+                        <select class="form-control" id="profile_id" formControlName="profile_id">
                             <option value="null" selected disabled hidden>Selecione</option>
-                            <option *ngFor="let role of roles" [ngValue]="role">
+                            <option *ngFor="let role of roles" [ngValue]="role.id">
                                 {{ role.name }}
                             </option>
                         </select>
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('role').valid && formGroup.get('role').dirty">
+                            *ngIf="!formGroup.get('profile_id').valid && formGroup.get('profile_id').dirty">
                             Campo 'Tipo de Usuário' é obrigatório.
                         </div>
                     </div>

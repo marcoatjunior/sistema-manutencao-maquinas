@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://cors-anywhere.herokuapp.com/https://novus-heroku.herokuapp.com/api'
+    apiUrl: '/api'
 };
 
 /*

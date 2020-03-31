@@ -23,7 +23,7 @@ export class MachineService {
     }
 
     save(machine: Machine): Observable<Machine> {
-        if (machine.id === null) {
+        if (!machine.id) {
             return this.insert(machine);
         }
         return this.update(machine);
@@ -31,13 +31,13 @@ export class MachineService {
 
     private insert(machine: Machine): Observable<Machine> {
         return this.httpClient
-            .post<Machine>(`${environment.apiUrl}/machines/`, machine)
+            .post<Machine>(`${environment.apiUrl}/machines`, machine)
             .pipe(take(1));
     }
 
     private update(machine: Machine): Observable<Machine> {
         return this.httpClient
-            .put<Machine>(`${environment.apiUrl}/machines/`, machine)
+            .put<Machine>(`${environment.apiUrl}/machines/${machine.id}`, machine)
             .pipe(take(1));
     }
 
