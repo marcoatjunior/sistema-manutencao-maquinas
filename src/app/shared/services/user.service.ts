@@ -25,7 +25,7 @@ export class UserService {
     }
 
     save(user: User): Observable<User> {
-        if (user.id === null) {
+        if (user.id === null || user.id === undefined) {
             return this.insert(user);
         }
         return this.update(user);

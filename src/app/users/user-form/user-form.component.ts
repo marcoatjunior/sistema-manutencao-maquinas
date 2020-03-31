@@ -4,9 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '@shared/services';
 import { User, modalSuccess, modalError } from '@shared/models';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { ProfileEnum, enumSelector } from '@shared/enums/profile.enum';
+import { roles } from '@shared/constants';
 import { openModalDialog } from '@shared/components/modal-dialog';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UserDTO } from '@users/shared/user-dto.model';
 
 @Component({
     selector: 'app-user-form',
@@ -18,7 +19,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     userId: number;
 
     loading = false;
-    profiles = enumSelector(ProfileEnum);
+    roles = roles;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -33,8 +34,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
             name: ['', Validators.required],
-            profile: ['', Validators.required],
-            username: ['', Validators.required],
+            role: [null, Validators.required],
             email: ['', Validators.required],
             password: ['', Validators.required],
             confirmPassword: ['', Validators.required]
@@ -59,13 +59,23 @@ export class UserFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            this.userService.save(this.formGroup.value as User)
+            this.userService.save(this.montaUser(this.formGroup.value))
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'usuarios' }),
                     () => openModalDialog(this.modalService, { ...modalError, route: 'usuarios' }));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
+    }
+
+    montaUser(data) {
+        let userDTO = new UserDTO();
+        userDTO.id = this.userId;
+        userDTO.name = data.name;
+        userDTO.email = data.email;
+        userDTO.password = data.password;
+        userDTO.profile_id = data.role.id;
+        return userDTO;
     }
 
     goBack(): void {

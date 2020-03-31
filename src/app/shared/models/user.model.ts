@@ -1,11 +1,10 @@
-﻿import { Profile } from './profile.model';
+﻿import { Role } from './role.model';
 
 export interface User {
     id?: number;
     name?: string;
-    username?: string;
     email?: string;
     password?: string;
-    profile?: Profile;
+    profile?: Role;
     token?: string;
 }
