@@ -39,7 +39,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="float-right">
-                    <button class="btn btn-primary" (click)="filter()">
+                    <button [disabled]="searching" class="btn btn-primary" (click)="filter()">
+                        <span *ngIf="searching" class="spinner-border spinner-border-sm mr-1"></span>
                         <fa name="search"></fa> Pesquisar
                     </button>
                 </div>

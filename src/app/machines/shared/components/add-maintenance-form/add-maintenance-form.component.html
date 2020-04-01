@@ -13,14 +13,14 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="review_type" class="required">Tipo de Manutenção</label>
-                <select class="form-control" id="review_type" formControlName="review_type">
+                <select class="form-control" id="review_type_id" formControlName="review_type_id">
                     <option value="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType">
+                    <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType.id">
                         {{ reviewType.name }}
                     </option>
                 </select>
                 <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('review_type').valid && formGroup.get('review_type').dirty">
+                    *ngIf="!formGroup.get('review_type_id').valid && formGroup.get('review_type_id').dirty">
                     Campo 'Tipo de Manutenção' é obrigatório.
                 </div>
             </div>
@@ -28,13 +28,13 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="piece" class="required">Peça utilizada na Manutenção</label>
-                <select class="form-control" id="piece" formControlName="piece">
+                <select class="form-control" id="piece_id" formControlName="piece_id">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces" [ngValue]="piece">
+                    <option *ngFor="let piece of pieces" [ngValue]="piece.id">
                         {{ piece.name }}
                     </option>
                 </select>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('piece').valid && formGroup.get('piece').dirty">
+                <div class="has-error mt-2" *ngIf="!formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty">
                     Campo 'Peça utilizada na manutenção' é obrigatório.
                 </div>
             </div>

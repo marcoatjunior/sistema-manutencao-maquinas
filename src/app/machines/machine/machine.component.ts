@@ -26,7 +26,6 @@ export class MachineComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        let a = this.machineService.getById(this.machineId).subscribe(t => console.log(t))
         this.machine$ = this.machineService.getById(this.machineId);
     }
 

@@ -13,20 +13,19 @@ export class MaintenanceService {
 
     getById(id: number): Observable<Maintenance> {
         return this.httpClient
-            .get<Maintenance>(`${environment.apiUrl}/maintenances/${id}`)
+            .get<Maintenance>(`${environment.apiUrl}/maintenance/${id}`)
             .pipe(take(1));
     }
     
     getByFilter(filter: MaintenanceFilter): Observable<Maintenance[]> {
         return this.httpClient
-            .post<Maintenance[]>(`${environment.apiUrl}/maintenances`, filter)
+            .post<Maintenance[]>(`${environment.apiUrl}/maintenance`, filter)
             .pipe(take(1));
     }
 
     post(maintenance: Maintenance): Observable<Maintenance> {
-        console.log(maintenance)
         return this.httpClient
-            .post<Maintenance>(`${environment.apiUrl}/maintenances`, maintenance)
+            .post<Maintenance>(`${environment.apiUrl}/maintenance`, maintenance)
             .pipe(take(1));
     }
 }

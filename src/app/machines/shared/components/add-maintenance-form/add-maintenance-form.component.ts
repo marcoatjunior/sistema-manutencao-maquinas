@@ -37,10 +37,11 @@ export class AddMaintenanceFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
+            machine_id: [this.machine.id],
             description: ['', Validators.required],
-            review_type: [null, Validators.required],
+            review_type_id: [null, Validators.required],
             machine: [this.machine, Validators.required],
-            piece: [null, Validators.required],
+            piece_id: [null, Validators.required],
             amount_used: ['', Validators.required],
             review_at: ['', Validators.required]
         });
@@ -51,7 +52,7 @@ export class AddMaintenanceFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.including = true;
-            this.maintenanceService.post({ ...this.formGroup.value, review_at: moment(this.formGroup.get('review_at').value) } as Maintenance)
+            this.maintenanceService.post({ ...this.formGroup.value } as Maintenance)
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
