@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { Machine } from '@machines/shared/machine.model';
+import { ManagerMachineDTO } from './manager-machine-dto.model';
 
 @Injectable()
 export class MachineService {
@@ -44,6 +45,13 @@ export class MachineService {
     delete(id: number): Observable<void> {
         return this.httpClient
             .delete<void>(`${environment.apiUrl}/machines/${id}`)
+            .pipe(take(1));
+    }
+
+    addManager(managerMachine: ManagerMachineDTO): Observable<Machine> {
+        console.log(managerMachine)
+        return this.httpClient
+            .post<Machine>(`${environment.apiUrl}/machines/technical-manager`, managerMachine)
             .pipe(take(1));
     }
 }

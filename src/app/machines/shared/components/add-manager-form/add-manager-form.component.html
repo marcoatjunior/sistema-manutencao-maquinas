@@ -5,7 +5,7 @@
                 <label for="piece" class="required">Responsável</label>
                 <select class="form-control" id="manager" formControlName="manager">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let manager of managers" [ngValue]="manager">
+                    <option *ngFor="let manager of managers" [ngValue]="manager.id">
                         {{ manager.name }}
                     </option>
                 </select>
@@ -21,7 +21,7 @@
                 </button>
                 <button [disabled]="including" class="btn btn-primary" (click)="submit()">
                     <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
-                    <fa name="check"></fa> Adicionar Peça
+                    <fa name="check"></fa> Vincular Responsável
                 </button>
             </div>
         </div>

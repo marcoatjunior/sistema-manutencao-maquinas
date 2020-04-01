@@ -4,6 +4,7 @@ import { Manager } from './manager.model';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 import { take } from 'rxjs/operators';
+import { ManagerMachineDTO } from '../../machines/shared/manager-machine-dto.model';
 
 @Injectable({
     providedIn: 'root'

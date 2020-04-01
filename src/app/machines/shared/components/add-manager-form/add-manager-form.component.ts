@@ -41,8 +41,7 @@ export class AddManagerFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.including = true;
-            this.machine.users = [this.formGroup.get('manager').value as Manager];
-            this.machineService.save(this.machine)
+            this.machineService.addManager({ machine_id: this.machine.id, user_id: this.formGroup.get('manager').value })
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),

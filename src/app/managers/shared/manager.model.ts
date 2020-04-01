@@ -1,4 +1,3 @@
-import { Machine } from '@machines/shared/machine.model';
 import { Moment } from 'moment';
 
 export interface Manager {
@@ -11,5 +10,4 @@ export interface Manager {
     updated_at?: Moment;
     telephone?: string;
     additional?: string;
-    machines?: Machine[];
 }

@@ -1,5 +1,3 @@
-import { MaintenancePiece } from '@machines/shared/maintenance-piece.model';
-
 export interface Piece {
     id?: number;
     name?: string;
@@ -7,5 +5,4 @@ export interface Piece {
     code?: string;
     stock_quantity?: number;
     minimal_quantity?: number;
-    maintenances?: MaintenancePiece[];
 }
