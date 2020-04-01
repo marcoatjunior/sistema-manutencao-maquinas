@@ -11,6 +11,12 @@ export class MaintenanceService {
 
     constructor(private httpClient: HttpClient) { }
 
+    get(): Observable<Maintenance[]> {
+        return this.httpClient
+            .get<Maintenance[]>(`${environment.apiUrl}/maintenance`)
+            .pipe(take(1));
+    }
+
     getById(id: number): Observable<Maintenance> {
         return this.httpClient
             .get<Maintenance>(`${environment.apiUrl}/maintenance/${id}`)

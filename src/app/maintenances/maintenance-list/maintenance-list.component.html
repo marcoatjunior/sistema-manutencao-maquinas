@@ -1,1 +1,41 @@
-Lista filtrada
+<div class="row" *ngIf="maintenances.length > 0">
+    <div class="col-md-12" *ngFor="let maintenance of maintenances">
+        <div class="card bg-light mb-3">
+            <div class="card-header text-bold">{{ maintenance.description }}</div>
+            <div class="card-body text-secondary">
+                <p class="card-text"><b>Máquina:</b> {{ maintenance.machine?.name }}</p>
+                <p class="card-text"><b>Peça:</b> {{ maintenance.peaces ? maintenance.peaces[0].name : '' }}</p>
+                <p class="card-text"><b>Quantidade utilizada:</b> {{ maintenance.peaces ? maintenance.peaces[0].pivot.amount_used : '' }}</p>
+                <p class="card-text"><b>Tipo de manutenção:</b> {{ maintenance.review_type?.name}}</p>
+                <p class="card-text"><b>Data da manutenção:</b> {{ maintenance.review_at | date: "dd/MM/yyyy" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th class="text-left" scope="row">Descrição</th>
+                <th class="text-left" scope="row">Máquina</th>
+                <th class="text-center" scope="row">Peça</th>
+                <th class="text-center" scope="row">Qtd. Utilizada</th>
+                <th class="text-center" scope="row">Tipo</th>
+                <th class="text-center" scope="row">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let maintenance of maintenances">
+                <td class="text-left">{{ maintenance.description }}</td>
+                <td class="text-left">{{ maintenance.machine?.name }}</td>
+                <td class="text-center">{{ maintenance.peaces ? maintenance.peaces[0].name : ''  }}</td>
+                <td class="text-center">{{ maintenance.peaces ? maintenance.peaces[0].pivot.amount_used : ''  }}</td>
+                <td class="text-center">{{ maintenance.review_type.name }}</td>
+                <td class="text-center">{{ maintenance.review_at | date: "dd/MM/yyyy" }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div> -->
+<div *ngIf="maintenances.length <= 0">
+    Não há informações a listar.
+</div>

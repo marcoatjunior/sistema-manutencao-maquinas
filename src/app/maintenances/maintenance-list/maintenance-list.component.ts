@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Maintenance } from '@maintenances/shared/maintenance.model';
 
 @Component({
@@ -8,7 +7,7 @@ import { Maintenance } from '@maintenances/shared/maintenance.model';
 })
 export class MaintenanceListComponent implements OnInit, OnDestroy {
 
-    @Input() maintenances$: Observable<Maintenance[]>;
+    @Input() maintenances: Maintenance[];
 
     ngOnInit() { }
 

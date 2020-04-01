@@ -9,8 +9,7 @@ import { modalSuccess, modalError } from '@shared/models';
 
 @Component({
     selector: 'app-machine-list',
-    templateUrl: 'machine-list.component.html',
-    styleUrls: ['./machine-list.component.scss']
+    templateUrl: 'machine-list.component.html'
 })
 export class MachineListComponent implements OnInit, OnDestroy {
 

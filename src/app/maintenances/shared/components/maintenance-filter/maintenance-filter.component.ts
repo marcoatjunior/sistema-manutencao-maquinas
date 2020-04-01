@@ -17,7 +17,6 @@ export class MaintenanceFilterComponent implements OnInit, OnDestroy {
     managers$: Observable<Machine[]>;
     formGroup: FormGroup;
 
-    searching = false;
     reviewTypes = reviewTypes
 
     constructor(
@@ -36,9 +35,7 @@ export class MaintenanceFilterComponent implements OnInit, OnDestroy {
     }
 
     filter() {
-        this.searching = true;
         this.formSubmit.emit(this.formGroup.value as MaintenanceFilter);
-        this.searching = false;
     }
 
     ngOnDestroy() { }

@@ -2,66 +2,47 @@
     <h4 class="card-header">Máquinas</h4>
     <div class="card-body">
         <div *ngIf="machines$ | async as machines else loading">
-            <div class="table-responsive" *ngIf="machines.length > 0">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th class="text-left" scope="row">Nome</th>
-                            <th class="text-left" scope="row">Descrição</th>
-                            <th class="text-left" scope="row">Características</th>
-                            <th class="text-center" scope="row">Patrimônio</th>
-                            <th class="text-center" scope="row">E-mail Aviso</th>
-                            <th class="text-center" scope="row" colspan="7">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let machine of machines">
-                            <td class="v-align text-left">{{ machine.name }}</td>
-                            <td class="v-align text-left">{{ machine.description }}</td>
-                            <td class="v-align text-left">{{ machine.technical }}</td>
-                            <td class="v-align text-center">{{ machine.patrimony }}</td>
-                            <td class="v-align text-center">{{ machine.warning_email_address }}</td>
-                            <td class="v-align text-center">
-                                <a title="Consultar" class="clickable text-dark" [routerLink]="[machine.id, 'd']">
+            <div class="row" *ngFor="let machine of machines">
+                <div class="col-md-12">
+                    <div class="card bg-light mb-3">
+                        <div class="card-header text-bold">{{ machine.name }}</div>
+                        <div class="card-body text-secondary">
+                            <h6 class="card-title"><b>Descrição:</b> {{ machine.description }}</h6>
+                            <p class="card-text"><b>Características:</b> {{ machine.technical }}</p>
+                            <p class="card-text"><b>Patrimônio:</b> {{ machine.patrimony }}</p>
+                            <p class="card-text"><b>E-mail de aviso:</b> {{ machine.warning_email_address }}</p>
+                            <div class="text-right">
+                                <a title="Consultar" class="clickable text-dark space-between"
+                                    [routerLink]="[machine.id, 'd']">
                                     <fa name="search"></fa>
                                 </a>
-                            <td class="v-align text-center">
-                                <a title="Editar" class="clickable text-dark" [routerLink]="[machine.id]">
+                                <a title="Editar" class="clickable text-dark space-between" [routerLink]="[machine.id]">
                                     <fa name="pencil"></fa>
                                 </a>
-                            </td>
-                            <td class="v-align text-center">
-                                <a title="Excluir" class="clickable text-dark" (click)="openModal(delete, machine)">
+                                <a title="Excluir" class="clickable text-dark space-between"
+                                    (click)="openModal(delete, machine)">
                                     <fa name="trash"></fa>
                                 </a>
-                            </td>
-                            <td class="v-align text-center">
-                                <a title="Adicionar Arquivo" class="clickable text-dark"
+                                <a title="Adicionar Arquivo" class="clickable text-dark space-between"
                                     (click)="openModal(addFile, machine)">
                                     <fa name="paperclip"></fa>
                                 </a>
-                            </td>
-                            <td class="v-align text-center">
-                                <a title="Vincular Peça de Reposição" class="clickable text-dark"
+                                <a title="Vincular Peça de Reposição" class="clickable text-dark space-between"
                                     (click)="openModal(addPiece, machine)">
                                     <fa name="archive"></fa>
                                 </a>
-                            </td>
-                            <td class="v-align text-center">
-                                <a title="Realizar Manutenção" class="clickable text-dark"
+                                <a title="Realizar Manutenção" class="clickable text-dark space-between"
                                     (click)="openModal(addMaintenance, machine)">
                                     <fa name="wrench"></fa>
                                 </a>
-                            </td>
-                            <td class="v-align text-center">
-                                <a title="Vincular Responsável" class="clickable text-dark"
+                                <a title="Vincular Responsável" class="clickable text-dark space-between"
                                     (click)="openModal(addManager, machine)">
                                     <fa name="user"></fa>
                                 </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div *ngIf="machines.length <= 0">
                 Não há informações a listar.
