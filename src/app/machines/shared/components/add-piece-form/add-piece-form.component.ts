@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { PieceService } from '@pieces/shared/piece.service';
 import { openModalDialog } from '@shared/components/modal-dialog';
 import { modalSuccess, modalError } from '@shared/models';
+import { PieceMachineDTO } from '@machines/shared/piece-machine-dto.model';
 
 @Component({
     selector: 'app-add-piece-form',
@@ -32,7 +33,8 @@ export class AddPieceFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.formGroup = this.formBuilder.group({
-            piece: [null, Validators.required],
+            machine_id: [this.machine.id],
+            piece_id: [null, Validators.required],
             minimal_quantity: ['', Validators.required]
         });
 
@@ -42,8 +44,7 @@ export class AddPieceFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.including = true;
-            this.machine.pieces = [{ ...this.formGroup.get('piece').value, minimal_quantity: this.formGroup.get('minimal_quantity').value } as Piece];
-            this.machineService.save(this.machine)
+            this.machineService.addPiece(this.formGroup.value as PieceMachineDTO)
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),

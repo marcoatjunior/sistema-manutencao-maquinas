@@ -48,7 +48,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
             review_period: ['', Validators.required],
             warning_period: ['', Validators.required],
             warning_email_address: ['', Validators.required],
-            user: [null]
+            user_id: [null]
         });
         this.managers$ = this.managerService.get();
         this.populateForm();
@@ -79,13 +79,15 @@ export class MachineFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            let machine = this.formGroup.value as Machine;
-            machine.users = [this.formGroup.get('user').value as Manager];
-            this.machineService.save(machine)
+            this.machineService.save(this.formGroup.value as Machine)
                 .pipe(untilDestroyed(this))
-                .subscribe(
-                    () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
-                    () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' }));
+                .subscribe((machine: Machine) => this.machineService.addManager({
+                    machine_id: machine.id,
+                    user_id: this.formGroup.get('user_id').value
+                })
+                    .subscribe(
+                        () => openModalDialog(this.modalService, { ...modalSuccess, route: 'maquinas' }),
+                        () => openModalDialog(this.modalService, { ...modalError, route: 'maquinas' })));
         }
         Object.values(this.formGroup.controls).forEach((control: FormControl) => control.markAsDirty());
     }

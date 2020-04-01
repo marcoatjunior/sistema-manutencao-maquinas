@@ -80,14 +80,14 @@
                 <div class="col-md-12" *ngIf="!machineId">
                     <div class="form-group">
                         <label for="piece">Responsável</label>
-                        <select class="form-control" id="user" formControlName="user">
+                        <select class="form-control" id="user_id" formControlName="user_id">
                             <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                            <option *ngFor="let manager of managers$ | async" [ngValue]="manager">
+                            <option *ngFor="let manager of managers$ | async" [ngValue]="manager.id">
                                 {{ manager.name }}
                             </option>
                         </select>
                         <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('user').valid && formGroup.get('user').dirty">
+                            *ngIf="!formGroup.get('user_id').valid && formGroup.get('user_id').dirty">
                             Campo 'Responsável' é obrigatório.
                         </div>
                     </div>

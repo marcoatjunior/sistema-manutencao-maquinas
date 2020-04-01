@@ -3,13 +3,13 @@
         <div class="col-md-8">
             <div class="form-group">
                 <label for="piece" class="required">Peça de Reposição</label>
-                <select class="form-control" id="piece" formControlName="piece">
+                <select class="form-control" id="piece_id" formControlName="piece_id">
                     <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces" [ngValue]="piece">
+                    <option *ngFor="let piece of pieces" [ngValue]="piece.id">
                         {{ piece.name }}
                     </option>
                 </select>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('piece').valid && formGroup.get('piece').dirty">
+                <div class="has-error mt-2" *ngIf="!formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty">
                     Campo 'Peça de Reposição' é obrigatório.
                 </div>
             </div>

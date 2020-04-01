@@ -5,6 +5,7 @@ import { take } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { Machine } from '@machines/shared/machine.model';
 import { ManagerMachineDTO } from './manager-machine-dto.model';
+import { PieceMachineDTO } from './piece-machine-dto.model';
 
 @Injectable()
 export class MachineService {
@@ -32,7 +33,7 @@ export class MachineService {
 
     private insert(machine: Machine): Observable<Machine> {
         return this.httpClient
-            .post<Machine>(`${environment.apiUrl}/machines`, machine)
+            .post(`${environment.apiUrl}/machines`, machine)
             .pipe(take(1));
     }
 
@@ -49,9 +50,14 @@ export class MachineService {
     }
 
     addManager(managerMachine: ManagerMachineDTO): Observable<Machine> {
-        console.log(managerMachine)
         return this.httpClient
             .post<Machine>(`${environment.apiUrl}/machines/technical-manager`, managerMachine)
+            .pipe(take(1));
+    }
+
+    addPiece(pieceMachine: PieceMachineDTO): Observable<Machine> {
+        return this.httpClient
+            .post<Machine>(`${environment.apiUrl}/machines/piece`, pieceMachine)
             .pipe(take(1));
     }
 }
