@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Machine } from '@machines/shared/models/machine.model';
-import { MachineService } from '@machines/shared/services/machine.service';
+import { Machine } from '@machines/shared/machine.model';
+import { MachineService } from '@machines/shared/machine.service';
 import { FileService } from '@shared/services/file-upload.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 

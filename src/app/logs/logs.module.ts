@@ -8,7 +8,7 @@ import { LogListComponent } from './log-list/log-list.component';
 import { LogComponent } from './log/log.component';
 import { LogService } from './shared/log.service';
 import { LogFilterComponent } from './shared/components/log-filter/log-filter.component';
-import { MachineService } from '@machines/shared/services/machine.service';
+import { MachineService } from '@machines/shared/machine.service';
 
 @NgModule({
     imports: [

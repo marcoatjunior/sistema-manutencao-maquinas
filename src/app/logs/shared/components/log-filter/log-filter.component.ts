@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MachineService } from '@machines/shared/services/machine.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MachineService } from '@machines/shared/machine.service';
 import { Observable } from 'rxjs';
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 import { ActionEnum } from '@logs/shared/action.enum';
-import { enumSelector } from '@shared/enums';
+import { enumSelector } from '@logs/shared/action.enum';
 import { Log } from '@logs/shared/log.model';
 import { LogService } from '@logs/shared/log.service';
 import { LogFilter } from '@logs/shared/log-filter.model';

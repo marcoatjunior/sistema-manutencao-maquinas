@@ -1,4 +1,4 @@
-import { MaintenancePiece } from '@machines/shared/models/maintenance-piece.model';
+import { MaintenancePiece } from '@machines/shared/maintenance-piece.model';
 
 export interface Piece {
     id?: number;

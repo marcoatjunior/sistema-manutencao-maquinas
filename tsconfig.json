@@ -41,6 +41,9 @@
       "@machines/*": [
         "./src/app/machines/*"
       ],
+      "@maintenances/*": [
+        "./src/app/maintenances/*"
+      ],
       "@logs/*": [
         "./src/app/logs/*"
       ]

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 
 @Injectable()
 export class MachineService {

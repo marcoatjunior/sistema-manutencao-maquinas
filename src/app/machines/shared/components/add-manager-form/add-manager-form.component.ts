@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Manager } from 'src/app/managers/shared/manager.model';
+import { Manager } from '@managers/shared/manager.model';
 import { Observable } from 'rxjs';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { ManagerService } from 'src/app/managers/shared/manager.service';
-import { MachineService } from '@machines/shared/services/machine.service';
+import { ManagerService } from '@managers/shared/manager.service';
+import { MachineService } from '@machines/shared/machine.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { openModalDialog } from '@shared/components/modal-dialog';
 import { modalSuccess, modalError } from '@shared/models';

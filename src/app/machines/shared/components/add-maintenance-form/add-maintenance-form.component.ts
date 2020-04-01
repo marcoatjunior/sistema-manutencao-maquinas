@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Piece } from 'src/app/pieces/shared/piece.model';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { PieceService } from 'src/app/pieces/shared/piece.service';
-import { MaintenanceService } from '@machines/shared/services/maintenance.service';
-import { Maintenance } from '@machines/shared/models/maintenance.model';
+import { MaintenanceService } from 'src/app/maintenances/shared/maintenance.service';
+import { Maintenance } from '@maintenances/shared/maintenance.model';
 import { untilDestroyed } from 'ngx-take-until-destroy';
 import { reviewTypes } from '@shared/constants';
 import * as moment from 'moment';

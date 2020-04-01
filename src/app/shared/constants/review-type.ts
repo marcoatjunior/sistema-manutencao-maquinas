@@ -1,4 +1,4 @@
-import { ReviewType } from '@machines/shared/models/review-type.model';
+import { ReviewType } from '@shared/models/review-type.model';
 
 export const reviewTypes: ReviewType[] = [
     {

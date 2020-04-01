@@ -1,6 +1,6 @@
-import { Maintenance } from './maintenance.model';
 import { Piece } from '@pieces/shared/piece.model';
 import { Moment } from 'moment';
+import { Maintenance } from '@maintenances/shared/maintenance.model';
 
 export interface MaintenancePiece {
     maintenance?: Maintenance;

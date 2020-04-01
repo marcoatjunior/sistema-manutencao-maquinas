@@ -1,4 +1,4 @@
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 import { Moment } from 'moment';
 
 export interface Manager {

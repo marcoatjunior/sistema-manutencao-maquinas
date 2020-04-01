@@ -52,7 +52,7 @@ export class ManagerFormComponent implements OnInit, OnDestroy {
     submit() {
         if (this.formGroup.valid) {
             this.loading = true;
-            this.managerService.save(this.formGroup.value as Manager)
+            this.managerService.save({ ...this.formGroup.value, profile_id: 3 })
                 .pipe(untilDestroyed(this))
                 .subscribe(
                     () => openModalDialog(this.modalService, { ...modalSuccess, route: 'responsaveis' }),

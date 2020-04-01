@@ -1,7 +1,7 @@
-import { Machine } from '@machines/shared/models/machine.model';
+import { Machine } from '@machines/shared/machine.model';
 import { Moment } from 'moment';
-import { MaintenancePiece } from './maintenance-piece.model';
-import { ReviewType } from './review-type.model';
+import { MaintenancePiece } from '@machines/shared/maintenance-piece.model';
+import { ReviewType } from '@shared/models/review-type.model';
 
 export interface Maintenance {
     id?: number;
