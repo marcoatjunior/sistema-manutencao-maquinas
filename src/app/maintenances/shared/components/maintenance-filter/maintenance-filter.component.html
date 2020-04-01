@@ -15,7 +15,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="review_type_id" class="required">Tipo</label>
+                    <label for="review_type_id">Tipo</label>
                     <select class="form-control" id="review_type_id" formControlName="review_type_id">
                         <option value="null" selected disabled hidden>Selecione</option>
                         <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType.id">
@@ -26,7 +26,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label for="technical_manager_id" class="required">Responsável</label>
+                    <label for="technical_manager_id">Responsável</label>
                     <select class="form-control" id="technical_manager_id" formControlName="technical_manager_id">
                         <option [ngValue]="null" selected disabled hidden>Selecione</option>
                         <option *ngFor="let manager of managers" [ngValue]="manager.id">
