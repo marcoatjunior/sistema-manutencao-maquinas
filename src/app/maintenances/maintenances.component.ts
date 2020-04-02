@@ -18,9 +18,16 @@ export class MaintenancesComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.maintenances$ = this.formSubmit.pipe(
-            switchMap(filter => this.maintenanceService.get())
-        );
+        this.filterData();
+        this.initialFilter();
+    }
+
+    private initialFilter() {
+        this.maintenances$ = this.maintenanceService.get({} as MaintenanceFilter);
+    }
+
+    private filterData() {
+        this.maintenances$ = this.formSubmit.pipe(switchMap(filter => this.maintenanceService.get(filter)));
     }
 
     ngOnDestroy() { }

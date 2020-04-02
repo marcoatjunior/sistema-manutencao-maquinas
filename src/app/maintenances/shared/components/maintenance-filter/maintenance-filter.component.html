@@ -5,12 +5,20 @@
                 <div class="form-group">
                     <label for="start_date">Data Inicial</label>
                     <input type="date" id="start_date" class="form-control" formControlName="start_date">
+                    <div class="has-error mt-2"
+                        *ngIf="!formGroup.get('start_date').valid && formGroup.get('start_date').dirty">
+                        Campo 'Data Inicial' é obrigatório.
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="end_date">Data Final</label>
                     <input type="date" id="end_date" class="form-control" formControlName="end_date">
+                    <div class="has-error mt-2"
+                        *ngIf="!formGroup.get('end_date').valid && formGroup.get('end_date').dirty">
+                        Campo 'Data Final' é obrigatório.
+                    </div>
                 </div>
             </div>
             <div class="col-md-3">

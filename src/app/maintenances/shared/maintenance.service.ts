@@ -11,21 +11,21 @@ export class MaintenanceService {
 
     constructor(private httpClient: HttpClient) { }
 
-    get(): Observable<Maintenance[]> {
-        return this.httpClient
-            .get<Maintenance[]>(`${environment.apiUrl}/maintenance`)
-            .pipe(take(1));
-    }
-
     getById(id: number): Observable<Maintenance> {
         return this.httpClient
             .get<Maintenance>(`${environment.apiUrl}/maintenance/${id}`)
             .pipe(take(1));
     }
-    
-    getByFilter(filter: MaintenanceFilter): Observable<Maintenance[]> {
+
+    get(filter: MaintenanceFilter): Observable<Maintenance[]> {
+        let params = '';
+        params += filter.start_date ? `start_date=${filter.start_date}&` : '';
+        params += filter.end_date ? `end_date=${filter.end_date}&` : '';
+        params += filter.review_type_id ? `review_type_id=${filter.review_type_id}&` : '';
+        params += filter.technical_manager_id ? `technical_manager_id=${filter.technical_manager_id}&` : '';
+
         return this.httpClient
-            .post<Maintenance[]>(`${environment.apiUrl}/maintenance`, filter)
+            .get<Maintenance[]>(`${environment.apiUrl}/maintenance?${params}`)
             .pipe(take(1));
     }
 
