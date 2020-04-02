@@ -9,5 +9,5 @@ export interface Maintenance {
     machine: Machine;
     review_type: ReviewType;
     review_at: Moment;
-    peaces: MaintenancePiece[];
+    pieces: MaintenancePiece[];
 }
