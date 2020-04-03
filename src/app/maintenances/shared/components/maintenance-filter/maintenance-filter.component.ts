@@ -6,7 +6,6 @@ import { MaintenanceFilter } from '@maintenances/shared/maintenance-filter.model
 import { reviewTypes } from '@shared/constants';
 import { ManagerService } from '@managers/shared/manager.service';
 import { untilDestroyed } from 'ngx-take-until-destroy';
-import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'app-maintenance-filter',

@@ -4,8 +4,8 @@
             <div class="card-header text-bold">{{ maintenance.description }}</div>
             <div class="card-body text-secondary">
                 <p class="card-text"><b>Máquina:</b> {{ maintenance.machine ? maintenance.machine.name : '' }}</p>
-                <p class="card-text"><b>Peça:</b> {{ maintenance.pieces ? maintenance.pieces[0].name : '' }}</p>
-                <p class="card-text"><b>Quantidade utilizada:</b> {{ maintenance.pieces ? maintenance.pieces[0].pivot.amount_used : '' }}</p>
+                <p class="card-text"><b>Peça:</b> {{ maintenance.pieces.length > 0 ? maintenance.pieces[0].name : '' }}</p>
+                <p class="card-text"><b>Quantidade utilizada:</b> {{ maintenance.pieces.length > 0 ? maintenance.pieces[0].pivot.amount_used : '' }}</p>
                 <p class="card-text"><b>Tipo de manutenção:</b> {{ maintenance.review_type ? maintenance.review_type.name : '' }}</p>
                 <p class="card-text"><b>Data da manutenção:</b> {{ maintenance.review_at | date: "dd/MM/yyyy" }}</p>
             </div>
