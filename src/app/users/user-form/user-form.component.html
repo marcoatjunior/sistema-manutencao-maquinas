@@ -1,7 +1,7 @@
 <div class="card mt-4">
     <h4 class="card-header">{{ userId ? 'Editar' : 'Cadastrar' }} Usuário</h4>
     <div class="card-body">
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup" (onSubmit)="submit()">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -57,7 +57,7 @@
                             Campo 'Confirmar Senha' é obrigatório.
                         </div>
                         <div class="has-error mt-2"
-                            *ngIf="formGroup.get('confirmPassword').value.length > 0 && formGroup.get('confirmPassword').value !== formGroup.get('password').value">
+                            *ngIf="formGroup.get('confirmPassword').value && formGroup.get('confirmPassword').value.length > 0 && formGroup.get('confirmPassword').value !== formGroup.get('password').value">
                             As senhas não conferem.
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <button class="btn btn-default mr-2" *ngIf="!userId" (click)="formGroup.reset()">
                             <fa name="eraser"></fa> Limpar
                         </button>
-                        <button [disabled]="disableSubmit() || loading" class="btn btn-success" (click)="submit()">
+                        <button [disabled]="disableSubmit() || loading" class="btn btn-success">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             <fa name="check"></fa> Salvar
                         </button>

@@ -58,7 +58,7 @@ export class UserFormComponent implements OnInit, OnDestroy {
     }
 
     disableSubmit(): boolean {
-        return !(this.formGroup.get('password').value.length > 3 &&
+        return !(this.formGroup.get('password').value && this.formGroup.get('password').value.length > 3 &&
             this.formGroup.get('password').value === this.formGroup.get('confirmPassword').value);
     }
 
