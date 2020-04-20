@@ -2,11 +2,16 @@
     <h4 class="card-header">Dashboard</h4>
     <div class="card-body">
         <div class="row">
-            <div class="col">
-                <canvas baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels"
-                    [chartType]="doughnutChartType" [colors]="donutColors"></canvas>
+            <div class="col-md-6">
+                <canvas *ngIf="doughnutChartData[0] || doughnutChartData[1] || doughnutChartData[2]" baseChart
+                    [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+                    [colors]="donutColors"></canvas>
+                <div *ngIf="!doughnutChartData[0] && !doughnutChartData[1] && !doughnutChartData[2]"
+                    class="text-danger" role="alert">
+                    Não há dados para exibição.
+                </div>
             </div>
-            <div class="col">
+            <div class="col-md-6">
                 <h2>Status</h2>
                 <br>
                 <ul>
