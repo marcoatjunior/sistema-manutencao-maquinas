@@ -5,6 +5,7 @@ import { SharedModule } from '@shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ChartsModule } from 'ng2-charts';
+import { DashboardService } from './shared/dashboard.service';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { ChartsModule } from 'ng2-charts';
     declarations: [
         DashboardComponent
     ],
-    exports: [DashboardComponent]
+    exports: [DashboardComponent],
+    providers: [DashboardService]
 })
 
 export class DashboardModule { }
