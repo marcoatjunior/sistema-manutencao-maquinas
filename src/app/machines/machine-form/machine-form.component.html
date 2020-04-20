@@ -106,6 +106,7 @@
                                             <th class="text-left" scope="row">Descrição</th>
                                             <th class="text-center" scope="row">Quant. Mínima</th>
                                             <th class="text-center" scope="row">Em Estoque</th>
+                                            <th class="text-center" scope="row">Remover</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -114,6 +115,12 @@
                                             <td class="text-left">{{ piece.description }}</td>
                                             <td class="text-center">{{ piece.minimal_quantity }}</td>
                                             <td class="text-center">{{ piece.stock_quantity }}</td>
+                                            <td class="text-center">
+                                                <a title="Excluir" class="clickable text-dark space-between"
+                                                    (click)="deletePiece(delete, machine)">
+                                                    <fa name="trash"></fa>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

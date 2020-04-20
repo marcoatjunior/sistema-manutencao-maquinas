@@ -31,7 +31,7 @@
                                     (click)="openModal(addPiece, machine)">
                                     <fa name="archive"></fa>
                                 </a>
-                                <a title="Realizar Manutenção" class="clickable text-dark space-between"
+                                <a title="Manutenção Realizada" class="clickable text-dark space-between"
                                     (click)="openModal(addMaintenance, machine)">
                                     <fa name="wrench"></fa>
                                 </a>
@@ -99,7 +99,7 @@
 
 <ng-template #addMaintenance let-modal>
     <div class="modal-header">
-        <h5 class="modal-title">Realizar manutenção para a máquina <b>{{ selectedMachine.name }}</b></h5>
+        <h5 class="modal-title">Manutenção realizada na máquina <b>{{ selectedMachine.name }}</b></h5>
         <button type="button" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true">&times;</span>
         </button>
