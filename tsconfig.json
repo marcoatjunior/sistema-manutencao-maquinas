@@ -12,41 +12,18 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2018", "dom"],
     "paths": {
-      "@shared/*": [
-        "./src/app/shared/*"
-      ],
-      "@images/*": [
-        "./src/assets/images/*"
-      ],
-      "@environments/*": [
-        "./src/environments/*"
-      ],
-      "@managers/*": [
-        "./src/app/managers/*"
-      ],
-      "@users/*": [
-        "./src/app/users/*"
-      ],
-      "@pieces/*": [
-        "./src/app/pieces/*"
-      ],
-      "@machines/*": [
-        "./src/app/machines/*"
-      ],
-      "@maintenances/*": [
-        "./src/app/maintenances/*"
-      ],
-      "@logs/*": [
-        "./src/app/logs/*"
-      ]
+      "@shared/*": ["./src/app/shared/*"],
+      "@images/*": ["./src/assets/images/*"],
+      "@environments/*": ["./src/environments/*"],
+      "@managers/*": ["./src/app/managers/*"],
+      "@users/*": ["./src/app/users/*"],
+      "@pieces/*": ["./src/app/pieces/*"],
+      "@machines/*": ["./src/app/machines/*"],
+      "@maintenances/*": ["./src/app/maintenances/*"],
+      "@logs/*": ["./src/app/logs/*"]
     }
   }
 }

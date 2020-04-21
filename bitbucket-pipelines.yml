@@ -28,8 +28,8 @@ pipelines:
           name: Deploy to Heroku
           deployment: production
           script:
-          - pipe: atlassian/heroku-deploy:1.1.2
-            variables:
-              HEROKU_API_KEY: $HEROKU_API_KEY
-              HEROKU_APP_NAME: $HEROKU_APP_NAME
-              ZIP_FILE: "novus-0.0.2.tgz"
+            - pipe: atlassian/heroku-deploy:1.1.2
+              variables:
+                HEROKU_API_KEY: $HEROKU_API_KEY
+                HEROKU_APP_NAME: $HEROKU_APP_NAME
+                ZIP_FILE: "novus-0.0.2.tgz"
