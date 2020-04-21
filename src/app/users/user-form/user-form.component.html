@@ -1,7 +1,7 @@
 <div class="card mt-4">
     <h4 class="card-header">{{ userId ? 'Editar' : 'Cadastrar' }} Usuário</h4>
     <div class="card-body">
-        <form [formGroup]="formGroup" (onSubmit)="submit()">
+        <form [formGroup]="formGroup" (submit)="submit()">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -67,10 +67,10 @@
                         <a class="btn btn-link clickable mr-2" (click)="goBack()">
                             <fa name="arrow-left"></fa> Voltar
                         </a>
-                        <button class="btn btn-default mr-2" *ngIf="!userId" (click)="formGroup.reset()">
+                        <a class="btn btn-default mr-2" *ngIf="!userId" (click)="formGroup.reset()">
                             <fa name="eraser"></fa> Limpar
-                        </button>
-                        <button [disabled]="disableSubmit() || loading" class="btn btn-success">
+                        </a>
+                        <button [disabled]="disableSubmit() || loading" class="btn btn-success" type="submit">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             <fa name="check"></fa> Salvar
                         </button>

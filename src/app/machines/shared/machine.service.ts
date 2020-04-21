@@ -55,9 +55,27 @@ export class MachineService {
             .pipe(take(1));
     }
 
+    unlinkManager(id: number): Observable<void> {
+        return this.httpClient
+            .delete<void>(`${environment.apiUrl}/machines/technical-manager/${id}`)
+            .pipe(take(1));
+    }
+
     addPiece(pieceMachine: PieceMachineDTO): Observable<Machine> {
         return this.httpClient
             .post<Machine>(`${environment.apiUrl}/machines/piece`, pieceMachine)
+            .pipe(take(1));
+    }
+
+    unlinkPiece(id: number): Observable<void> {
+        return this.httpClient
+            .delete<void>(`${environment.apiUrl}/machines/piece/${id}`)
+            .pipe(take(1));
+    }
+
+    deleteFile(id: number): Observable<void> {
+        return this.httpClient
+            .delete<void>(`${environment.apiUrl}/machines/file/${id}`)
             .pipe(take(1));
     }
 }

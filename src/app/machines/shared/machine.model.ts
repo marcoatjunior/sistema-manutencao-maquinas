@@ -10,7 +10,6 @@ export interface Machine {
     patrimony?: string;
     review_period?: number;
     warning_period?: number;
-    warning_email_address?: string;
     pieces?: Piece[],
     users?: Manager[],
     files?: File[]

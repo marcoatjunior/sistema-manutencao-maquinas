@@ -14,7 +14,7 @@ export class FileService {
 
     getById(id: number): Observable<Blob> {
         return this.httpClient
-            .post<Blob>(`${environment.apiUrl}/uploadFile/${id}`, { responseType: 'blob' })
+            .post<Blob>(`${environment.apiUrl}/files/${id}`, { responseType: 'blob' })
             .pipe(take(1));
     }
 
@@ -28,7 +28,7 @@ export class FileService {
         }
 
         return this.httpClient
-            .post<FileI>(`${environment.apiUrl}/uploadFile`, formData, options)
+            .post<FileI>(`${environment.apiUrl}/files`, formData, options)
             .pipe(take(1));
     }
 }

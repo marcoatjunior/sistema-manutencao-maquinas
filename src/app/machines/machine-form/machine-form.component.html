@@ -1,7 +1,7 @@
 <div class="card mt-4">
     <h4 class="card-header">{{ machineId ? 'Editar' : 'Cadastrar' }} Máquina</h4>
     <div class="card-body">
-        <form [formGroup]="formGroup">
+        <form [formGroup]="formGroup" (submit)="submit()">
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -65,18 +65,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="warning_email_address" class="required">Endereço de e-mail para enviar o
-                            aviso</label>
-                        <input class="form-control" id="warning_email_address" type="email"
-                            formControlName="warning_email_address">
-                        <div class="has-error mt-2"
-                            *ngIf="!formGroup.get('warning_email_address').valid && formGroup.get('warning_email_address').dirty">
-                            Campo 'E-mail de Aviso' é obrigatório.
-                        </div>
-                    </div>
-                </div>
                 <div class="col-md-12" *ngIf="!machineId">
                     <div class="form-group">
                         <label for="piece">Responsável</label>
@@ -116,9 +104,9 @@
                                             <td class="text-center">{{ piece.minimal_quantity }}</td>
                                             <td class="text-center">{{ piece.stock_quantity }}</td>
                                             <td class="text-center">
-                                                <a title="Excluir" class="clickable text-dark space-between"
-                                                    (click)="deletePiece(delete, machine)">
-                                                    <fa name="trash"></fa>
+                                                <a title="Desvincular Peça" class="clickable"
+                                                (click)="openModal(unlinkPiece, piece)">
+                                                    <fa name="minus-circle"></fa>
                                                 </a>
                                             </td>
                                         </tr>
@@ -145,6 +133,7 @@
                                             <th class="text-left" scope="row">E-mail</th>
                                             <th class="text-left" scope="row">Telefone</th>
                                             <th class="text-center" scope="row">Inf. Adicionais</th>
+                                            <th class="text-center" scope="row">Remover</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -153,6 +142,12 @@
                                             <td class="text-left">{{ manager.email }}</td>
                                             <td class="text-left">{{ manager.telephone }}</td>
                                             <td class="text-center">{{ manager.additional }}</td>
+                                            <td class="text-center">
+                                                <a title="Desvincular Responsável" class="clickable"
+                                                (click)="openModal(unlinkManager, manager)">
+                                                    <fa name="minus-circle"></fa>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -177,19 +172,23 @@
                                             <th class="text-left" scope="row">Descrição</th>
                                             <th class="text-center" scope="row">Data de Inclusão</th>
                                             <th class="text-center" scope="row">Tipo</th>
-                                            <th class="text-center" scope="row">Ações</th>
+                                            <th class="text-center" scope="row" colspan="2">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let file of machine.files">
                                             <td class="text-left">{{ file.name }}</td>
                                             <td class="text-left">{{ file.description }}</td>
-                                            <td class="text-center">{{ file.createdAt | date: "dd/MM/yyyy" }}</td>
+                                            <td class="text-center">{{ file.created_at | date: "dd/MM/yyyy" }}</td>
                                             <td class="text-center">{{ file.type }}</td>
                                             <td class="text-center">
                                                 <a title="Baixar Arquivo" class="clickable"
                                                     (click)="downloadFile(file.id)">
                                                     <fa name="download"></fa>
+                                                </a>
+                                                <a title="Excluir Arquivo" class="clickable"
+                                                    (click)="openModal(deleteFile, file)">
+                                                    <fa name="minus-circle"></fa>
                                                 </a>
                                             </td>
                                         </tr>
@@ -214,10 +213,10 @@
                         <a class="btn btn-link clickable mr-2" (click)="goBack()">
                             <fa name="arrow-left"></fa> Voltar
                         </a>
-                        <button class="btn btn-default mr-2" *ngIf="!machineId" (click)="formGroup.reset()">
+                        <a class="btn btn-default mr-2" *ngIf="!machineId" (click)="formGroup.reset()">
                             <fa name="eraser"></fa> Limpar
-                        </button>
-                        <button [disabled]="loading" class="btn btn-success" (click)="submit()">
+                        </a>
+                        <button [disabled]="loading" class="btn btn-success" type="submit">
                             <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                             <fa name="check"></fa> Salvar
                         </button>
@@ -227,3 +226,60 @@
         </form>
     </div>
 </div>
+
+<ng-template #unlinkPiece let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Desvincular Peça</h5>
+        <button type="button" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Deseja realmente desvincular a peça <b>{{ selected.name }}</b>?</p>
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="unlinking" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button [disabled]="unlinking" type="button" class="btn btn-primary" (click)="unlinkMachinePiece()">
+            <span *ngIf="unlinking" class="spinner-border spinner-border-sm mr-1"></span>
+            Sim
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #unlinkManager let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Desvincular Peça</h5>
+        <button type="button" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Deseja realmente desvincular o responsável <b>{{ selected.name }}</b>?</p>
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="unlinking" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button [disabled]="unlinking" type="button" class="btn btn-primary" (click)="unlinkMachineManager()">
+            <span *ngIf="unlinking" class="spinner-border spinner-border-sm mr-1"></span>
+            Sim
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #deleteFile let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Desvincular Responsável</h5>
+        <button type="button" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Confirma a exclusão do arquivo <b>{{ selected.name }}</b>?</p>
+    </div>
+    <div class="modal-footer">
+        <button [disabled]="excluding" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
+        <button [disabled]="excluding" type="button" class="btn btn-primary" (click)="deleteMachineFile()">
+            <span *ngIf="excluding" class="spinner-border spinner-border-sm mr-1"></span>
+            Sim
+        </button>
+    </div>
+</ng-template>

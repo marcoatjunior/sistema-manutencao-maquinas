@@ -4,6 +4,6 @@ export interface File {
     id?: number;
     name?: string;
     description?: string;
-    createdAt?: Moment;
+    created_at?: Moment;
     type?: string;
 }
