@@ -33,7 +33,7 @@
                   <fa name="pencil"></fa>
                 </a>
               </td>
-              <td class="text-center">
+              <td class="text-center" *ngIf="hasDeletePermission">
                 <a
                   title="Excluir"
                   class="clickable text-dark"
