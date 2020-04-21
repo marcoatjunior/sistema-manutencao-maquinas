@@ -1,60 +1,91 @@
 <form [formGroup]="formGroup" (submit)="filter()">
-    <div *ngIf="managers$ | async as managers else loading">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="start_date">Data Inicial</label>
-                    <input type="date" id="start_date" class="form-control" formControlName="start_date">
-                    <div class="has-error mt-2"
-                        *ngIf="!formGroup.get('start_date').valid && formGroup.get('start_date').dirty">
-                        Campo 'Data Inicial' é obrigatório.
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="end_date">Data Final</label>
-                    <input type="date" id="end_date" class="form-control" formControlName="end_date">
-                    <div class="has-error mt-2"
-                        *ngIf="!formGroup.get('end_date').valid && formGroup.get('end_date').dirty">
-                        Campo 'Data Final' é obrigatório.
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="review_type_id">Tipo</label>
-                    <select class="form-control" id="review_type_id" formControlName="review_type_id">
-                        <option value="null" selected disabled hidden>Selecione</option>
-                        <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType.id">
-                            {{ reviewType.name }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="technical_manager_id">Responsável</label>
-                    <select class="form-control" id="technical_manager_id" formControlName="technical_manager_id">
-                        <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                        <option *ngFor="let manager of managers" [ngValue]="manager.id">
-                            {{ manager.name }}
-                        </option>
-                    </select>
-                </div>
-            </div>
+  <div *ngIf="managers$ | async as managers; else loading">
+    <div class="row">
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="start_date">Data Inicial</label>
+          <input
+            type="date"
+            id="start_date"
+            class="form-control"
+            formControlName="start_date"
+          />
+          <div
+            class="has-error mt-2"
+            *ngIf="
+              !formGroup.get('start_date').valid &&
+              formGroup.get('start_date').dirty
+            "
+          >
+            Campo 'Data Inicial' é obrigatório.
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="float-right">
-                    <button class="btn btn-primary" type="submit">
-                        <fa name="search"></fa> Pesquisar
-                    </button>
-                </div>
-            </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="end_date">Data Final</label>
+          <input
+            type="date"
+            id="end_date"
+            class="form-control"
+            formControlName="end_date"
+          />
+          <div
+            class="has-error mt-2"
+            *ngIf="
+              !formGroup.get('end_date').valid &&
+              formGroup.get('end_date').dirty
+            "
+          >
+            Campo 'Data Final' é obrigatório.
+          </div>
         </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="review_type_id">Tipo</label>
+          <select
+            class="form-control"
+            id="review_type_id"
+            formControlName="review_type_id"
+          >
+            <option value="null" selected disabled hidden>Selecione</option>
+            <option
+              *ngFor="let reviewType of reviewTypes"
+              [ngValue]="reviewType.id"
+            >
+              {{ reviewType.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="technical_manager_id">Responsável</label>
+          <select
+            class="form-control"
+            id="technical_manager_id"
+            formControlName="technical_manager_id"
+          >
+            <option [ngValue]="null" selected disabled hidden>Selecione</option>
+            <option *ngFor="let manager of managers" [ngValue]="manager.id">
+              {{ manager.name }}
+            </option>
+          </select>
+        </div>
+      </div>
     </div>
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="float-right">
+          <button class="btn btn-primary" type="submit">
+            <fa name="search"></fa> Pesquisar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
 </form>

@@ -1,42 +1,60 @@
 <form [formGroup]="formGroup" (submit)="submit()">
-    <div class="row" *ngIf="pieces$ | async as pieces else loading">
-        <div class="col-md-8">
-            <div class="form-group">
-                <label for="piece" class="required">Peça de Reposição</label>
-                <select class="form-control" id="piece_id" formControlName="piece_id">
-                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces" [ngValue]="piece.id">
-                        {{ piece.name }}
-                    </option>
-                </select>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty">
-                    Campo 'Peça de Reposição' é obrigatório.
-                </div>
-            </div>
+  <div class="row" *ngIf="pieces$ | async as pieces; else loading">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="piece" class="required">Peça de Reposição</label>
+        <select class="form-control" id="piece_id" formControlName="piece_id">
+          <option [ngValue]="null" selected disabled hidden>Selecione</option>
+          <option *ngFor="let piece of pieces" [ngValue]="piece.id">
+            {{ piece.name }}
+          </option>
+        </select>
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty
+          "
+        >
+          Campo 'Peça de Reposição' é obrigatório.
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="minimal_quantity" class="required">Quantidade Mínima</label>
-                <input class="form-control" id="minimal_quantity" type="number" formControlName="minimal_quantity">
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('minimal_quantity').valid && formGroup.get('minimal_quantity').dirty">
-                    Campo 'Quantidade Mínima' é obrigatória.
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="float-right">
-                <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
-                    <fa name="ban"></fa> Cancelar
-                </a>
-                <button [disabled]="including" class="btn btn-primary" type="submit">
-                    <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
-                    <fa name="check"></fa> Adicionar Peça
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="minimal_quantity" class="required">Quantidade Mínima</label>
+        <input
+          class="form-control"
+          id="minimal_quantity"
+          type="number"
+          formControlName="minimal_quantity"
+        />
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('minimal_quantity').valid &&
+            formGroup.get('minimal_quantity').dirty
+          "
+        >
+          Campo 'Quantidade Mínima' é obrigatória.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="float-right">
+        <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
+          <fa name="ban"></fa> Cancelar
+        </a>
+        <button [disabled]="including" class="btn btn-primary" type="submit">
+          <span
+            *ngIf="including"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          <fa name="check"></fa> Adicionar Peça
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
 </form>

@@ -1,1 +1,1 @@
-export * from './role.pipe';
+export * from "./role.pipe";

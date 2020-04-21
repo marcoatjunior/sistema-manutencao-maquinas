@@ -1,77 +1,126 @@
 <form [formGroup]="formGroup" (submit)="submit()">
-    <div class="row" *ngIf="pieces$ | async as pieces else loading">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="description" class="required">Descrição</label>
-                <input class="form-control" id="description" formControlName="description">
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('description').valid && formGroup.get('description').dirty">
-                    Campo 'Descrição' é obrigatório.
-                </div>
-            </div>
+  <div class="row" *ngIf="pieces$ | async as pieces; else loading">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="description" class="required">Descrição</label>
+        <input
+          class="form-control"
+          id="description"
+          formControlName="description"
+        />
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('description').valid &&
+            formGroup.get('description').dirty
+          "
+        >
+          Campo 'Descrição' é obrigatório.
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="review_type" class="required">Tipo de Manutenção</label>
-                <select class="form-control" id="review_type_id" formControlName="review_type_id">
-                    <option value="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let reviewType of reviewTypes" [ngValue]="reviewType.id">
-                        {{ reviewType.name }}
-                    </option>
-                </select>
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('review_type_id').valid && formGroup.get('review_type_id').dirty">
-                    Campo 'Tipo de Manutenção' é obrigatório.
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="piece" class="required">Peça utilizada na Manutenção</label>
-                <select class="form-control" id="piece_id" formControlName="piece_id">
-                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let piece of pieces" [ngValue]="piece.id">
-                        {{ piece.name }}
-                    </option>
-                </select>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty">
-                    Campo 'Peça utilizada na manutenção' é obrigatório.
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="amount_used" class="required">Quantidade Utilizada</label>
-                <input class="form-control" id="amount_used" type="number" formControlName="amount_used">
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('amount_used').valid && formGroup.get('amount_used').dirty">
-                    Campo 'Quantidade Utilizada' é obrigatória.
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="review_at" class="required">Data da Manutenção</label>
-                <input class="form-control" id="review_at" type="date" formControlName="review_at">
-                <div class="has-error mt-2"
-                    *ngIf="!formGroup.get('review_at').valid && formGroup.get('review_at').dirty">
-                    Campo 'Data da Manutenção' é obrigatória.
-                </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="float-right">
-                <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
-                    <fa name="ban"></fa> Cancelar
-                </a>
-                <button [disabled]="including" class="btn btn-primary" type="submit">
-                    <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
-                    <fa name="check"></fa> Manutenção Realizada
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="review_type" class="required">Tipo de Manutenção</label>
+        <select
+          class="form-control"
+          id="review_type_id"
+          formControlName="review_type_id"
+        >
+          <option value="null" selected disabled hidden>Selecione</option>
+          <option
+            *ngFor="let reviewType of reviewTypes"
+            [ngValue]="reviewType.id"
+          >
+            {{ reviewType.name }}
+          </option>
+        </select>
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('review_type_id').valid &&
+            formGroup.get('review_type_id').dirty
+          "
+        >
+          Campo 'Tipo de Manutenção' é obrigatório.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="piece" class="required">Peça utilizada na Manutenção</label>
+        <select class="form-control" id="piece_id" formControlName="piece_id">
+          <option [ngValue]="null" selected disabled hidden>Selecione</option>
+          <option *ngFor="let piece of pieces" [ngValue]="piece.id">
+            {{ piece.name }}
+          </option>
+        </select>
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('piece_id').valid && formGroup.get('piece_id').dirty
+          "
+        >
+          Campo 'Peça utilizada na manutenção' é obrigatório.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="amount_used" class="required">Quantidade Utilizada</label>
+        <input
+          class="form-control"
+          id="amount_used"
+          type="number"
+          formControlName="amount_used"
+        />
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('amount_used').valid &&
+            formGroup.get('amount_used').dirty
+          "
+        >
+          Campo 'Quantidade Utilizada' é obrigatória.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="review_at" class="required">Data da Manutenção</label>
+        <input
+          class="form-control"
+          id="review_at"
+          type="date"
+          formControlName="review_at"
+        />
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('review_at').valid &&
+            formGroup.get('review_at').dirty
+          "
+        >
+          Campo 'Data da Manutenção' é obrigatória.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="float-right">
+        <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
+          <fa name="ban"></fa> Cancelar
+        </a>
+        <button [disabled]="including" class="btn btn-primary" type="submit">
+          <span
+            *ngIf="including"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          <fa name="check"></fa> Manutenção Realizada
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
 </form>

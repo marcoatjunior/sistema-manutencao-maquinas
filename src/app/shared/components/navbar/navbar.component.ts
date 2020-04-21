@@ -1,26 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthenticationService } from '@shared/services';
+import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthenticationService } from "@shared/services";
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html'
+  selector: "app-navbar",
+  templateUrl: "./navbar.component.html",
 })
 export class NavbarComponent implements OnInit {
+  @Input() isLogged: Boolean;
 
-    @Input() isLogged: Boolean;
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
-    constructor(
-        private router: Router,
-        private authenticationService: AuthenticationService
-    ) { }
+  ngOnInit() {
+    this.isLogged = true;
+  }
 
-    ngOnInit() {
-        this.isLogged = true;
-    }
-
-    logout() {
-        this.authenticationService.logout();
-        this.router.navigate(['/login']);
-    }
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate(["/login"]);
+  }
 }

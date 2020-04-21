@@ -1,48 +1,51 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Machine } from '@machines/shared/machine.model';
-import { MachineService } from '@machines/shared/machine.service';
-import { FileService } from '@shared/services/file-upload.service';
-import { untilDestroyed } from 'ngx-take-until-destroy';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Observable } from "rxjs";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Machine } from "@machines/shared/machine.model";
+import { MachineService } from "@machines/shared/machine.service";
+import { FileService } from "@shared/services/file-upload.service";
+import { untilDestroyed } from "ngx-take-until-destroy";
 
 @Component({
-    selector: 'app-machine',
-    templateUrl: 'machine.component.html'
+  selector: "app-machine",
+  templateUrl: "machine.component.html",
 })
 export class MachineComponent implements OnInit, OnDestroy {
+  machine$: Observable<Machine>;
+  machineId: number;
+  downloadError: string;
 
-    machine$: Observable<Machine>;
-    machineId: number;
-    downloadError: string;
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private machineService: MachineService,
+    private fileService: FileService
+  ) {
+    this.machineId = this.route.snapshot.params.id;
+  }
 
-    constructor(
-        private route: ActivatedRoute,
-        private router: Router,
-        private machineService: MachineService,
-        private fileService: FileService
-    ) {
-        this.machineId = this.route.snapshot.params.id;
-    }
+  ngOnInit() {
+    this.machine$ = this.machineService.getById(this.machineId);
+  }
 
-    ngOnInit() {
-        this.machine$ = this.machineService.getById(this.machineId);
-    }
+  downloadFile(id: number) {
+    this.fileService
+      .getById(id)
+      .pipe(untilDestroyed(this))
+      .subscribe(
+        (blob: Blob) => this.saveBlob(blob),
+        (error) => (this.downloadError = error)
+      );
+  }
 
-    downloadFile(id: number) {
-        this.fileService.getById(id)
-            .pipe(untilDestroyed(this))
-            .subscribe((blob: Blob) => this.saveBlob(blob), (error) => this.downloadError = error);
-    }
+  saveBlob(blob: Blob) {
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+  }
 
-    saveBlob(blob: Blob) {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
-    }
+  goBack(): void {
+    this.router.navigate(["../../"], { relativeTo: this.route });
+  }
 
-    goBack(): void {
-        this.router.navigate(['../../'], { relativeTo: this.route });
-    }
-
-    ngOnDestroy() { }
+  ngOnDestroy() {}
 }

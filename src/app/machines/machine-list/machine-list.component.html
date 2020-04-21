@@ -1,122 +1,190 @@
 <div class="card mt-4">
-    <h4 class="card-header">Máquinas</h4>
-    <div class="card-body">
-        <div *ngIf="machines$ | async as machines else loading">
-            <div class="row" *ngFor="let machine of machines">
-                <div class="col-md-12">
-                    <div class="card bg-light mb-3">
-                        <div class="card-header text-bold">{{ machine.name }}</div>
-                        <div class="card-body text-secondary">
-                            <h6 class="card-title"><b>Descrição:</b> {{ machine.description }}</h6>
-                            <p class="card-text"><b>Características:</b> {{ machine.technical }}</p>
-                            <p class="card-text"><b>Patrimônio:</b> {{ machine.patrimony }}</p>
-                            <p class="card-text"><b>E-mail de aviso:</b> {{ machine.warning_email_address }}</p>
-                            <div class="text-right">
-                                <a title="Consultar" class="clickable text-dark space-between"
-                                    [routerLink]="[machine.id, 'd']">
-                                    <fa name="search"></fa>
-                                </a>
-                                <a title="Editar" class="clickable text-dark space-between" [routerLink]="[machine.id]">
-                                    <fa name="pencil"></fa>
-                                </a>
-                                <a title="Excluir" class="clickable text-dark space-between"
-                                    (click)="openModal(delete, machine)">
-                                    <fa name="trash"></fa>
-                                </a>
-                                <a title="Adicionar Arquivo" class="clickable text-dark space-between"
-                                    (click)="openModal(addFile, machine)">
-                                    <fa name="paperclip"></fa>
-                                </a>
-                                <a title="Vincular Peça de Reposição" class="clickable text-dark space-between"
-                                    (click)="openModal(addPiece, machine)">
-                                    <fa name="archive"></fa>
-                                </a>
-                                <a title="Manutenção Realizada" class="clickable text-dark space-between"
-                                    (click)="openModal(addMaintenance, machine)">
-                                    <fa name="wrench"></fa>
-                                </a>
-                                <a title="Vincular Responsável" class="clickable text-dark space-between"
-                                    (click)="openModal(addManager, machine)">
-                                    <fa name="user"></fa>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <h4 class="card-header">Máquinas</h4>
+  <div class="card-body">
+    <div *ngIf="machines$ | async as machines; else loading">
+      <div class="row" *ngFor="let machine of machines">
+        <div class="col-md-12">
+          <div class="card bg-light mb-3">
+            <div class="card-header text-bold">{{ machine.name }}</div>
+            <div class="card-body text-secondary">
+              <h6 class="card-title">
+                <b>Descrição:</b> {{ machine.description }}
+              </h6>
+              <p class="card-text">
+                <b>Características:</b> {{ machine.technical }}
+              </p>
+              <p class="card-text">
+                <b>Patrimônio:</b> {{ machine.patrimony }}
+              </p>
+              <p class="card-text">
+                <b>E-mail de aviso:</b> {{ machine.warning_email_address }}
+              </p>
+              <div class="text-right">
+                <a
+                  title="Consultar"
+                  class="clickable text-dark space-between"
+                  [routerLink]="[machine.id, 'd']"
+                >
+                  <fa name="search"></fa>
+                </a>
+                <a
+                  title="Editar"
+                  class="clickable text-dark space-between"
+                  [routerLink]="[machine.id]"
+                >
+                  <fa name="pencil"></fa>
+                </a>
+                <a
+                  title="Excluir"
+                  class="clickable text-dark space-between"
+                  (click)="openModal(delete, machine)"
+                >
+                  <fa name="trash"></fa>
+                </a>
+                <a
+                  title="Adicionar Arquivo"
+                  class="clickable text-dark space-between"
+                  (click)="openModal(addFile, machine)"
+                >
+                  <fa name="paperclip"></fa>
+                </a>
+                <a
+                  title="Vincular Peça de Reposição"
+                  class="clickable text-dark space-between"
+                  (click)="openModal(addPiece, machine)"
+                >
+                  <fa name="archive"></fa>
+                </a>
+                <a
+                  title="Manutenção Realizada"
+                  class="clickable text-dark space-between"
+                  (click)="openModal(addMaintenance, machine)"
+                >
+                  <fa name="wrench"></fa>
+                </a>
+                <a
+                  title="Vincular Responsável"
+                  class="clickable text-dark space-between"
+                  (click)="openModal(addManager, machine)"
+                >
+                  <fa name="user"></fa>
+                </a>
+              </div>
             </div>
-            <div *ngIf="machines.length <= 0">
-                Não há informações a listar.
-            </div>
+          </div>
         </div>
-        <ng-template #loading>
-            <app-loading></app-loading>
-        </ng-template>
+      </div>
+      <div *ngIf="machines.length <= 0">
+        Não há informações a listar.
+      </div>
     </div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </div>
 </div>
 
 <ng-template #delete let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title">Exclusão</h5>
-        <button type="button" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <p>Confirma a exclusão da máquina <b>{{ selectedMachine.name }}</b>?</p>
-    </div>
-    <div class="modal-footer">
-        <button [disabled]="excluding" type="button" class="btn btn-default" (click)="modal.dismiss()">Não</button>
-        <button [disabled]="excluding" type="button" class="btn btn-primary" (click)="deleteMachine()">
-            <span *ngIf="excluding" class="spinner-border spinner-border-sm mr-1"></span>
-            Sim
-        </button>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">Exclusão</h5>
+    <button type="button" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Confirma a exclusão da máquina <b>{{ selectedMachine.name }}</b
+      >?
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      [disabled]="excluding"
+      type="button"
+      class="btn btn-default"
+      (click)="modal.dismiss()"
+    >
+      Não
+    </button>
+    <button
+      [disabled]="excluding"
+      type="button"
+      class="btn btn-primary"
+      (click)="deleteMachine()"
+    >
+      <span
+        *ngIf="excluding"
+        class="spinner-border spinner-border-sm mr-1"
+      ></span>
+      Sim
+    </button>
+  </div>
 </ng-template>
 
 <ng-template #addFile let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title">Adicionar arquivo à máquina <b>{{ selectedMachine.name }}</b></h5>
-        <button type="button" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-add-file-form [machine]="selectedMachine" [modal]="modal"></app-add-file-form>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Adicionar arquivo à máquina <b>{{ selectedMachine.name }}</b>
+    </h5>
+    <button type="button" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-file-form
+      [machine]="selectedMachine"
+      [modal]="modal"
+    ></app-add-file-form>
+  </div>
 </ng-template>
 
 <ng-template #addPiece let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title">Vincular peça de reposição à máquina <b>{{ selectedMachine.name }}</b></h5>
-        <button type="button" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-add-piece-form [machine]="selectedMachine" [modal]="modal"></app-add-piece-form>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Vincular peça de reposição à máquina <b>{{ selectedMachine.name }}</b>
+    </h5>
+    <button type="button" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-piece-form
+      [machine]="selectedMachine"
+      [modal]="modal"
+    ></app-add-piece-form>
+  </div>
 </ng-template>
 
 <ng-template #addMaintenance let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title">Manutenção realizada na máquina <b>{{ selectedMachine.name }}</b></h5>
-        <button type="button" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-add-maintenance-form [machine]="selectedMachine" [modal]="modal"></app-add-maintenance-form>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Manutenção realizada na máquina <b>{{ selectedMachine.name }}</b>
+    </h5>
+    <button type="button" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-maintenance-form
+      [machine]="selectedMachine"
+      [modal]="modal"
+    ></app-add-maintenance-form>
+  </div>
 </ng-template>
 
 <ng-template #addManager let-modal>
-    <div class="modal-header">
-        <h5 class="modal-title">Vincular responsável à máquina <b>{{ selectedMachine.name }}</b></h5>
-        <button type="button" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    <div class="modal-body">
-        <app-add-manager-form [machine]="selectedMachine" [modal]="modal"></app-add-manager-form>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title">
+      Vincular responsável à máquina <b>{{ selectedMachine.name }}</b>
+    </h5>
+    <button type="button" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-add-manager-form
+      [machine]="selectedMachine"
+      [modal]="modal"
+    ></app-add-manager-form>
+  </div>
 </ng-template>

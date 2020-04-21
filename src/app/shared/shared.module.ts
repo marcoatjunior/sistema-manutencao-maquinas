@@ -1,13 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { ModalDialogComponent } from './components/modal-dialog/modal-dialog.component';
-import { LoadingComponent } from './components/loading/loading.component';
-import { RolePipe } from './pipes/role.pipe';
+import { CommonModule } from "@angular/common";
+import { RouterModule } from "@angular/router";
+import { NgModule } from "@angular/core";
+import { AngularFontAwesomeModule } from "angular-font-awesome";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { NavbarComponent } from "./components/navbar/navbar.component";
+import { ModalDialogComponent } from "./components/modal-dialog/modal-dialog.component";
+import { LoadingComponent } from "./components/loading/loading.component";
+import { RolePipe } from "./pipes/role.pipe";
 
 @NgModule({
   imports: [
@@ -16,24 +16,21 @@ import { RolePipe } from './pipes/role.pipe';
     ReactiveFormsModule,
     RouterModule,
     AngularFontAwesomeModule,
-    NgbModule
+    NgbModule,
   ],
   declarations: [
     NavbarComponent,
     ModalDialogComponent,
     LoadingComponent,
-    RolePipe
+    RolePipe,
   ],
   exports: [
     NgbModule,
     AngularFontAwesomeModule,
     NavbarComponent,
     LoadingComponent,
-    RolePipe
+    RolePipe,
   ],
-  entryComponents: [
-    ModalDialogComponent
-  ]
+  entryComponents: [ModalDialogComponent],
 })
-export class SharedModule {
-}
+export class SharedModule {}

@@ -1,1 +1,1 @@
-export { openModalDialog } from './modal-dialog.component';
+export { openModalDialog } from "./modal-dialog.component";

@@ -1,41 +1,41 @@
 <div class="card mt-4">
-    <h4 class="card-header">Dados do Usuário</h4>
-    <div class="card-body">
-        <div class="row" *ngIf="user$ | async as user else loading">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="name">Nome</label>
-                    <p class="text">
-                        <b>{{ user.name }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <p class="text">
-                        <b>{{ user.email }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="profile">Perfil</label>
-                    <p class="text">
-                        <b>{{ user.roles | rolePipe }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="float-right">
-                    <a class="btn btn-link clickable mr-2" (click)="goBack()">
-                        <fa name="arrow-left"></fa> Voltar
-                    </a>
-                </div>
-            </div>
+  <h4 class="card-header">Dados do Usuário</h4>
+  <div class="card-body">
+    <div class="row" *ngIf="user$ | async as user; else loading">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <p class="text">
+            <b>{{ user.name }}</b>
+          </p>
         </div>
-        <ng-template #loading>
-            <app-loading></app-loading>
-        </ng-template>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="email">E-mail</label>
+          <p class="text">
+            <b>{{ user.email }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="profile">Perfil</label>
+          <p class="text">
+            <b>{{ user.roles | rolePipe }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="float-right">
+          <a class="btn btn-link clickable mr-2" (click)="goBack()">
+            <fa name="arrow-left"></fa> Voltar
+          </a>
+        </div>
+      </div>
     </div>
+    <ng-template #loading>
+      <app-loading></app-loading>
+    </ng-template>
+  </div>
 </div>

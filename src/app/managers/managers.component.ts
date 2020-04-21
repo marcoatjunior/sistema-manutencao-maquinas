@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-    templateUrl: 'managers.component.html'
+  templateUrl: "managers.component.html",
 })
 export class ManagersComponent implements OnInit {
-
-    ngOnInit() { }
+  ngOnInit() {}
 }

@@ -1,5 +1,5 @@
 export interface Dashboard {
-    red: number;
-    green: number;
-    yellow: number;
+  red: number;
+  green: number;
+  yellow: number;
 }

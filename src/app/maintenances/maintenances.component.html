@@ -1,21 +1,25 @@
 <div class="card mt-4">
-    <h4 class="card-header">Filtro </h4>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <app-maintenance-filter [formSubmit]="formSubmit"></app-maintenance-filter>
-            </div>
-        </div>
+  <h4 class="card-header">Filtro</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <app-maintenance-filter
+          [formSubmit]="formSubmit"
+        ></app-maintenance-filter>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="card mt-2" *ngIf="maintenances$ | async as maintenances">
-    <h4 class="card-header">Manutenções</h4>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-12">
-                <app-maintenance-list [maintenances]="maintenances"></app-maintenance-list>
-            </div>
-        </div>
+  <h4 class="card-header">Manutenções</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <app-maintenance-list
+          [maintenances]="maintenances"
+        ></app-maintenance-list>
+      </div>
     </div>
+  </div>
 </div>

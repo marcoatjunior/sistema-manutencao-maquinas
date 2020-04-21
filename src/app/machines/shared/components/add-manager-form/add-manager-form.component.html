@@ -1,32 +1,40 @@
 <form [formGroup]="formGroup" (submit)="submit()">
-    <div class="row" *ngIf="managers$ | async as managers else loading">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="piece" class="required">Responsável</label>
-                <select class="form-control" id="manager" formControlName="manager">
-                    <option [ngValue]="null" selected disabled hidden>Selecione</option>
-                    <option *ngFor="let manager of managers" [ngValue]="manager.id">
-                        {{ manager.name }}
-                    </option>
-                </select>
-                <div class="has-error mt-2" *ngIf="!formGroup.get('manager').valid && formGroup.get('manager').dirty">
-                    Campo 'Responsável' é obrigatório.
-                </div>
-            </div>
+  <div class="row" *ngIf="managers$ | async as managers; else loading">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="piece" class="required">Responsável</label>
+        <select class="form-control" id="manager" formControlName="manager">
+          <option [ngValue]="null" selected disabled hidden>Selecione</option>
+          <option *ngFor="let manager of managers" [ngValue]="manager.id">
+            {{ manager.name }}
+          </option>
+        </select>
+        <div
+          class="has-error mt-2"
+          *ngIf="
+            !formGroup.get('manager').valid && formGroup.get('manager').dirty
+          "
+        >
+          Campo 'Responsável' é obrigatório.
         </div>
-        <div class="col-md-12">
-            <div class="float-right">
-                <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
-                    <fa name="ban"></fa> Cancelar
-                </a>
-                <button [disabled]="including" class="btn btn-primary" type="submit">
-                    <span *ngIf="including" class="spinner-border spinner-border-sm mr-1"></span>
-                    <fa name="check"></fa> Vincular Responsável
-                </button>
-            </div>
-        </div>
+      </div>
     </div>
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+    <div class="col-md-12">
+      <div class="float-right">
+        <a class="btn btn-light clickable mr-2" (click)="modal.dismiss()">
+          <fa name="ban"></fa> Cancelar
+        </a>
+        <button [disabled]="including" class="btn btn-primary" type="submit">
+          <span
+            *ngIf="including"
+            class="spinner-border spinner-border-sm mr-1"
+          ></span>
+          <fa name="check"></fa> Vincular Responsável
+        </button>
+      </div>
+    </div>
+  </div>
+  <ng-template #loading>
+    <app-loading></app-loading>
+  </ng-template>
 </form>

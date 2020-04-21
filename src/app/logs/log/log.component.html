@@ -1,62 +1,62 @@
 <div class="card mt-4">
-    <h4 class="card-header">Dados do Log</h4>
-    <div class="card-body">
-        <div class="row" *ngIf="log$ | async; let log">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="machineName">Nome da Máquina</label>
-                    <p class="text">
-                        <b>{{ log.machineName }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="machineDescription">Descrição da Máquina</label>
-                    <p class="text">
-                        <b>{{ log.machineDescription }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="historyDescription">Descrição do Log</label>
-                    <p class="text">
-                        <b>{{ log.maintenanceDescription }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="historyCreatedAt">Data do Log</label>
-                    <p class="text">
-                        <b>{{ log.historyCreatedAt | date: "dd/MM/yyyy hh:mm:ss" }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="historyCreatedAt">Descrição do Histórico</label>
-                    <p class="text">
-                        <b>{{ log.historyDescription }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="historyCreatedAt">Data da Manutenção</label>
-                    <p class="text">
-                        <b>{{ log.maintenanceReviewAt | date: "dd/MM/yyyy hh:mm:ss" }}</b>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="float-right">
-                    <a class="btn btn-link clickable mr-2" (click)="goBack()">
-                        <fa name="arrow-left"></fa> Voltar
-                    </a>
-                </div>
-            </div>
+  <h4 class="card-header">Dados do Log</h4>
+  <div class="card-body">
+    <div class="row" *ngIf="log$ | async; let log">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="machineName">Nome da Máquina</label>
+          <p class="text">
+            <b>{{ log.machineName }}</b>
+          </p>
         </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="machineDescription">Descrição da Máquina</label>
+          <p class="text">
+            <b>{{ log.machineDescription }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="historyDescription">Descrição do Log</label>
+          <p class="text">
+            <b>{{ log.maintenanceDescription }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="historyCreatedAt">Data do Log</label>
+          <p class="text">
+            <b>{{ log.historyCreatedAt | date: "dd/MM/yyyy hh:mm:ss" }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="historyCreatedAt">Descrição do Histórico</label>
+          <p class="text">
+            <b>{{ log.historyDescription }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="historyCreatedAt">Data da Manutenção</label>
+          <p class="text">
+            <b>{{ log.maintenanceReviewAt | date: "dd/MM/yyyy hh:mm:ss" }}</b>
+          </p>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="float-right">
+          <a class="btn btn-link clickable mr-2" (click)="goBack()">
+            <fa name="arrow-left"></fa> Voltar
+          </a>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

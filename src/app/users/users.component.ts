@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from "@angular/core";
 
 @Component({
-    templateUrl: 'users.component.html'
+  templateUrl: "users.component.html",
 })
 export class UsersComponent implements OnInit {
-
-    ngOnInit() { }
+  ngOnInit() {}
 }

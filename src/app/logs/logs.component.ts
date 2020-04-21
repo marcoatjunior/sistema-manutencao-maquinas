@@ -1,22 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Log } from './shared/log.model';
-import { LogService } from './shared/log.service';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Observable } from "rxjs";
+import { Log } from "./shared/log.model";
+import { LogService } from "./shared/log.service";
 
 @Component({
-    templateUrl: 'logs.component.html'
+  templateUrl: "logs.component.html",
 })
 export class LogsComponent implements OnInit, OnDestroy {
+  logs$: Observable<Log[]>;
 
-    logs$: Observable<Log[]>;
+  constructor(private logService: LogService) {}
 
-    constructor(
-        private logService: LogService
-    ) { }
+  ngOnInit() {
+    this.logs$ = this.logService.get();
+  }
 
-    ngOnInit() {
-        this.logs$ = this.logService.get();
-    }
-
-    ngOnDestroy() { }
+  ngOnDestroy() {}
 }
