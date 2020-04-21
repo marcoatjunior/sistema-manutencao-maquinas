@@ -6,6 +6,7 @@ import { environment } from "@environments/environment";
 import { Machine } from "@machines/shared/machine.model";
 import { ManagerMachineDTO } from "./manager-machine-dto.model";
 import { PieceMachineDTO } from "./piece-machine-dto.model";
+import { FileMachineDTO } from './file-machine-dto.model';
 
 @Injectable()
 export class MachineService {
@@ -72,6 +73,12 @@ export class MachineService {
   unlinkPiece(id: number): Observable<void> {
     return this.httpClient
       .delete<void>(`${environment.apiUrl}/machines/piece/${id}`)
+      .pipe(take(1));
+  }
+
+  addFile(fileMachine: FileMachineDTO): Observable<Machine> {
+    return this.httpClient
+      .post<Machine>(`${environment.apiUrl}/machines/file`, fileMachine)
       .pipe(take(1));
   }
 

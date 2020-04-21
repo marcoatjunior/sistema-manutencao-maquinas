@@ -13,6 +13,7 @@ import { Machine } from "@machines/shared/machine.model";
 import { FileService } from "@shared/services/file-upload.service";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { modalSuccess, modalError } from "@shared/models";
+import { FileMachineDTO } from '@machines/shared/file-machine-dto.model';
 
 @Component({
   selector: "app-add-file-form",
@@ -36,8 +37,10 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
+      machine_id: [this.machine.id],
       description: ["", Validators.required],
       file: ["", Validators.required],
+      file_id: ["", Validators.required]
     });
   }
 
@@ -54,6 +57,7 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
 
   private fileUploaded(file: File) {
     this.fileInput = file;
+    this.formGroup.get("file_id").setValue(file.id);
     this.sending = false;
   }
 
@@ -65,9 +69,8 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
   submit() {
     if (this.formGroup.valid) {
       this.including = true;
-      this.addFile();
       this.machineService
-        .save(this.machine)
+        .addFile({ ...this.formGroup.value } as FileMachineDTO)
         .pipe(untilDestroyed(this))
         .subscribe(
           () =>
@@ -86,11 +89,6 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
         control.markAsDirty()
       );
     }
-  }
-
-  private addFile() {
-    this.fileInput.description = this.formGroup.get("description").value;
-    this.machine.files = [this.fileInput];
   }
 
   ngOnDestroy() {
