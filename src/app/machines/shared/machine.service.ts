@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
 import { environment } from "@environments/environment";
 import { Machine } from "@machines/shared/machine.model";
 import { ManagerMachineDTO } from "./models/manager-machine-dto.model";
 import { PieceMachineDTO } from "./models/piece-machine-dto.model";
-import { FileMachineDTO } from './models/file-machine-dto.model';
 
 @Injectable()
 export class MachineService {
@@ -60,7 +59,10 @@ export class MachineService {
 
   unlinkManager(managerMachine: ManagerMachineDTO): Observable<void> {
     return this.httpClient
-      .post<void>(`${environment.apiUrl}/machines/technical-manager/remove`, managerMachine)
+      .post<void>(
+        `${environment.apiUrl}/machines/technical-manager/remove`,
+        managerMachine
+      )
       .pipe(take(1));
   }
 
@@ -73,35 +75,6 @@ export class MachineService {
   unlinkPiece(pieceMachine: PieceMachineDTO): Observable<void> {
     return this.httpClient
       .post<void>(`${environment.apiUrl}/machines/piece/remove`, pieceMachine)
-      .pipe(take(1));
-  }
-
-  addFile(fileMachine: FileMachineDTO): Observable<Machine> {
-    let formData = this.formDataFile(fileMachine);
-    const headers = this.headerFilePost();
-    return this.httpClient
-      .post<Machine>(`${environment.apiUrl}/files`, formData, { headers })
-      .pipe(take(1));
-  }
-
-  private headerFilePost() {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-    return headers;
-  }
-
-  private formDataFile(fileMachine: FileMachineDTO) {
-    let formData = new FormData();
-    formData.append("machine_id", fileMachine.machine_id as any);
-    formData.append("description", fileMachine.description);
-    formData.append("archive", fileMachine.archive);
-    return formData;
-  }
-
-  deleteFile(id: any): Observable<void> {
-    return this.httpClient
-      .delete<void>(`${environment.apiUrl}/files/${id}`)
       .pipe(take(1));
   }
 }

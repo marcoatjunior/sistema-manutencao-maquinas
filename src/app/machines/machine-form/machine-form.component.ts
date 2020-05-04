@@ -12,7 +12,7 @@ import { MachineService } from "@machines/shared/machine.service";
 import { ManagerService } from "@managers/shared/manager.service";
 import { Observable } from "rxjs";
 import { Manager } from "@managers/shared/manager.model";
-import { FileService } from "@shared/services/file-upload.service";
+import { FileService } from "@shared/services/file.service";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { modalSuccess, modalError, File } from "@shared/models";
@@ -77,7 +77,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
 
   downloadFile(file: File) {
     this.fileService
-      .downloadFile(file.id)
+      .download(file.id)
       .pipe(untilDestroyed(this))
       .subscribe(
         (response: Blob) =>
@@ -181,8 +181,8 @@ export class MachineFormComponent implements OnInit, OnDestroy {
 
   deleteMachineFile() {
     this.excluding = true;
-    this.machineService
-      .deleteFile(this.selected.id)
+    this.fileService
+      .delete(this.selected.id)
       .pipe(untilDestroyed(this))
       .subscribe(
         () =>

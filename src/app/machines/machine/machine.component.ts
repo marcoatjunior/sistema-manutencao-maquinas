@@ -3,7 +3,7 @@ import { Observable } from "rxjs";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Machine } from "@machines/shared/machine.model";
 import { MachineService } from "@machines/shared/machine.service";
-import { FileService } from "@shared/services/file-upload.service";
+import { FileService } from "@shared/services/file.service";
 import { untilDestroyed } from "ngx-take-until-destroy";
 import { File } from "@shared/models";
 import { saveAs } from "file-saver";
@@ -32,7 +32,7 @@ export class MachineComponent implements OnInit, OnDestroy {
 
   downloadFile(file: File) {
     this.fileService
-      .downloadFile(file.id)
+      .download(file.id)
       .pipe(untilDestroyed(this))
       .subscribe(
         (response: Blob) =>
