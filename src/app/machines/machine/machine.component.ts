@@ -5,6 +5,8 @@ import { Machine } from "@machines/shared/machine.model";
 import { MachineService } from "@machines/shared/machine.service";
 import { FileService } from "@shared/services/file-upload.service";
 import { untilDestroyed } from "ngx-take-until-destroy";
+import { File } from "@shared/models";
+import { saveAs } from "file-saver";
 
 @Component({
   selector: "app-machine",
@@ -28,19 +30,14 @@ export class MachineComponent implements OnInit, OnDestroy {
     this.machine$ = this.machineService.getById(this.machineId);
   }
 
-  downloadFile(id: number) {
+  downloadFile(file: File) {
     this.fileService
-      .getById(id)
+      .downloadFile(file.id)
       .pipe(untilDestroyed(this))
       .subscribe(
-        (blob: Blob) => this.saveBlob(blob),
+        (response: Blob) => saveAs(response, `${file.name}.${file.type}`),
         (error) => (this.downloadError = error)
       );
-  }
-
-  saveBlob(blob: Blob) {
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
   }
 
   goBack(): void {

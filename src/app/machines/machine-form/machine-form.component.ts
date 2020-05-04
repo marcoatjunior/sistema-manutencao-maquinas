@@ -77,7 +77,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
 
   downloadFile(id: number) {
     this.fileService
-      .getById(id)
+      .downloadFile(id)
       .pipe(untilDestroyed(this))
       .subscribe(
         (blob: Blob) => this.saveBlob(blob),

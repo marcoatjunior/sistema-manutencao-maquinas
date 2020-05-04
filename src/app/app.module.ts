@@ -1,6 +1,7 @@
 ﻿import { JwtInterceptor, ErrorInterceptor } from "./shared/interceptor";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { HttpModule } from "@angular/http";
 import localePt from "@angular/common/locales/pt";
 import { AppComponent } from "./app.component";
 import { registerLocaleData } from "@angular/common";
@@ -19,6 +20,7 @@ registerLocaleData(localePt, "pt");
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
+    HttpModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

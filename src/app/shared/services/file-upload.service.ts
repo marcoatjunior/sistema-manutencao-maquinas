@@ -1,18 +1,20 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { Http, ResponseContentType } from "@angular/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
-import { take } from "rxjs/operators";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
 })
 export class FileService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private http: Http) {}
 
-  getById(id: number): Observable<Blob> {
-    return this.httpClient
-      .post<Blob>(`${environment.apiUrl}/files/${id}`, { responseType: "blob" })
-      .pipe(take(1));
+  downloadFile(id: number): Observable<Blob> {
+    return this.http
+      .get(`${environment.apiUrl}/files/${id}`, {
+        responseType: ResponseContentType.Blob,
+      })
+      .pipe(map((res) => res.blob()));
   }
 }
