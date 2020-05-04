@@ -7,7 +7,7 @@ import { environment } from "@environments/environment";
 import { User } from "@shared/models";
 
 @Injectable({ providedIn: "root" })
-export class AuthenticationService {
+export class AuthService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 

@@ -6,7 +6,7 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { untilDestroyed } from "ngx-take-until-destroy";
 import { openModalDialog } from "@shared/components/modal-dialog/modal-dialog.component";
 import { modalSuccess, modalError } from "@shared/models";
-import { AuthenticationService } from '@shared/services';
+import { AuthService } from "@shared/services";
 import { RoleEnum } from "@shared/enums";
 
 @Component({
@@ -23,12 +23,12 @@ export class UserListComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private modalService: NgbModal,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
     this.users$ = this.userService.get();
-    const userLogged = this.authenticationService.currentUserValue;
+    const userLogged = this.authService.currentUserValue;
     if (userLogged) {
       this.hasDeletePermission = userLogged.roles[0].id === RoleEnum.ADMIN;
     }

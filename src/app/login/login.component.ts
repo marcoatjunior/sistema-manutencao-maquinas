@@ -2,7 +2,7 @@
 import { Router, ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { first } from "rxjs/operators";
-import { AuthenticationService } from "@shared/services";
+import { AuthService } from "@shared/services";
 
 @Component({
   templateUrl: "login.component.html",
@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authenticationService: AuthenticationService
+    private authService: AuthService
   ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authService.currentUserValue) {
       this.router.navigate(["/"]);
     }
   }
@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 
     this.loading = true;
 
-    this.authenticationService
+    this.authService
       .login(this.form.email.value, this.form.password.value)
       .pipe(first())
       .subscribe(

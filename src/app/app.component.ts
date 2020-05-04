@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from "@angular/core";
 
-import { AuthenticationService } from "./shared/services";
+import { AuthService } from "./shared/services";
 import { User } from "./shared/models";
 
 @Component({
@@ -10,10 +10,10 @@ import { User } from "./shared/models";
 export class AppComponent implements OnInit {
   currentUser: User;
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authenticationService.currentUser.subscribe(
+    this.authService.currentUser.subscribe(
       (x) => (this.currentUser = x)
     );
   }
