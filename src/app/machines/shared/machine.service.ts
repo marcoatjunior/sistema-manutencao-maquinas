@@ -4,9 +4,9 @@ import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
 import { environment } from "@environments/environment";
 import { Machine } from "@machines/shared/machine.model";
-import { ManagerMachineDTO } from "./manager-machine-dto.model";
-import { PieceMachineDTO } from "./piece-machine-dto.model";
-import { FileMachineDTO } from './file-machine-dto.model';
+import { ManagerMachineDTO } from "./models/manager-machine-dto.model";
+import { PieceMachineDTO } from "./models/piece-machine-dto.model";
+import { FileMachineDTO } from './models/file-machine-dto.model';
 
 @Injectable()
 export class MachineService {

@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
 import { environment } from "@environments/environment";
 import { Maintenance } from "@maintenances/shared/maintenance.model";
-import { MaintenanceFilter } from "src/app/maintenances/shared/maintenance-filter.model";
+import { MaintenanceFilter } from "@maintenances/shared/models/maintenance-filter.model";
 
 @Injectable()
 export class MaintenanceService {

@@ -1,6 +1,6 @@
 import { Machine } from "@machines/shared/machine.model";
 import { Moment } from "moment";
-import { MaintenancePiece } from "@maintenances/shared/maintenance-piece.model";
+import { MaintenancePiece } from "@maintenances/shared/models/maintenance-piece.model";
 import { ReviewType } from "@shared/models/review-type.model";
 
 export interface Maintenance {

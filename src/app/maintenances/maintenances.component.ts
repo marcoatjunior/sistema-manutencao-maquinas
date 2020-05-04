@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, EventEmitter } from "@angular/core";
 import { Observable } from "rxjs";
 import { Maintenance } from "@maintenances/shared/maintenance.model";
 import { MaintenanceService } from "src/app/maintenances/shared/maintenance.service";
-import { MaintenanceFilter } from "./shared/maintenance-filter.model";
+import { MaintenanceFilter } from "./shared/models/maintenance-filter.model";
 import { switchMap } from "rxjs/operators";
 
 @Component({

@@ -11,7 +11,7 @@ import { untilDestroyed } from "ngx-take-until-destroy";
 import { Machine } from "@machines/shared/machine.model";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { modalSuccess, modalError } from "@shared/models";
-import { FileMachineDTO } from "@machines/shared/file-machine-dto.model";
+import { FileMachineDTO } from "@machines/shared/models/file-machine-dto.model";
 
 @Component({
   selector: "app-add-file-form",

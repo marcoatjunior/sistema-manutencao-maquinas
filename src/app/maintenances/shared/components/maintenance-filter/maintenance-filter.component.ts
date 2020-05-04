@@ -13,7 +13,7 @@ import {
 } from "@angular/forms";
 import { Observable } from "rxjs";
 import { Machine } from "@machines/shared/machine.model";
-import { MaintenanceFilter } from "@maintenances/shared/maintenance-filter.model";
+import { MaintenanceFilter } from "@maintenances/shared/models/maintenance-filter.model";
 import { reviewTypes } from "@shared/constants";
 import { ManagerService } from "@managers/shared/manager.service";
 import { untilDestroyed } from "ngx-take-until-destroy";

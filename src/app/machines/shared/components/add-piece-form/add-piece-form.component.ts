@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
 import { PieceService } from "@pieces/shared/piece.service";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { modalSuccess, modalError } from "@shared/models";
-import { PieceMachineDTO } from "@machines/shared/piece-machine-dto.model";
+import { PieceMachineDTO } from "@machines/shared/models/piece-machine-dto.model";
 
 @Component({
   selector: "app-add-piece-form",

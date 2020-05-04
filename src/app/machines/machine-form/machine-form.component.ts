@@ -17,8 +17,8 @@ import { openModalDialog } from "@shared/components/modal-dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { modalSuccess, modalError, File } from "@shared/models";
 import { Piece } from "@pieces/shared/piece.model";
-import { PieceMachineDTO } from "@machines/shared/piece-machine-dto.model";
-import { ManagerMachineDTO } from "@machines/shared/manager-machine-dto.model";
+import { PieceMachineDTO } from "@machines/shared/models/piece-machine-dto.model";
+import { ManagerMachineDTO } from "@machines/shared/models/manager-machine-dto.model";
 
 @Component({
   selector: "app-machine-form",
