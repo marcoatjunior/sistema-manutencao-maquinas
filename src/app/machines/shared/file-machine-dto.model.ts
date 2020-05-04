@@ -1,5 +1,5 @@
 export interface FileMachineDTO {
   machine_id: number;
-  file_id: number;
+  archive: File;
   description: string;
 }
