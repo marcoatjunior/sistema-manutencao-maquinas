@@ -101,7 +101,7 @@ export class MachineService {
 
   deleteFile(id: any): Observable<void> {
     return this.httpClient
-      .delete<void>(`${environment.apiUrl}/machines/file/${id}`)
+      .delete<void>(`${environment.apiUrl}/files/${id}`)
       .pipe(take(1));
   }
 }

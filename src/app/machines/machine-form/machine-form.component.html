@@ -266,7 +266,7 @@
                         {{ file.pivot.created_at | date: "dd/MM/yyyy" }}
                       </td>
                       <td class="text-center">{{ file.type }}</td>
-                      <td class="text-center">
+                      <td class="text-center space-between">
                         <a
                           title="Baixar Arquivo"
                           class="clickable"
@@ -401,14 +401,14 @@
 
 <ng-template #deleteFile let-modal>
   <div class="modal-header">
-    <h5 class="modal-title">Desvincular Responsável</h5>
+    <h5 class="modal-title">Exclusão de Arquivo</h5>
     <button type="button" aria-label="Close" (click)="modal.dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <p>
-      Confirma a exclusão do arquivo <b>{{ selected.name }}</b
+      Confirma a exclusão do arquivo <b>{{ selected.description }}</b
       >?
     </p>
   </div>
