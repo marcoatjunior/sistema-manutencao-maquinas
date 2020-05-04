@@ -35,7 +35,8 @@ export class MachineComponent implements OnInit, OnDestroy {
       .downloadFile(file.id)
       .pipe(untilDestroyed(this))
       .subscribe(
-        (response: Blob) => saveAs(response, `${file.name}.${file.type}`),
+        (response: Blob) =>
+          saveAs(response, `${file.description}.${file.type}`),
         (error) => (this.downloadError = error)
       );
   }

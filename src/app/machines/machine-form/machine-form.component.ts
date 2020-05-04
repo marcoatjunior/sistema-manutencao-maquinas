@@ -75,19 +75,15 @@ export class MachineFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  downloadFile(id: number) {
+  downloadFile(file: File) {
     this.fileService
-      .downloadFile(id)
+      .downloadFile(file.id)
       .pipe(untilDestroyed(this))
       .subscribe(
-        (blob: Blob) => this.saveBlob(blob),
+        (response: Blob) =>
+          saveAs(response, `${file.description}.${file.type}`),
         (error) => (this.downloadError = error)
       );
-  }
-
-  saveBlob(blob: Blob) {
-    const url = window.URL.createObjectURL(blob);
-    window.open(url);
   }
 
   submit() {

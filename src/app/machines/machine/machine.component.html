@@ -137,7 +137,7 @@
                   <td class="text-left">{{ file.name }}</td>
                   <td class="text-left">{{ file.description }}</td>
                   <td class="text-center">
-                    {{ file.created_at | date: "dd/MM/yyyy" }}
+                    {{ file.pivot.created_at | date: "dd/MM/yyyy" }}
                   </td>
                   <td class="text-center">{{ file.type }}</td>
                   <td class="text-center">
