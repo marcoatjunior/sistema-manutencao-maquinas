@@ -1,17 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Http, ResponseContentType } from "@angular/http";
+import { Http, ResponseContentType, Headers } from "@angular/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
 import { map, take } from "rxjs/operators";
 import { FileMachineDTO } from "@machines/shared/models/file-machine-dto.model";
 import { Machine } from "@machines/shared/machine.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class FileService {
-  constructor(private httpClient: HttpClient, private http: Http) {}
+  constructor(private httpClient: HttpClient, private http: Http, private authService: AuthService) {}
 
   upload(fileMachine: FileMachineDTO): Observable<Machine> {
     let formData = this.formData(fileMachine);
@@ -25,6 +26,7 @@ export class FileService {
     const headers = new HttpHeaders();
     headers.append("Content-Type", "multipart/form-data");
     headers.append("Accept", "application/json");
+    
     return headers;
   }
 
@@ -37,9 +39,12 @@ export class FileService {
   }
 
   download(id: number): Observable<Blob> {
+    const headers = new Headers();
+    headers.append("Authorization", `Bearer ${this.authService.currentUserValue.access_token}`);
     return this.http
       .get(`${environment.apiUrl}/files/${id}`, {
         responseType: ResponseContentType.Blob,
+        headers: new Headers(headers)
       })
       .pipe(map((res) => res.blob()));
   }
