@@ -6,5 +6,5 @@ export interface User {
   email?: string;
   password?: string;
   roles?: Role[];
-  token?: string;
+  access_token?: string;
 }

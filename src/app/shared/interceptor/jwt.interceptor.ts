@@ -6,7 +6,6 @@ import {
   HttpInterceptor,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-
 import { AuthenticationService } from "@shared/services";
 
 @Injectable()
@@ -18,15 +17,13 @@ export class JwtInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     let currentUser = this.authenticationService.currentUserValue;
-    if (currentUser && currentUser.token) {
+    if (currentUser && currentUser.access_token) {
       request = request.clone({
         setHeaders: {
-          "X-Requested-With": "XMLHttpRequest",
-          Authorization: `Bearer ${currentUser.token}`,
+          Authorization: `Bearer ${currentUser.access_token}`,
         },
       });
     }
-
     return next.handle(request);
   }
 }
