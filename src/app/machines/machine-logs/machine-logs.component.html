@@ -12,10 +12,32 @@
 <div class="card mt-2" *ngIf="logs$ | async as logs">
   <h4 class="card-header">Logs de Atividades das Máquinas</h4>
   <div class="card-body">
-    <div class="row">
+    <div class="row" *ngFor="let log of logs">
       <div class="col-md-12">
-        lista
+        <div class="card bg-light mb-3">
+          <div class="card-header text-bold">{{ log.machine_name }}</div>
+          <div class="card-body text-secondary">
+            <p class="card-text">
+              <b>Descrição da Máquina:</b> {{ log.machine_description }}
+            </p>
+            <p class="card-text">
+              <b>Descrição do Log:</b> {{ log.log_description }}
+            </p>
+            <p class="card-text">
+              <b>Data/Hora do Log:</b> {{ log.log_time | date:"dd/MM/yyyy H:mm:ss" }}
+            </p>
+            <p class="card-text">
+              <b>Descrição da Manutenção:</b> {{ log.maintenance_description }}
+            </p>
+            <p class="card-text">
+              <b>Data da Manutenção:</b> {{ log.maintenance_review_at | date:"dd/MM/yyyy H:mm:ss" }}
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+    <div *ngIf="logs.length <= 0">
+      Não há informações a listar.
     </div>
   </div>
 </div>

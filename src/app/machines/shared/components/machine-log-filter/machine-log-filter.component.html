@@ -16,8 +16,8 @@
         <label for="action_id" class="required">Ação</label>
         <select class="form-control" id="action_id" formControlName="action_id">
           <option value="null" selected disabled hidden>Selecione</option>
-          <option *ngFor="let action of actions" [ngValue]="action.title">
-            {{ action.value }}
+          <option *ngFor="let action of actions" [ngValue]="action.value">
+            {{ action.key }}
           </option>
         </select>
       </div>

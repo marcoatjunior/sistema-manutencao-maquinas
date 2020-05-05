@@ -26,6 +26,7 @@ export class MachineService {
   }
 
   getLog(filter: MachineLogFilter): Observable<MachineLog[]> {
+    console.log(filter)
     let params = "";
     params += filter && filter.machine_id ? `machine_id=${filter.machine_id}&` : "";
     params += filter && filter.action_id ? `action_id=${filter.action_id}&` : "";
