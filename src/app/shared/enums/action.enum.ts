@@ -1,7 +1,7 @@
 export enum ActionEnum {
   Criação = "created",
-  Atualização = "deleted",
-  Exclusão = "updated",
+  Atualização = "updated",
+  Exclusão = "deleted",
 }
 
 export function enumSelector(definition) {
