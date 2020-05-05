@@ -1,4 +1,4 @@
-﻿import { JwtInterceptor, ErrorInterceptor } from "./shared/interceptor";
+﻿import { JwtInterceptor, ErrorInterceptor } from "./shared/interceptors";
 import { NgModule } from "@angular/core";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { HttpModule } from "@angular/http";

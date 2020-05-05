@@ -14,7 +14,7 @@ import { Observable } from "rxjs";
 import { PieceService } from "@pieces/shared/piece.service";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { modalSuccess, modalError } from "@shared/models";
-import { PieceMachineDTO } from "@machines/shared/models/piece-machine-dto.model";
+import { MachinePiece } from "@machines/shared/models/machine-piece.model";
 
 @Component({
   selector: "app-add-piece-form",
@@ -49,7 +49,7 @@ export class AddPieceFormComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       this.including = true;
       this.machineService
-        .addPiece(this.formGroup.value as PieceMachineDTO)
+        .addPiece(this.formGroup.value as MachinePiece)
         .pipe(untilDestroyed(this))
         .subscribe(
           () =>

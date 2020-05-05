@@ -1,0 +1,21 @@
+<div class="card mt-4">
+  <h4 class="card-header">Filtro</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <app-machine-log-filter [formSubmit]="formSubmit"></app-machine-log-filter>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mt-2" *ngIf="logs$ | async as logs">
+  <h4 class="card-header">Logs de Atividades das Máquinas</h4>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        lista
+      </div>
+    </div>
+  </div>
+</div>

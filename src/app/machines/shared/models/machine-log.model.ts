@@ -1,6 +1,6 @@
 import { Moment } from "moment";
 
-export interface Log {
+export interface MachineLog {
   historyId?: number;
   historyCreatedAt?: Moment;
   historyDescription?: string;

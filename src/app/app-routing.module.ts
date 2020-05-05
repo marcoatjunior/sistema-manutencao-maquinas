@@ -1,6 +1,6 @@
 ﻿import { Routes, RouterModule } from "@angular/router";
 
-import { AuthGuard } from "./shared/guard";
+import { AuthGuard } from "./shared/guards";
 import { NgModule } from "@angular/core";
 
 const routes: Routes = [
@@ -45,11 +45,6 @@ const routes: Routes = [
       import("./maintenances/maintenances.module").then(
         (m) => m.MaintenancesModule
       ),
-    canActivate: [AuthGuard],
-  },
-  {
-    path: "logs",
-    loadChildren: () => import("./logs/logs.module").then((m) => m.LogsModule),
     canActivate: [AuthGuard],
   },
 ];

@@ -17,8 +17,8 @@ import { openModalDialog } from "@shared/components/modal-dialog";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { modalSuccess, modalError, File } from "@shared/models";
 import { Piece } from "@pieces/shared/piece.model";
-import { PieceMachineDTO } from "@machines/shared/models/piece-machine-dto.model";
-import { ManagerMachineDTO } from "@machines/shared/models/manager-machine-dto.model";
+import { MachinePiece } from "@machines/shared/models/machine-piece.model";
+import { MachineManager } from "@machines/shared/models/machine-manager.model";
 
 @Component({
   selector: "app-machine-form",
@@ -141,7 +141,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
       .unlinkPiece({
         machine_id: this.machineId,
         piece_id: this.selected.id,
-      } as PieceMachineDTO)
+      } as MachinePiece)
       .pipe(untilDestroyed(this))
       .subscribe(
         () =>
@@ -163,7 +163,7 @@ export class MachineFormComponent implements OnInit, OnDestroy {
       .unlinkManager({
         machine_id: this.machineId,
         user_id: this.selected.id,
-      } as ManagerMachineDTO)
+      } as MachineManager)
       .pipe(untilDestroyed(this))
       .subscribe(
         () =>

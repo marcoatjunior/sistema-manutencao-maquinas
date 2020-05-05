@@ -1,4 +1,4 @@
-export interface FileMachineDTO {
+export interface MachineFile {
   machine_id: number;
   archive: File;
   description: string;

@@ -2,10 +2,10 @@
   <div class="row" *ngIf="machines$ | async as machines; else loading">
     <div class="col-md-5">
       <div class="form-group">
-        <label for="machine" class="required">Máquina</label>
-        <select class="form-control" id="machine" formControlName="machine">
+        <label for="machine_id" class="required">Máquina</label>
+        <select class="form-control" id="machine_id" formControlName="machine_id">
           <option [ngValue]="null" selected disabled hidden>Selecione</option>
-          <option *ngFor="let machine of machines" [ngValue]="machine">
+          <option *ngFor="let machine of machines" [ngValue]="machine.id">
             {{ machine.name }}
           </option>
         </select>
@@ -13,10 +13,10 @@
     </div>
     <div class="col-md-3">
       <div class="form-group">
-        <label for="action" class="required">Ação</label>
-        <select class="form-control" id="action" formControlName="action">
+        <label for="action_id" class="required">Ação</label>
+        <select class="form-control" id="action_id" formControlName="action_id">
           <option value="null" selected disabled hidden>Selecione</option>
-          <option *ngFor="let action of actions" [ngValue]="action">
+          <option *ngFor="let action of actions" [ngValue]="action.title">
             {{ action.value }}
           </option>
         </select>

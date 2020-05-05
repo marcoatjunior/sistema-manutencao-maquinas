@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { SharedModule } from "@shared/shared.module";
 import { PiecesComponent } from "./pieces.component";
 import { PiecesRoutingModule } from "./pieces-routing.module";
-import { ChartsModule } from "ng2-charts";
 import { PieceListComponent } from "./piece-list/piece-list.component";
 import { PieceFormComponent } from "./piece-form/piece-form.component";
 import { PieceComponent } from "./piece/piece.component";
@@ -16,7 +15,6 @@ import { PieceComponent } from "./piece/piece.component";
     FormsModule,
     ReactiveFormsModule,
     PiecesRoutingModule,
-    ChartsModule,
   ],
   declarations: [
     PiecesComponent,

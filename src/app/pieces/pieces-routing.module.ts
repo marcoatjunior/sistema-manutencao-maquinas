@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { PiecesComponent } from "./pieces.component";
-import { AuthGuard } from "@shared/guard";
+import { AuthGuard } from "@shared/guards";
 import { PieceFormComponent } from "./piece-form/piece-form.component";
 import { PieceComponent } from "./piece/piece.component";
 

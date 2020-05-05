@@ -3,29 +3,21 @@
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
-        <canvas
-          *ngIf="
+        <canvas *ngIf="
             doughnutChartData[0] || doughnutChartData[1] || doughnutChartData[2]
-          "
-          baseChart
-          [data]="doughnutChartData"
-          [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType"
-          [colors]="donutColors"
-        ></canvas>
-        <div
-          *ngIf="
+          " baseChart [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType"
+          [colors]="donutColors"></canvas>
+        <div *ngIf="
             !doughnutChartData[0] &&
             !doughnutChartData[1] &&
             !doughnutChartData[2]
-          "
-          class="text-danger"
-          role="alert"
-        >
+          " class="text-danger" role="alert">
           <app-loading></app-loading>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6" *ngIf="
+        doughnutChartData[0] || doughnutChartData[1] || doughnutChartData[2]
+      ">
         <h2>Status</h2>
         <br />
         <ul>

@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
 import { MaintenancesComponent } from "./maintenances.component";
-import { AuthGuard } from "@shared/guard";
+import { AuthGuard } from "@shared/guards";
 import { MaintenanceComponent } from "./maintenance/maintenance.component";
 
 const routes: Routes = [

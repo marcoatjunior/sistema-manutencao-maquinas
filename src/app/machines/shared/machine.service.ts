@@ -4,8 +4,10 @@ import { Observable } from "rxjs";
 import { take } from "rxjs/operators";
 import { environment } from "@environments/environment";
 import { Machine } from "@machines/shared/machine.model";
-import { ManagerMachineDTO } from "./models/manager-machine-dto.model";
-import { PieceMachineDTO } from "./models/piece-machine-dto.model";
+import { MachineManager } from "./models/machine-manager.model";
+import { MachinePiece } from "./models/machine-piece.model";
+import { MachineLog } from "./models/machine-log.model";
+import { MachineLogFilter } from "./models/machine-log-filter.model";
 
 @Injectable()
 export class MachineService {
@@ -20,6 +22,15 @@ export class MachineService {
   getById(id: number): Observable<Machine> {
     return this.httpClient
       .get<Machine>(`${environment.apiUrl}/machines/${id}`)
+      .pipe(take(1));
+  }
+
+  getLog(filter: MachineLogFilter): Observable<MachineLog[]> {
+    let params = "";
+    params += filter && filter.machine_id ? `machine_id=${filter.machine_id}&` : "";
+    params += filter && filter.action_id ? `action_id=${filter.action_id}&` : "";
+    return this.httpClient
+      .get<MachineLog[]>(`${environment.apiUrl}/machines/logs?${params}`)
       .pipe(take(1));
   }
 
@@ -48,7 +59,7 @@ export class MachineService {
       .pipe(take(1));
   }
 
-  addManager(managerMachine: ManagerMachineDTO): Observable<Machine> {
+  addManager(managerMachine: MachineManager): Observable<Machine> {
     return this.httpClient
       .post<Machine>(
         `${environment.apiUrl}/machines/technical-manager`,
@@ -57,7 +68,7 @@ export class MachineService {
       .pipe(take(1));
   }
 
-  unlinkManager(managerMachine: ManagerMachineDTO): Observable<void> {
+  unlinkManager(managerMachine: MachineManager): Observable<void> {
     return this.httpClient
       .post<void>(
         `${environment.apiUrl}/machines/technical-manager/remove`,
@@ -66,13 +77,13 @@ export class MachineService {
       .pipe(take(1));
   }
 
-  addPiece(pieceMachine: PieceMachineDTO): Observable<Machine> {
+  addPiece(pieceMachine: MachinePiece): Observable<Machine> {
     return this.httpClient
       .post<Machine>(`${environment.apiUrl}/machines/piece`, pieceMachine)
       .pipe(take(1));
   }
 
-  unlinkPiece(pieceMachine: PieceMachineDTO): Observable<void> {
+  unlinkPiece(pieceMachine: MachinePiece): Observable<void> {
     return this.httpClient
       .post<void>(`${environment.apiUrl}/machines/piece/remove`, pieceMachine)
       .pipe(take(1));

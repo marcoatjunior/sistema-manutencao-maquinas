@@ -3,7 +3,7 @@ import { Http, ResponseContentType, Headers } from "@angular/http";
 import { Observable } from "rxjs";
 import { environment } from "@environments/environment";
 import { map, take } from "rxjs/operators";
-import { FileMachineDTO } from "@machines/shared/models/file-machine-dto.model";
+import { MachineFile } from "@machines/shared/models/machine-file.model";
 import { Machine } from "@machines/shared/machine.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthService } from './auth.service';
@@ -14,7 +14,7 @@ import { AuthService } from './auth.service';
 export class FileService {
   constructor(private httpClient: HttpClient, private http: Http, private authService: AuthService) {}
 
-  upload(fileMachine: FileMachineDTO): Observable<Machine> {
+  upload(fileMachine: MachineFile): Observable<Machine> {
     let formData = this.formData(fileMachine);
     const headers = this.header();
     return this.httpClient
@@ -30,7 +30,7 @@ export class FileService {
     return headers;
   }
 
-  private formData(fileMachine: FileMachineDTO) {
+  private formData(fileMachine: MachineFile) {
     let formData = new FormData();
     formData.append("machine_id", fileMachine.machine_id as any);
     formData.append("description", fileMachine.description);

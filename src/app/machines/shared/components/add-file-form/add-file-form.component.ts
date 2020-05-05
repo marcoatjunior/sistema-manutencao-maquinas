@@ -10,7 +10,7 @@ import { untilDestroyed } from "ngx-take-until-destroy";
 import { Machine } from "@machines/shared/machine.model";
 import { openModalDialog } from "@shared/components/modal-dialog";
 import { modalSuccess, modalError } from "@shared/models";
-import { FileMachineDTO } from "@machines/shared/models/file-machine-dto.model";
+import { MachineFile } from "@machines/shared/models/machine-file.model";
 import { FileService } from "@shared/services";
 
 @Component({
@@ -47,7 +47,7 @@ export class AddFileFormComponent implements OnInit, OnDestroy {
     if (this.formGroup.valid) {
       this.including = true;
       this.fileService
-        .upload({ ...this.formGroup.value } as FileMachineDTO)
+        .upload({ ...this.formGroup.value } as MachineFile)
         .pipe(untilDestroyed(this))
         .subscribe(
           () =>

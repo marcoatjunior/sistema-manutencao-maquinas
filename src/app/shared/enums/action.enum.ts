@@ -1,7 +1,7 @@
 export enum ActionEnum {
-  ALTERACAO = "Alteração",
-  CRIACAO = "Criação",
-  MANUTENCAO = "Manutenção",
+  ALTERACAO = 0,
+  CRIACAO = 1,
+  MANUTENCAO = 2,
 }
 
 export function enumSelector(definition) {
