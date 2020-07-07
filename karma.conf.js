@@ -18,7 +18,7 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require("path").join(
         __dirname,
-        "./coverage/novus"
+        "./coverage/sistema-manutencao-maquinas"
       ),
       reports: ["html", "lcovonly", "text-summary"],
       fixWebpackSourcePaths: true,
